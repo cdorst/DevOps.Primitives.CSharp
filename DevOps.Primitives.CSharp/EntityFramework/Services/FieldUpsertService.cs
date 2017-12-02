@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class FieldUpsertService<TDbContext> : UpsertService<TDbContext, Field>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertUniqueListService<TDbContext, Attribute, AttributeListCollection, AttributeListCollectionAssociation> _attributeLists;
         private readonly IUpsertUniqueListService<TDbContext, DocumentationComment, DocumentationCommentList, DocumentationCommentListAssociation> _documentationCommentLists;

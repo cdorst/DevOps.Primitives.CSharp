@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class StructDeclarationUpsertService<TDbContext> : UpsertService<TDbContext, StructDeclaration>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertUniqueListService<TDbContext, Attribute, AttributeListCollection, AttributeListCollectionAssociation> _attributeLists;
         private readonly IUpsertUniqueListService<TDbContext, BaseType, BaseList, BaseListAssociation> _baseLists;
@@ -28,6 +28,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
             IUpsertUniqueListService<TDbContext, Attribute, AttributeListCollection, AttributeListCollectionAssociation> attributeLists,
             IUpsertUniqueListService<TDbContext, BaseType, BaseList, BaseListAssociation> baseLists,
             IUpsertUniqueListService<TDbContext, ConstraintClause, ConstraintClauseList, ConstraintClauseListAssociation> constraintClauseLists,
+            IUpsertUniqueListService<TDbContext, Constructor, ConstructorList, ConstructorListAssociation> constuctorLists,
             IUpsertUniqueListService<TDbContext, DocumentationComment, DocumentationCommentList, DocumentationCommentListAssociation> documentationCommentLists,
             IUpsertUniqueListService<TDbContext, Field, FieldList, FieldListAssociation> fieldLists,
             IUpsertService<TDbContext, Identifier> identifiers,
@@ -43,6 +44,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
             _attributeLists = attributeLists ?? throw new ArgumentNullException(nameof(attributeLists));
             _baseLists = baseLists ?? throw new ArgumentNullException(nameof(baseLists));
             _constraintClauseLists = constraintClauseLists ?? throw new ArgumentNullException(nameof(constraintClauseLists));
+            _constuctorLists = constuctorLists ?? throw new ArgumentNullException(nameof(constuctorLists));
             _documentationCommentLists = documentationCommentLists ?? throw new ArgumentNullException(nameof(documentationCommentLists));
             _fieldLists = fieldLists ?? throw new ArgumentNullException(nameof(fieldLists));
             _identifiers = identifiers ?? throw new ArgumentNullException(nameof(identifiers));

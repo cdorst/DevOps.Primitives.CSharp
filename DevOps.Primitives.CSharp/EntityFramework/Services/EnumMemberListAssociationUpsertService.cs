@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class EnumMemberListAssociationUpsertService<TDbContext> : UpsertService<TDbContext, EnumMemberListAssociation>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         public EnumMemberListAssociationUpsertService(ICacheService<EnumMemberListAssociation> cache, TDbContext database, ILogger<UpsertService<TDbContext, EnumMemberListAssociation>> logger)
             : base(cache, database, logger, database.EnumMemberListAssociations)

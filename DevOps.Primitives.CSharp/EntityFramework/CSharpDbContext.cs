@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevOps.Primitives.CSharp.EntityFramework
 {
-    public class SourceCodeTypeDeclarationsDbContext : UniqueStringsDbContext
+    public class CSharpDbContext : UniqueStringsDbContext
     {
-        public SourceCodeTypeDeclarationsDbContext(DbContextOptions options) : base(options)
+        public CSharpDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -71,7 +71,6 @@ namespace DevOps.Primitives.CSharp.EntityFramework
         public DbSet<TypeArgument> TypeArguments { get; set; }
         public DbSet<TypeArgumentList> TypeArgumentLists { get; set; }
         public DbSet<TypeArgumentListAssociation> TypeArgumentListAssociations { get; set; }
-        public DbSet<TypeDeclarationProjectFile> TypeDeclarationProjectFiles { get; set; }
         public DbSet<TypeDeclaration> TypeDeclarations { get; set; }
         public DbSet<TypeParameter> TypeParameters { get; set; }
         public DbSet<TypeParameterList> TypeParameterLists { get; set; }

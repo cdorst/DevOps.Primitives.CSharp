@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class ArgumentListAssociationUpsertService<TDbContext> : UpsertService<TDbContext, ArgumentListAssociation>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         public ArgumentListAssociationUpsertService(ICacheService<ArgumentListAssociation> cache, TDbContext database, ILogger<UpsertService<TDbContext, ArgumentListAssociation>> logger)
             : base(cache, database, logger, database.ArgumentListAssociations)

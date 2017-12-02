@@ -1,5 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
-using DevOps.Abstractions.UniqueStrings;
+using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
 using System.Collections.Generic;

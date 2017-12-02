@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class UsingDirectiveUpsertService<TDbContext> : UpsertService<TDbContext, UsingDirective>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertService<TDbContext, Identifier> _identifiers;
 

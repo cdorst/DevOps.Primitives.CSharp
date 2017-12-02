@@ -1,17 +1,16 @@
 ﻿using Common.EntityFrameworkServices.Services;
-using DevOps.Abstractions.SourceCode.EntityFramework;
 using DevOps.Primitives.CSharp.EntityFramework.Services;
-using Microsoft.Extensions.Configuration;
+using DevOps.Primitives.Strings.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevOps.Primitives.CSharp.EntityFramework
 {
-    public static class AddSourceCodeTypeDeclarationsServicesExtension
+    public static class AddCSharpServicesExtension
     {
-        public static IServiceCollection AddSourceCodeTypeDeclarationsServices<TDbContext>(this IServiceCollection services, IConfiguration config)
-            where TDbContext : SourceCodeTypeDeclarationsDbContext
+        public static IServiceCollection AddCSharpServices<TDbContext>(this IServiceCollection services)
+            where TDbContext : CSharpDbContext
             => services
-                .AddSourceCodeServices<TDbContext>(config)
+                .AddUniqueStringsServices<TDbContext>()
                 .AddScoped<IUpsertService<TDbContext, AccessorListAssociation>, AccessorListAssociationUpsertService<TDbContext>>()
                 .AddScoped<IUpsertService<TDbContext, AccessorList>, AccessorListUpsertService<TDbContext>>()
                 .AddScoped<IUpsertService<TDbContext, Accessor>, AccessorUpsertService<TDbContext>>()

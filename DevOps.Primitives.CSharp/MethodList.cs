@@ -1,5 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
-using DevOps.Abstractions.UniqueStrings;
+using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
 using System.Collections.Generic;
@@ -27,5 +27,17 @@ namespace DevOps.Primitives.CSharp
 
         public IEnumerable<MemberDeclarationSyntax> GetMemberDeclarationSyntax()
             => MemberDeclarationSorter.Sort(MethodListAssociations.Select(m => m.Method));
+
+        public List<MethodListAssociation> GetAssociations() => MethodListAssociations;
+
+        public void SetRecords(List<Method> records)
+        {
+            for (int i = 0; i < MethodListAssociations.Count; i++)
+            {
+                MethodListAssociations[i].SetRecord(records[i]);
+            }
+            ListIdentifier = new AsciiStringReference(
+                string.Join(",", records.Select(r => r.MethodId)));
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class AccessorUpsertService<TDbContext> : UpsertService<TDbContext, Accessor>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertService<TDbContext, Block> _blocks;
         private readonly IUpsertService<TDbContext, SyntaxToken> _syntaxTokens;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class ConstraintClauseUpsertService<TDbContext> : UpsertService<TDbContext, ConstraintClause>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertService<TDbContext, Identifier> _identifiers;
         private readonly IUpsertUniqueListService<TDbContext, Constraint, ConstraintList, ConstraintListAssociation> _constraintList;

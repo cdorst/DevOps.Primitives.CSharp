@@ -1,5 +1,5 @@
 ﻿using Common.EntityFrameworkServices.Services;
-using DevOps.Abstractions.UniqueStrings;
+using DevOps.Primitives.Strings;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DevOps.Primitives.CSharp.EntityFramework.Services
 {
     public class AttributeListCollectionUpsertService<TDbContext> : UpsertService<TDbContext, AttributeListCollection>
-        where TDbContext : SourceCodeTypeDeclarationsDbContext
+        where TDbContext : CSharpDbContext
     {
         private readonly IUpsertService<TDbContext, AsciiStringReference> _strings;
 
@@ -29,7 +29,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
 
         protected override IEnumerable<object> EnumerateReferences(AttributeListCollection record)
         {
-            yield return record.AttributeListCollectionAssociations;
+            yield return record.AttributeLists;
             yield return record.ListIdentifier;
         }
 
