@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Common.EntityFrameworkServices.Factories;
 using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,12 +43,9 @@ namespace DevOps.Primitives.CSharp
 
         public void SetRecords(List<UsingDirective> records)
         {
-            for (int i = 0; i < UsingDirectiveListAssociations.Count; i++)
-            {
-                UsingDirectiveListAssociations[i].SetRecord(records[i]);
-            }
+            UsingDirectiveListAssociations = UniqueListAssociationsFactory<UsingDirective, UsingDirectiveListAssociation>.Create(records);
             ListIdentifier = new AsciiStringReference(
-                string.Join(",", records.Select(r => r.UsingDirectiveId)));
+                UniqueListIdentifierFactory<UsingDirective>.Create(records, r => r.UsingDirectiveId));
         }
     }
 }

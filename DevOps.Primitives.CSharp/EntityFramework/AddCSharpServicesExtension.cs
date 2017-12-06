@@ -1,4 +1,4 @@
-﻿using Common.EntityFrameworkServices.Services;
+﻿using Common.EntityFrameworkServices;
 using DevOps.Primitives.CSharp.EntityFramework.Services;
 using DevOps.Primitives.Strings.EntityFramework;
 using Microsoft.Extensions.DependencyInjection;

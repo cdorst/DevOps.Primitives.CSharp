@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Common.EntityFrameworkServices.Factories;
 using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
@@ -32,12 +33,9 @@ namespace DevOps.Primitives.CSharp
 
         public void SetRecords(List<Field> records)
         {
-            for (int i = 0; i < FieldListAssociations.Count; i++)
-            {
-                FieldListAssociations[i].SetRecord(records[i]);
-            }
+            FieldListAssociations = UniqueListAssociationsFactory<Field, FieldListAssociation>.Create(records);
             ListIdentifier = new AsciiStringReference(
-                string.Join(",", records.Select(r => r.FieldId)));
+                UniqueListIdentifierFactory<Field>.Create(records, r => r.FieldId));
         }
     }
 }

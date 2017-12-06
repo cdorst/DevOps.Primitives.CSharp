@@ -1,4 +1,4 @@
-﻿using Common.EntityFrameworkServices.Services;
+﻿using Common.EntityFrameworkServices;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq.Expressions;

@@ -1,4 +1,4 @@
-﻿using Common.EntityFrameworkServices.Services;
+﻿using Common.EntityFrameworkServices;
 using DevOps.Primitives.Strings;
 using Microsoft.Extensions.Logging;
 using System;

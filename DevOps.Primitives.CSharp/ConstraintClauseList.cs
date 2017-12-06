@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Common.EntityFrameworkServices.Factories;
 using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,12 +43,9 @@ namespace DevOps.Primitives.CSharp
 
         public void SetRecords(List<ConstraintClause> records)
         {
-            for (int i = 0; i < ConstraintClauseListAssociations.Count; i++)
-            {
-                ConstraintClauseListAssociations[i].SetRecord(records[i]);
-            }
+            ConstraintClauseListAssociations = UniqueListAssociationsFactory<ConstraintClause, ConstraintClauseListAssociation>.Create(records);
             ListIdentifier = new AsciiStringReference(
-                string.Join(",", records.Select(r => r.ConstraintClauseId)));
+                UniqueListIdentifierFactory<ConstraintClause>.Create(records, r => r.ConstraintClauseId));
         }
     }
 }

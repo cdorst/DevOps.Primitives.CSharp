@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Common.EntityFrameworkServices.Factories;
 using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -59,12 +60,9 @@ namespace DevOps.Primitives.CSharp
 
         public void SetRecords(List<SyntaxToken> records)
         {
-            for (int i = 0; i < ModifierListAssociations.Count; i++)
-            {
-                ModifierListAssociations[i].SetRecord(records[i]);
-            }
+            ModifierListAssociations = UniqueListAssociationsFactory<SyntaxToken, ModifierListAssociation>.Create(records);
             ListIdentifier = new AsciiStringReference(
-                string.Join(",", records.Select(r => r.SyntaxTokenId)));
+                UniqueListIdentifierFactory<SyntaxToken>.Create(records, r => r.SyntaxTokenId));
         }
 
         private static int Rank(SyntaxKind modifier)
