@@ -16,7 +16,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public DocumentationCommentAttributeListUpsertService(ICacheService<DocumentationCommentAttributeList> cache, TDbContext database, ILogger<UpsertService<TDbContext, DocumentationCommentAttributeList>> logger, IUpsertService<TDbContext, AsciiStringReference> strings)
             : base(cache, database, logger, database.DocumentationCommentAttributeLists)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Expression)}={record.ListIdentifierId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(DocumentationCommentAttributeList)}={record.ListIdentifierId}";
             _strings = strings ?? throw new ArgumentNullException(nameof(strings));
         }
 

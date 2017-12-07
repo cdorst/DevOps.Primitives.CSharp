@@ -16,7 +16,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public ModifierListUpsertService(ICacheService<ModifierList> cache, TDbContext database, ILogger<UpsertService<TDbContext, ModifierList>> logger, IUpsertService<TDbContext, AsciiStringReference> strings)
             : base(cache, database, logger, database.ModifierLists)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Expression)}={record.ListIdentifierId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(ModifierList)}={record.ListIdentifierId}";
             _strings = strings ?? throw new ArgumentNullException(nameof(strings));
         }
 

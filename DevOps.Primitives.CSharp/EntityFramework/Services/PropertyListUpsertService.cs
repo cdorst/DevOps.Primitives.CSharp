@@ -16,7 +16,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public PropertyListUpsertService(ICacheService<PropertyList> cache, TDbContext database, ILogger<UpsertService<TDbContext, PropertyList>> logger, IUpsertService<TDbContext, AsciiStringReference> strings)
             : base(cache, database, logger, database.PropertyLists)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Expression)}={record.ListIdentifierId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(PropertyList)}={record.ListIdentifierId}";
             _strings = strings ?? throw new ArgumentNullException(nameof(strings));
         }
 

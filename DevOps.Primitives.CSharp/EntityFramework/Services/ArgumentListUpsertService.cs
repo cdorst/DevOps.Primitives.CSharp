@@ -16,7 +16,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public ArgumentListUpsertService(ICacheService<ArgumentList> cache, TDbContext database, ILogger<UpsertService<TDbContext, ArgumentList>> logger, IUpsertService<TDbContext, AsciiStringReference> strings)
             : base(cache, database, logger, database.ArgumentLists)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Expression)}={record.ListIdentifierId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(ArgumentList)}={record.ListIdentifierId}";
             _strings = strings ?? throw new ArgumentNullException(nameof(strings));
         }
 

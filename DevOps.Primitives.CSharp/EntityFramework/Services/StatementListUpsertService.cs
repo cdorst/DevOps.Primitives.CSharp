@@ -16,7 +16,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public StatementListUpsertService(ICacheService<StatementList> cache, TDbContext database, ILogger<UpsertService<TDbContext, StatementList>> logger, IUpsertService<TDbContext, AsciiStringReference> strings)
             : base(cache, database, logger, database.StatementLists)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Expression)}={record.ListIdentifierId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(StatementList)}={record.ListIdentifierId}";
             _strings = strings ?? throw new ArgumentNullException(nameof(strings));
         }
 
