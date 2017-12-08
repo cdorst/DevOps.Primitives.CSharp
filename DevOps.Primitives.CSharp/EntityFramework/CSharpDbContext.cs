@@ -148,7 +148,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework
             modelBuilder.Entity<DocumentationCommentListAssociation>()
                 .HasIndex(e => new { e.DocumentationCommentId, e.DocumentationCommentListId }).IsUnique();
             modelBuilder.Entity<EnumMember>()
-                .HasIndex(e => new { e.EqualsValue, e.IdentifierId, e.DocumentationCommentListId }).IsUnique();
+                .HasIndex(e => new { e.EqualsValue, e.IdentifierId, e.DocumentationCommentListId, e.AttributeListCollectionId }).IsUnique();
             modelBuilder.Entity<EnumMemberList>()
                 .HasIndex(e => new { e.ListIdentifierId }).IsUnique();
             modelBuilder.Entity<EnumMemberListAssociation>()

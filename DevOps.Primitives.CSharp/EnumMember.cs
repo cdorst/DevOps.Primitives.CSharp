@@ -29,14 +29,24 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(6)]
         public int? DocumentationCommentListId { get; set; }
 
+        [ProtoMember(7)]
+        public AttributeListCollection AttributeListCollection { get; set; }
+        [ProtoMember(8)]
+        public int? AttributeListCollectionId { get; set; }
+
         public EnumMemberDeclarationSyntax GetEnumMemberDeclaration()
-            => EqualsValue == null
-            ? EnumMemberDeclaration(Identifier.GetSyntaxToken(DocumentationCommentList))
-            : EnumMemberDeclaration(Identifier.GetSyntaxToken(DocumentationCommentList))
-                .WithEqualsValue(
-                    EqualsValueClause(
-                        LiteralExpression(
-                            SyntaxKind.NumericLiteralExpression,
-                            Literal(EqualsValue.Value))));
+        {
+            var declaration = EqualsValue == null
+                ? EnumMemberDeclaration(Identifier.GetSyntaxToken(DocumentationCommentList))
+                : EnumMemberDeclaration(Identifier.GetSyntaxToken(DocumentationCommentList))
+                    .WithEqualsValue(
+                        EqualsValueClause(
+                            LiteralExpression(
+                                SyntaxKind.NumericLiteralExpression,
+                                Literal(EqualsValue.Value))));
+            return AttributeListCollection == null
+                ? declaration
+                : declaration.WithAttributeLists(AttributeListCollection.GetAttributeListSyntaxList());
+        }
     }
 }
