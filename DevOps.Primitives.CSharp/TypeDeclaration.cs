@@ -31,7 +31,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(6)]
         public ConstraintClauseList ConstraintClauseList { get; set; }
         [ProtoMember(7)]
-        public int ConstraintClauseListId { get; set; }
+        public int? ConstraintClauseListId { get; set; }
 
         [ProtoMember(8)]
         public ConstructorList ConstructorList { get; set; }
