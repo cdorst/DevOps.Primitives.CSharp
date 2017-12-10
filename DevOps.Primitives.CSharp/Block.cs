@@ -10,6 +10,9 @@ namespace DevOps.Primitives.CSharp
     [Table("Blocks", Schema = nameof(CSharp))]
     public class Block
     {
+        public Block() { }
+        public Block(StatementList statementList) { StatementList = statementList; }
+
         [Key]
         [ProtoMember(1)]
         public int BlockId { get; set; }
@@ -17,10 +20,12 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(2)]
         public StatementList StatementList { get; set; }
         [ProtoMember(3)]
-        public int StatementListId { get; set; }
+        public int? StatementListId { get; set; }
 
         public BlockSyntax GetBlockSyntax()
-            => Block(
+            => StatementList == null
+            ? Block()
+            : Block(
                 StatementList.GetStatementListSyntax());
     }
 }
