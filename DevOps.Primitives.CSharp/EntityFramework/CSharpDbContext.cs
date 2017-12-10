@@ -166,7 +166,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework
             modelBuilder.Entity<Identifier>()
                 .HasIndex(e => new { e.NameId }).IsUnique();
             modelBuilder.Entity<Method>()
-                .HasIndex(e => new { e.ArrowClauseExpressionValueId, e.AttributeListCollectionId, e.BlockId, e.DocumentationCommentListId, e.IdentifierId, e.ModifierListId, e.ParameterListId, e.TypeId, e.TypeParameterListId }).IsUnique();
+                .HasIndex(e => new { e.ArrowClauseExpressionValueId, e.AttributeListCollectionId, e.BlockId, e.ConstraintClauseListId, e.DocumentationCommentListId, e.IdentifierId, e.ModifierListId, e.ParameterListId, e.TypeId, e.TypeParameterListId }).IsUnique();
             modelBuilder.Entity<MethodList>()
                 .HasIndex(e => new { e.ListIdentifierId }).IsUnique();
             modelBuilder.Entity<MethodListAssociation>()

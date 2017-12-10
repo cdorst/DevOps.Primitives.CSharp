@@ -12,6 +12,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Methods", Schema = nameof(CSharp))]
     public class Method : ISortableMemberDeclaration, IUniqueListRecord
     {
+        public Method() { }
+        public Method(Identifier identifier, Identifier type, Expression arrowClauseExpression = null, Block block = null, DocumentationCommentList documentationCommentList = null, ModifierList modifierList = null) { }
+        public Method() { }
+
         [Key]
         [ProtoMember(1)]
         public int MethodId { get; set; }
@@ -61,6 +65,11 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(19)]
         public int? TypeParameterListId { get; set; }
 
+        [ProtoMember(20)]
+        public ConstraintClauseList ConstraintClauseList { get; set; }
+        [ProtoMember(21)]
+        public int? ConstraintClauseListId { get; set; }
+
         public MemberDeclarationSyntax GetMemberDeclarationSyntax()
         {
             var hasAttributes = AttributeListCollection != null;
@@ -88,6 +97,11 @@ namespace DevOps.Primitives.CSharp
             {
                 declaration = declaration.WithTypeParameterList(
                     TypeParameterList.GetTypeParameterListSyntax());
+            }
+            if (ConstraintClauseList != null)
+            {
+                declaration = declaration.WithConstraintClauses(
+                    ConstraintClauseList.GetConstraintClauses());
             }
             return (ArrowClauseExpressionValue != null)
                 ? declaration

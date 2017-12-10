@@ -12,6 +12,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
     {
         private readonly IUpsertUniqueListService<TDbContext, Attribute, AttributeListCollection, AttributeListCollectionAssociation> _attributeLists;
         private readonly IUpsertService<TDbContext, Block> _blocks;
+        private readonly IUpsertUniqueListService<TDbContext, ConstraintClause, ConstraintClauseList, ConstraintClauseListAssociation> _constraintClauseList;
         private readonly IUpsertUniqueListService<TDbContext, DocumentationComment, DocumentationCommentList, DocumentationCommentListAssociation> _documentationCommentLists;
         private readonly IUpsertService<TDbContext, Expression> _expressions;
         private readonly IUpsertService<TDbContext, Identifier> _identifiers;
@@ -22,6 +23,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public MethodUpsertService(ICacheService<Method> cache, TDbContext database, ILogger<UpsertService<TDbContext, Method>> logger,
             IUpsertUniqueListService<TDbContext, Attribute, AttributeListCollection, AttributeListCollectionAssociation> attributeLists,
             IUpsertService<TDbContext, Block> blocks,
+            IUpsertUniqueListService<TDbContext, ConstraintClause, ConstraintClauseList, ConstraintClauseListAssociation> constraintClauseList,
             IUpsertUniqueListService<TDbContext, DocumentationComment, DocumentationCommentList, DocumentationCommentListAssociation> documentationCommentLists,
             IUpsertService<TDbContext, Expression> expressions,
             IUpsertService<TDbContext, Identifier> identifiers,
@@ -33,6 +35,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
             CacheKey = record => $"{nameof(CSharp)}.{nameof(Method)}={record.ArrowClauseExpressionValueId}:{record.AttributeListCollectionId}:{record.BlockId}:{record.DocumentationCommentListId}:{record.IdentifierId}:{record.ModifierListId}:{record.ParameterListId}:{record.TypeId}:{record.TypeParameterListId}";
             _attributeLists = attributeLists ?? throw new ArgumentNullException(nameof(attributeLists));
             _blocks = blocks ?? throw new ArgumentNullException(nameof(blocks));
+            _constraintClauseList = constraintClauseList ?? throw new ArgumentNullException(nameof(constraintClauseList));
             _documentationCommentLists = documentationCommentLists ?? throw new ArgumentNullException(nameof(documentationCommentLists));
             _expressions = expressions ?? throw new ArgumentNullException(nameof(expressions));
             _identifiers = identifiers ?? throw new ArgumentNullException(nameof(identifiers));
@@ -49,6 +52,8 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
             record.AttributeListCollectionId = record.AttributeListCollection?.AttributeListCollectionId ?? record.AttributeListCollectionId;
             record.Block = await _blocks.UpsertAsync(record.Block);
             record.BlockId = record.Block?.BlockId ?? record.BlockId;
+            record.ConstraintClauseList = await _constraintClauseList.UpsertAsync(record.ConstraintClauseList);
+            record.ConstraintClauseListId = record.ConstraintClauseList?.ConstraintClauseListId ?? record.ConstraintClauseListId;
             record.DocumentationCommentList = await _documentationCommentLists.UpsertAsync(record.DocumentationCommentList);
             record.DocumentationCommentListId = record.DocumentationCommentList?.DocumentationCommentListId ?? record.DocumentationCommentListId;
             record.Identifier = await _identifiers.UpsertAsync(record.Identifier);
@@ -69,6 +74,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
             yield return record.ArrowClauseExpressionValue;
             yield return record.AttributeListCollection;
             yield return record.Block;
+            yield return record.ConstraintClauseList;
             yield return record.DocumentationCommentList;
             yield return record.Identifier;
             yield return record.ModifierList;
@@ -82,6 +88,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
                 => ((existing.ArrowClauseExpressionValueId == null && record.ArrowClauseExpressionValueId == null) || (existing.ArrowClauseExpressionValueId == record.ArrowClauseExpressionValueId))
                 && ((existing.AttributeListCollectionId == null && record.AttributeListCollectionId == null) || (existing.AttributeListCollectionId == record.AttributeListCollectionId))
                 && ((existing.BlockId == null && record.BlockId == null) || (existing.BlockId == record.BlockId))
+                && ((existing.ConstraintClauseListId == null && record.ConstraintClauseListId == null) || (existing.ConstraintClauseListId == record.ConstraintClauseListId))
                 && ((existing.DocumentationCommentListId == null && record.DocumentationCommentListId == null) || (existing.DocumentationCommentListId == record.DocumentationCommentListId))
                 && existing.IdentifierId == record.IdentifierId
                 && ((existing.ModifierListId == null && record.ModifierListId == null) || (existing.ModifierListId == record.ModifierListId))
