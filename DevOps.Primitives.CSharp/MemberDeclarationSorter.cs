@@ -17,7 +17,7 @@ namespace DevOps.Primitives.CSharp
                 .Select(r => r.Item1.GetMemberDeclarationSyntax());
         }
 
-        private static IEnumerable<Tuple<ISortableMemberDeclaration, int>> Rank(IEnumerable<ISortableMemberDeclaration> declarations)
+        private static IEnumerable<Tuple<ISortableMemberDeclaration, byte>> Rank(IEnumerable<ISortableMemberDeclaration> declarations)
         {
             foreach (var declaration in declarations)
             {
@@ -25,17 +25,19 @@ namespace DevOps.Primitives.CSharp
                     declaration.ModifierList?.ModifierListAssociations.Select(m => m.SyntaxToken.SyntaxKind)
                     ?? new SyntaxKind[] { SyntaxKind.PrivateKeyword });
                 var rank = GetRankValue(modifiers);
-                yield return new Tuple<ISortableMemberDeclaration, int>(declaration, rank);
+                yield return new Tuple<ISortableMemberDeclaration, byte>(declaration, rank);
             }
         }
 
         /// <summary>
         /// Returns an integer indicating rank. Based on rules from https://stackoverflow.com/a/310967
         /// </summary>
-        private static int GetRankValue(HashSet<SyntaxKind> modifiers)
+        private static byte GetRankValue(HashSet<SyntaxKind> modifiers)
         {
             var isConstant = modifiers.Contains(SyntaxKind.ConstKeyword);
+            var isInternal = modifiers.Contains(SyntaxKind.InternalKeyword);
             var isReadOnly = modifiers.Contains(SyntaxKind.ReadOnlyKeyword);
+            var isProtected = modifiers.Contains(SyntaxKind.ProtectedKeyword);
             var isStatic = modifiers.Contains(SyntaxKind.StaticKeyword);
             var rank = 0;
             if (modifiers.Contains(SyntaxKind.PublicKeyword))
@@ -43,17 +45,17 @@ namespace DevOps.Primitives.CSharp
                 if (isStatic) rank = isReadOnly ? 0 : 1;
                 else rank = isReadOnly ? 2 : 3;
             }
-            else if (modifiers.Contains(SyntaxKind.InternalKeyword) && !modifiers.Contains(SyntaxKind.ProtectedKeyword))
+            else if (isInternal && !isProtected)
             {
                 if (isStatic) rank = isReadOnly ? 4 : 5;
                 else rank = isReadOnly ? 6 : 7;
             }
-            else if (modifiers.Contains(SyntaxKind.ProtectedKeyword) && modifiers.Contains(SyntaxKind.InternalKeyword))
+            else if (isProtected && isInternal)
             {
                 if (isStatic) rank = isReadOnly ? 8 : 9;
                 else rank = isReadOnly ? 10 : 11;
             }
-            else if (modifiers.Contains(SyntaxKind.ProtectedKeyword))
+            else if (isProtected)
             {
                 if (isStatic) rank = isReadOnly ? 12 : 13;
                 else rank = isReadOnly ? 14 : 15;
@@ -64,7 +66,7 @@ namespace DevOps.Primitives.CSharp
                 else rank = isReadOnly ? 18 : 19;
             }
             if (isConstant) rank = rank - 20; // Sort const fields above non-const fields
-            return rank;
+            return unchecked((byte)rank);
         }
     }
 }
