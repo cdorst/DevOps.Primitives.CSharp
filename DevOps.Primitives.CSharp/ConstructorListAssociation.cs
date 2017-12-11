@@ -9,6 +9,13 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstructorListAssociations", Schema = nameof(CSharp))]
     public class ConstructorListAssociation : IUniqueListAssociation<Constructor>
     {
+        public ConstructorListAssociation() { }
+        public ConstructorListAssociation(Constructor constructor, ConstructorList constructorList = null)
+        {
+            Constructor = constructor;
+            ConstructorList = constructorList;
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstructorListAssociationId { get; set; }

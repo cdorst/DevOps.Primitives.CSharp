@@ -14,6 +14,17 @@ namespace DevOps.Primitives.CSharp
     [Table("DocumentationCommentAttributes", Schema = nameof(CSharp))]
     public class DocumentationCommentAttribute : IUniqueListRecord
     {
+        public DocumentationCommentAttribute() { }
+        public DocumentationCommentAttribute(Identifier identifier, Identifier value)
+        {
+            Identifier = identifier;
+            Value = value;
+        }
+        public DocumentationCommentAttribute(string identifier, string value)
+            : this(new Identifier(identifier), new Identifier(value))
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int DocumentationCommentAttributeId { get; set; }

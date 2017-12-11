@@ -18,6 +18,25 @@ namespace DevOps.Primitives.CSharp
     [Table("AttributeListCollections", Schema = nameof(CSharp))]
     public class AttributeListCollection : IUniqueList<Attribute, AttributeListCollectionAssociation>
     {
+        public AttributeListCollection() { }
+        public AttributeListCollection(List<AttributeListCollectionAssociation> attributeLists, AsciiStringReference listIdentifier = null)
+        {
+            AttributeLists = attributeLists;
+            ListIdentifier = listIdentifier;
+        }
+        public AttributeListCollection(AttributeListCollectionAssociation attributeList, AsciiStringReference listIdentifier = null)
+            : this(new List<AttributeListCollectionAssociation> { attributeList }, listIdentifier)
+        {
+        }
+        public AttributeListCollection(Identifier attribute, AsciiStringReference listIdentifier = null)
+            : this(new AttributeListCollectionAssociation(attribute), listIdentifier)
+        {
+        }
+        public AttributeListCollection(string attribute, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(attribute), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int AttributeListCollectionId { get; set; }

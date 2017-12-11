@@ -12,6 +12,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Statements", Schema = nameof(CSharp))]
     public class Statement : IUniqueListRecord
     {
+        public Statement() { }
+        public Statement(AsciiMaxStringReference text) { Text = text; }
+        public Statement(string text) : this(new AsciiMaxStringReference(text)) { }
+
         [Key]
         [ProtoMember(1)]
         public int StatementId { get; set; }

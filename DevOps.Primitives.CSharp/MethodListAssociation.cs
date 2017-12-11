@@ -9,6 +9,13 @@ namespace DevOps.Primitives.CSharp
     [Table("MethodListAssociations", Schema = nameof(CSharp))]
     public class MethodListAssociation : IUniqueListAssociation<Method>
     {
+        public MethodListAssociation() { }
+        public MethodListAssociation(Method method, MethodList methodList = null)
+        {
+            Method = method;
+            MethodList = methodList;
+        }
+
         [Key]
         [ProtoMember(1)]
         public int MethodListAssociationId { get; set; }

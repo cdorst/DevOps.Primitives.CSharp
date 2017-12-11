@@ -16,6 +16,25 @@ namespace DevOps.Primitives.CSharp
     [Table("StatementLists", Schema = nameof(CSharp))]
     public class StatementList : IUniqueList<Statement, StatementListAssociation>
     {
+        public StatementList() { }
+        public StatementList(List<StatementListAssociation> statementListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            StatementListAssociations = statementListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public StatementList(StatementListAssociation statementListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<StatementListAssociation> { statementListAssociation }, listIdentifier)
+        {
+        }
+        public StatementList(AsciiMaxStringReference statement, AsciiStringReference listIdentifier = null)
+            : this(new StatementListAssociation(statement), listIdentifier)
+        {
+        }
+        public StatementList(string statement, AsciiStringReference listIdentifier = null)
+            : this(new AsciiMaxStringReference(statement), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int StatementListId { get; set; }

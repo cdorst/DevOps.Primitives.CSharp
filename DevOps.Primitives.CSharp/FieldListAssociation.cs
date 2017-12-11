@@ -9,6 +9,13 @@ namespace DevOps.Primitives.CSharp
     [Table("FieldListAssociations", Schema = nameof(CSharp))]
     public class FieldListAssociation : IUniqueListAssociation<Field>
     {
+        public FieldListAssociation() { }
+        public FieldListAssociation(Field field, FieldList fieldList = null)
+        {
+            Field = field;
+            FieldList = fieldList;
+        }
+
         [Key]
         [ProtoMember(1)]
         public int FieldListAssociationId { get; set; }

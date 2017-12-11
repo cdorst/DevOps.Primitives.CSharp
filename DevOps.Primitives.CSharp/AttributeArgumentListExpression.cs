@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("AttributeArgumentListExpressions", Schema = nameof(CSharp))]
     public class AttributeArgumentListExpression
     {
+        public AttributeArgumentListExpression() { }
+        public AttributeArgumentListExpression(AsciiMaxStringReference expression) { Expression = expression; }
+        public AttributeArgumentListExpression(string expression) : this(new AsciiMaxStringReference(expression)) { }
+
         [Key]
         [ProtoMember(1)]
         public int AttributeArgumentListExpressionId { get; set; }

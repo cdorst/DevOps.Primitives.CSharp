@@ -11,6 +11,19 @@ namespace DevOps.Primitives.CSharp
     [Table("Parameters", Schema = nameof(CSharp))]
     public class Parameter : IUniqueListRecord
     {
+        public Parameter() { }
+        public Parameter(Identifier identifier, Identifier type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null)
+        {
+            Identifier = identifier;
+            Type = type;
+            DefaultValue = defaultValue;
+            AttributeListCollection = attributeListCollection;
+        }
+        public Parameter(string identifier, string type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null)
+            : this(new Identifier(identifier), new Identifier(type), defaultValue, attributeListCollection)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ParameterId { get; set; }

@@ -9,6 +9,35 @@ namespace DevOps.Primitives.CSharp
     [Table("PropertyListAssociations", Schema = nameof(CSharp))]
     public class PropertyListAssociation : IUniqueListAssociation<Property>
     {
+        public PropertyListAssociation() { }
+        public PropertyListAssociation(Property property, PropertyList propertyList = null)
+        {
+            Property = property;
+            PropertyList = propertyList;
+        }
+        public PropertyListAssociation(
+            Identifier identifier,
+            Identifier type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            PropertyList propertyList = null)
+            : this(new Property(identifier, type, accessorList, modifierList, documentationCommentList, attributeListCollection), propertyList)
+        {
+        }
+        public PropertyListAssociation(
+            string identifier,
+            string type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            PropertyList propertyList = null)
+            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection, propertyList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int PropertyListAssociationId { get; set; }

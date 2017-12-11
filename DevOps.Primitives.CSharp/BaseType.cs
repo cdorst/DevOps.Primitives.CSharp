@@ -11,6 +11,17 @@ namespace DevOps.Primitives.CSharp
     [Table("BaseTypes", Schema = nameof(CSharp))]
     public class BaseType : IUniqueListRecord
     {
+        public BaseType() { }
+        public BaseType(Identifier identifier, TypeArgumentList typeArgumentList = null)
+        {
+            Identifier = identifier;
+            TypeArgumentList = typeArgumentList;
+        }
+        public BaseType(string identifier, TypeArgumentList typeArgumentList = null)
+            : this(new Identifier(identifier), typeArgumentList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int BaseTypeId { get; set; }

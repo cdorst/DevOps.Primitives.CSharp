@@ -9,6 +9,21 @@ namespace DevOps.Primitives.CSharp
     [Table("UsingDirectiveListAssociations", Schema = nameof(CSharp))]
     public class UsingDirectiveListAssociation : IUniqueListAssociation<UsingDirective>
     {
+        public UsingDirectiveListAssociation() { }
+        public UsingDirectiveListAssociation(UsingDirective usingDirective, UsingDirectiveList usingDirectiveList = null)
+        {
+            UsingDirective = usingDirective;
+            UsingDirectiveList = usingDirectiveList;
+        }
+        public UsingDirectiveListAssociation(Identifier usingDirective, UsingDirectiveList usingDirectiveList = null)
+            : this(new UsingDirective(usingDirective), usingDirectiveList)
+        {
+        }
+        public UsingDirectiveListAssociation(string usingDirective, UsingDirectiveList usingDirectiveList = null)
+            : this(new Identifier(usingDirective), usingDirectiveList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int UsingDirectiveListAssociationId { get; set; }

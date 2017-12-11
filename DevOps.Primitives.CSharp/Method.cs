@@ -48,7 +48,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(12)]
         public ModifierList ModifierList { get; set; }
         [ProtoMember(13)]
-        public int? ModifierListId { get; set; }
+        public byte? ModifierListId { get; set; }
 
         [ProtoMember(14)]
         public ParameterList ParameterList { get; set; }

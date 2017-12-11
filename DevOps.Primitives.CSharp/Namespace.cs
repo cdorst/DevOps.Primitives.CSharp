@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Namespaces", Schema = nameof(CSharp))]
     public class Namespace
     {
+        public Namespace() { }
+        public Namespace(Identifier identifier) { Identifier = identifier; }
+        public Namespace(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int NamespaceId { get; set; }

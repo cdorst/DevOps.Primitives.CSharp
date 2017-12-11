@@ -17,6 +17,30 @@ namespace DevOps.Primitives.CSharp
     [Table("DocumentationCommentLists", Schema = nameof(CSharp))]
     public class DocumentationCommentList : IUniqueList<DocumentationComment, DocumentationCommentListAssociation>
     {
+        public DocumentationCommentList() { }
+        public DocumentationCommentList(List<DocumentationCommentListAssociation> documentationCommentListAssociations, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
+        {
+            DocumentationComments = documentationCommentListAssociations;
+            IncludeNewLine = includeNewLine;
+            ListIdentifier = listIdentifier;
+        }
+        public DocumentationCommentList(DocumentationCommentListAssociation documentationCommentListAssociations, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
+            : this(new List<DocumentationCommentListAssociation> { documentationCommentListAssociations }, includeNewLine, listIdentifier)
+        {
+        }
+        public DocumentationCommentList(DocumentationComment documentationComment, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
+            : this(new DocumentationCommentListAssociation(documentationComment), includeNewLine, listIdentifier)
+        {
+        }
+        public DocumentationCommentList(Identifier identifier, AsciiMaxStringReference text, bool includeNewLine = false, byte indentLevel = byte.MinValue, bool includeNewLineAtListLevel = false, AsciiStringReference listIdentifier = null)
+            : this(new DocumentationComment(identifier, text, includeNewLine, indentLevel), includeNewLineAtListLevel, listIdentifier)
+        {
+        }
+        public DocumentationCommentList(string identifier, string text, bool includeNewLine = false, byte indentLevel = byte.MinValue, bool includeNewLineAtListLevel = false, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(identifier), new AsciiMaxStringReference(text), includeNewLine, indentLevel, includeNewLineAtListLevel, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int DocumentationCommentListId { get; set; }

@@ -12,6 +12,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Constraints", Schema = nameof(CSharp))]
     public class Constraint : IUniqueListRecord
     {
+        public Constraint() { }
+        public Constraint(Identifier identifier) { Identifier = identifier; }
+        public Constraint(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int ConstraintId { get; set; }

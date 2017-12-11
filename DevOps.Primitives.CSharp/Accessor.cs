@@ -12,6 +12,17 @@ namespace DevOps.Primitives.CSharp
     [Table("Accessors", Schema = nameof(CSharp))]
     public class Accessor : IUniqueListRecord
     {
+        public Accessor() { }
+        public Accessor(SyntaxToken syntaxToken, Block block = null)
+        {
+            SyntaxToken = syntaxToken;
+            Body = block;
+        }
+        public Accessor(SyntaxKind syntaxKind, Block block = null)
+            : this(new SyntaxToken(syntaxKind), block)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int AccessorId { get; set; }
@@ -24,7 +35,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public SyntaxToken SyntaxToken { get; set; }
         [ProtoMember(5)]
-        public int SyntaxTokenId { get; set; }
+        public short SyntaxTokenId { get; set; }
 
         public AccessorDeclarationSyntax GetAccessorDeclarationSyntax()
         {

@@ -11,9 +11,12 @@ namespace DevOps.Primitives.CSharp
     [Table("SyntaxTokens", Schema = nameof(CSharp))]
     public class SyntaxToken : IUniqueListRecord
     {
+        public SyntaxToken() { }
+        public SyntaxToken(SyntaxKind syntaxKind) { SyntaxKind = syntaxKind; }
+
         [Key]
         [ProtoMember(1)]
-        public int SyntaxTokenId { get; set; }
+        public short SyntaxTokenId { get; set; }
 
         [ProtoMember(2)]
         public SyntaxKind SyntaxKind { get; set; }

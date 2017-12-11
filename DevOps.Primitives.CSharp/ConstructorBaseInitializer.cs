@@ -11,6 +11,9 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstructorBaseInitializers", Schema = nameof(CSharp))]
     public class ConstructorBaseInitializer
     {
+        public ConstructorBaseInitializer() { }
+        public ConstructorBaseInitializer(ArgumentList argumentList) { ArgumentList = argumentList; }
+
         [Key]
         [ProtoMember(1)]
         public int ConstructorBaseInitializerId { get; set; }

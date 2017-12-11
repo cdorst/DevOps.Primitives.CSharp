@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Microsoft.CodeAnalysis.CSharp;
 using ProtoBuf;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,6 +10,21 @@ namespace DevOps.Primitives.CSharp
     [Table("AccessorListAssociations", Schema = nameof(CSharp))]
     public class AccessorListAssociation : IUniqueListAssociation<Accessor>
     {
+        public AccessorListAssociation() { }
+        public AccessorListAssociation(Accessor accessor, AccessorList accessorList = null)
+        {
+            Accessor = accessor;
+            AccessorList = accessorList;
+        }
+        public AccessorListAssociation(SyntaxToken syntaxToken, AccessorList accessorList = null)
+            : this(new Accessor(syntaxToken), accessorList)
+        {
+        }
+        public AccessorListAssociation(SyntaxKind syntaxKind, AccessorList accessorList = null)
+            : this(new SyntaxToken(syntaxKind), accessorList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int AccessorListAssociationId { get; set; }

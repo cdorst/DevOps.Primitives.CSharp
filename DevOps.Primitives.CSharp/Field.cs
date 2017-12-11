@@ -11,6 +11,33 @@ namespace DevOps.Primitives.CSharp
     [Table("Fields", Schema = nameof(CSharp))]
     public class Field : ISortableMemberDeclaration, IUniqueListRecord
     {
+        public Field() { }
+        public Field(
+            Identifier identifier,
+            Identifier type,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            Expression initializer = null,
+            AttributeListCollection attributeListCollection = null)
+        {
+            Identifier = identifier;
+            Type = type;
+            ModifierList = modifierList;
+            DocumentationCommentList = documentationCommentList;
+            Initializer = initializer;
+            AttributeListCollection = attributeListCollection;
+        }
+        public Field(
+            string identifier,
+            string type,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            Expression initializer = null,
+            AttributeListCollection attributeListCollection = null)
+            : this(new Identifier(identifier), new Identifier(type), modifierList, documentationCommentList, initializer, attributeListCollection)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int FieldId { get; set; }
@@ -38,7 +65,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(10)]
         public ModifierList ModifierList { get; set; }
         [ProtoMember(11)]
-        public int? ModifierListId { get; set; }
+        public byte? ModifierListId { get; set; }
 
         [ProtoMember(12)]
         public Identifier Type { get; set; }

@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("TypeParameters", Schema = nameof(CSharp))]
     public class TypeParameter : IUniqueListRecord
     {
+        public TypeParameter() { }
+        public TypeParameter(Identifier identifier) { Identifier = identifier; }
+        public TypeParameter(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int TypeParameterId { get; set; }

@@ -17,6 +17,29 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstraintLists", Schema = nameof(CSharp))]
     public class ConstraintList : IUniqueList<Constraint, ConstraintListAssociation>
     {
+        public ConstraintList() { }
+        public ConstraintList(List<ConstraintListAssociation> constraintListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ConstraintListAssociations = constraintListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ConstraintList(ConstraintListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<ConstraintListAssociation> { argumentListAssociation }, listIdentifier)
+        {
+        }
+        public ConstraintList(Constraint constraint, AsciiStringReference listIdentifier = null)
+            : this(new ConstraintListAssociation(constraint), listIdentifier)
+        {
+        }
+        public ConstraintList(Identifier constraint, AsciiStringReference listIdentifier = null)
+            : this(new Constraint(constraint), listIdentifier)
+        {
+        }
+        public ConstraintList(string constraint, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(constraint), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstraintListId { get; set; }

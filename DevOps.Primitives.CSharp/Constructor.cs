@@ -11,6 +11,36 @@ namespace DevOps.Primitives.CSharp
     [Table("Constructors", Schema = nameof(CSharp))]
     public class Constructor : ISortableMemberDeclaration, IUniqueListRecord
     {
+        public Constructor() { }
+        public Constructor(
+            Identifier identifier,
+            Block block,
+            ModifierList modifierList = null,
+            ParameterList parameterList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            ConstructorBaseInitializer constructorBaseInitializer = null)
+        {
+            Identifier = identifier;
+            Block = block;
+            ModifierList = modifierList;
+            ParameterList = parameterList;
+            DocumentationCommentList = documentationCommentList;
+            AttributeListCollection = attributeListCollection;
+            ConstructorBaseInitializer = constructorBaseInitializer;
+        }
+        public Constructor(
+            string identifier,
+            Block block,
+            ModifierList modifierList = null,
+            ParameterList parameterList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            ConstructorBaseInitializer constructorBaseInitializer = null)
+            : this(new Identifier(identifier), block, modifierList, parameterList, documentationCommentList, attributeListCollection, constructorBaseInitializer)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstructorId { get; set; }
@@ -43,7 +73,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(12)]
         public ModifierList ModifierList { get; set; }
         [ProtoMember(13)]
-        public int? ModifierListId { get; set; }
+        public byte? ModifierListId { get; set; }
 
         [ProtoMember(14)]
         public ParameterList ParameterList { get; set; }

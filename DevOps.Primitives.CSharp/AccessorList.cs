@@ -16,6 +16,29 @@ namespace DevOps.Primitives.CSharp
     [Table("AccessorLists", Schema = nameof(CSharp))]
     public class AccessorList : IUniqueList<Accessor, AccessorListAssociation>
     {
+        public AccessorList() { }
+        public AccessorList(List<AccessorListAssociation> accessorListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            AccessorListAssociations = accessorListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public AccessorList(AccessorListAssociation accessorListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<AccessorListAssociation> { accessorListAssociation }, listIdentifier)
+        {
+        }
+        public AccessorList(Accessor accessor, AsciiStringReference listIdentifier = null)
+            : this(new AccessorListAssociation(accessor), listIdentifier)
+        {
+        }
+        public AccessorList(SyntaxToken syntaxToken, AsciiStringReference listIdentifier = null)
+            : this(new Accessor(syntaxToken), listIdentifier)
+        {
+        }
+        public AccessorList(SyntaxKind syntaxKind, AsciiStringReference listIdentifier = null)
+            : this(new SyntaxToken(syntaxKind), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int AccessorListId { get; set; }
@@ -27,6 +50,13 @@ namespace DevOps.Primitives.CSharp
 
         [ProtoMember(4)]
         public List<AccessorListAssociation> AccessorListAssociations { get; set; }
+
+        public static AccessorList AutoGet => new AccessorList(SyntaxKind.GetAccessorDeclaration);
+        public static AccessorList AutoGetSet => new AccessorList(new List<AccessorListAssociation>
+        {
+            new AccessorListAssociation(SyntaxKind.GetAccessorDeclaration),
+            new AccessorListAssociation(SyntaxKind.SetAccessorDeclaration)
+        });
 
         public AccessorListSyntax GetAccessorListSyntax()
             => AccessorListAssociations.Count == 1

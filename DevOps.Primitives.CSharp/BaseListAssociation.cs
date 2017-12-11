@@ -9,6 +9,21 @@ namespace DevOps.Primitives.CSharp
     [Table("BaseListAssociations", Schema = nameof(CSharp))]
     public class BaseListAssociation : IUniqueListAssociation<BaseType>
     {
+        public BaseListAssociation() { }
+        public BaseListAssociation(BaseType baseType, BaseList baseList = null)
+        {
+            BaseType = baseType;
+            BaseList = baseList;
+        }
+        public BaseListAssociation(Identifier baseType, BaseList baseList = null)
+            : this(new BaseType(baseType), baseList)
+        {
+        }
+        public BaseListAssociation(string baseType, BaseList baseList = null)
+            : this(new Identifier(baseType), baseList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int BaseListAssociationId { get; set; }

@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Expressions", Schema = nameof(CSharp))]
     public class Expression
     {
+        public Expression() { }
+        public Expression(AsciiMaxStringReference text) { Text = text; }
+        public Expression(string text) :this(new AsciiMaxStringReference(text)) { }
+
         [Key]
         [ProtoMember(1)]
         public int ExpressionId { get; set; }

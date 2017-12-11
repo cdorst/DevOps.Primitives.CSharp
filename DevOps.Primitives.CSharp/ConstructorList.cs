@@ -14,6 +14,21 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstructorLists", Schema = nameof(CSharp))]
     public class ConstructorList : IUniqueList<Constructor, ConstructorListAssociation>
     {
+        public ConstructorList() { }
+        public ConstructorList(List<ConstructorListAssociation> constructorListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ConstructorListAssociations = constructorListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ConstructorList(ConstructorListAssociation constructorListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<ConstructorListAssociation> { constructorListAssociation }, listIdentifier)
+        {
+        }
+        public ConstructorList(Constructor constructor, AsciiStringReference listIdentifier = null)
+            : this(new ConstructorListAssociation(constructor), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstructorListId { get; set; }

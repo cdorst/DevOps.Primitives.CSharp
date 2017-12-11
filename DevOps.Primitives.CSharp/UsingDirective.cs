@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("UsingDirectives", Schema = nameof(CSharp))]
     public class UsingDirective : IUniqueListRecord
     {
+        public UsingDirective() { }
+        public UsingDirective(Identifier identifier) { Identifier = identifier; }
+        public UsingDirective(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int UsingDirectiveId { get; set; }

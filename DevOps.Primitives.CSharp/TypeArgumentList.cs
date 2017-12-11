@@ -17,6 +17,25 @@ namespace DevOps.Primitives.CSharp
     [Table("TypeArgumentLists", Schema = nameof(CSharp))]
     public class TypeArgumentList : IUniqueList<TypeArgument, TypeArgumentListAssociation>
     {
+        public TypeArgumentList() { }
+        public TypeArgumentList(List<TypeArgumentListAssociation> typeArgumentListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            TypeArgumentListAssociations = typeArgumentListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public TypeArgumentList(TypeArgumentListAssociation typeArgumentListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<TypeArgumentListAssociation> { typeArgumentListAssociation }, listIdentifier)
+        {
+        }
+        public TypeArgumentList(Identifier typeArgument, AsciiStringReference listIdentifier = null)
+            : this(new TypeArgumentListAssociation(typeArgument), listIdentifier)
+        {
+        }
+        public TypeArgumentList(string typeArgument, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(typeArgument), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int TypeArgumentListId { get; set; }

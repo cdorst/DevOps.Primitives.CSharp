@@ -17,6 +17,25 @@ namespace DevOps.Primitives.CSharp
     [Table("ParameterLists", Schema = nameof(CSharp))]
     public class ParameterList : IUniqueList<Parameter, ParameterListAssociation>
     {
+        public ParameterList() { }
+        public ParameterList(List<ParameterListAssociation> parameterListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ParameterListAssociations = parameterListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ParameterList(ParameterListAssociation parameterListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<ParameterListAssociation> { parameterListAssociation }, listIdentifier)
+        {
+        }
+        public ParameterList(Identifier identifier, Identifier type, Expression defaultValue = null, AsciiStringReference listIdentifier = null)
+            : this(new ParameterListAssociation(identifier, type, defaultValue), listIdentifier)
+        {
+        }
+        public ParameterList(string identifier, string type, Expression defaultValue = null, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(identifier), new Identifier(type), defaultValue, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ParameterListId { get; set; }

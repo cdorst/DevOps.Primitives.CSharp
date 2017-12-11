@@ -14,6 +14,17 @@ namespace DevOps.Primitives.CSharp
     [Table("FieldLists", Schema = nameof(CSharp))]
     public class FieldList : IUniqueList<Field, FieldListAssociation>
     {
+        public FieldList() { }
+        public FieldList(List<FieldListAssociation> fieldListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            FieldListAssociations = fieldListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public FieldList(FieldListAssociation fieldListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<FieldListAssociation> { fieldListAssociation }, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int FieldListId { get; set; }

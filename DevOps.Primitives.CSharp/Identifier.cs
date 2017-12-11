@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Identifiers", Schema = nameof(CSharp))]
     public class Identifier
     {
+        public Identifier() { }
+        public Identifier(AsciiStringReference name) { Name = name; }
+        public Identifier(string name) : this(new AsciiStringReference(name)) { }
+
         [Key]
         [ProtoMember(1)]
         public int IdentifierId { get; set; }

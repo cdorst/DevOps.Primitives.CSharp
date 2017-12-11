@@ -16,6 +16,17 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstraintClauseLists", Schema = nameof(CSharp))]
     public class ConstraintClauseList : IUniqueList<ConstraintClause, ConstraintClauseListAssociation>
     {
+        public ConstraintClauseList() { }
+        public ConstraintClauseList(List<ConstraintClauseListAssociation> constraintClauseListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ConstraintClauseListAssociations = constraintClauseListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ConstraintClauseList(ConstraintClauseListAssociation constraintClauseListAssociations, AsciiStringReference listIdentifier = null)
+            : this(new List<ConstraintClauseListAssociation> { constraintClauseListAssociations }, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstraintClauseListId { get; set; }

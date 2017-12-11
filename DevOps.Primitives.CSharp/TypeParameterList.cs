@@ -17,6 +17,25 @@ namespace DevOps.Primitives.CSharp
     [Table("TypeParameterLists", Schema = nameof(CSharp))]
     public class TypeParameterList : IUniqueList<TypeParameter, TypeParameterListAssociation>
     {
+        public TypeParameterList() { }
+        public TypeParameterList(List<TypeParameterListAssociation> typeParameterListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            TypeParameterListAssociations = typeParameterListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public TypeParameterList(TypeParameterListAssociation typeParameterListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<TypeParameterListAssociation> { typeParameterListAssociation }, listIdentifier)
+        {
+        }
+        public TypeParameterList(Identifier typeParameter, AsciiStringReference listIdentifier = null)
+            : this(new TypeParameterListAssociation(typeParameter), listIdentifier)
+        {
+        }
+        public TypeParameterList(string typeParameter, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(typeParameter), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int TypeParameterListId { get; set; }

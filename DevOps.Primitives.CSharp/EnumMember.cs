@@ -12,6 +12,19 @@ namespace DevOps.Primitives.CSharp
     [Table("EnumMembers", Schema = nameof(CSharp))]
     public class EnumMember : IUniqueListRecord
     {
+        public EnumMember() { }
+        public EnumMember(Identifier identifier, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributeListCollection = null, int? equalsValue = null)
+        {
+            Identifier = identifier;
+            DocumentationCommentList = documentationCommentList;
+            AttributeListCollection = attributeListCollection;
+            EqualsValue = equalsValue;
+        }
+        public EnumMember(string identifier, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributeListCollection = null, int? equalsValue = null)
+            : this(new Identifier(identifier), documentationCommentList, attributeListCollection, equalsValue)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int EnumMemberId { get; set; }

@@ -14,6 +14,39 @@ namespace DevOps.Primitives.CSharp
     [Table("PropertyLists", Schema = nameof(CSharp))]
     public class PropertyList : IUniqueList<Property, PropertyListAssociation>
     {
+        public PropertyList() { }
+        public PropertyList(List<PropertyListAssociation> propertyListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            PropertyListAssociations = propertyListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public PropertyList(PropertyListAssociation propertyListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<PropertyListAssociation> { propertyListAssociation }, listIdentifier)
+        {
+        }
+        public PropertyList(
+            Identifier identifier,
+            Identifier type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            AsciiStringReference listIdentifier = null)
+            : this(new PropertyListAssociation(identifier, type, accessorList, modifierList, documentationCommentList, attributeListCollection), listIdentifier)
+        {
+        }
+        public PropertyList(
+            string identifier,
+            string type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            AsciiStringReference listIdentifier = null)
+            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int PropertyListId { get; set; }

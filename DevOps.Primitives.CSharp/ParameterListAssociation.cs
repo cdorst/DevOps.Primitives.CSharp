@@ -9,6 +9,21 @@ namespace DevOps.Primitives.CSharp
     [Table("ParameterListAssociations", Schema = nameof(CSharp))]
     public class ParameterListAssociation : IUniqueListAssociation<Parameter>
     {
+        public ParameterListAssociation() { }
+        public ParameterListAssociation(Parameter parameter, ParameterList parameterList = null)
+        {
+            Parameter = parameter;
+            ParameterList = parameterList;
+        }
+        public ParameterListAssociation(Identifier identifier, Identifier type, Expression defaultValue = null, ParameterList parameterList = null)
+            : this (new Parameter(identifier, type, defaultValue), parameterList)
+        {
+        }
+        public ParameterListAssociation(string identifier, string type, Expression defaultValue = null, ParameterList parameterList = null)
+            : this(new Identifier(identifier), new Identifier(type), defaultValue, parameterList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ParameterListAssociationId { get; set; }

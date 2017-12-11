@@ -10,6 +10,17 @@ namespace DevOps.Primitives.CSharp
     [Table("Finalizers", Schema = nameof(CSharp))]
     public class Finalizer
     {
+        public Finalizer() { }
+        public Finalizer(Identifier identifier, Block block)
+        {
+            Identifier = identifier;
+            Block = block;
+        }
+        public Finalizer(string identifier, Block block)
+            : this(new Identifier(identifier), block)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int FinalizerId { get; set; }

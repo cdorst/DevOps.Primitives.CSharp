@@ -9,6 +9,10 @@ namespace DevOps.Primitives.CSharp
     [Table("TypeArguments", Schema = nameof(CSharp))]
     public class TypeArgument : IUniqueListRecord
     {
+        public TypeArgument() { }
+        public TypeArgument(Identifier identifier) { Identifier = identifier; }
+        public TypeArgument(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int TypeArgumentId { get; set; }

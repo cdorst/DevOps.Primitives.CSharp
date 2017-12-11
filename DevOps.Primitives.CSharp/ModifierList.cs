@@ -16,9 +16,28 @@ namespace DevOps.Primitives.CSharp
     [Table("ModifierLists", Schema = nameof(CSharp))]
     public class ModifierList : IUniqueList<SyntaxToken, ModifierListAssociation>
     {
+        public ModifierList() { }
+        public ModifierList(List<ModifierListAssociation> modifierListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ModifierListAssociations = modifierListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ModifierList(ModifierListAssociation modifierListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<ModifierListAssociation> { modifierListAssociation }, listIdentifier)
+        {
+        }
+        public ModifierList(SyntaxToken syntaxToken, AsciiStringReference listIdentifier = null)
+            : this(new ModifierListAssociation(syntaxToken), listIdentifier)
+        {
+        }
+        public ModifierList(SyntaxKind syntaxKind, AsciiStringReference listIdentifier = null)
+            : this(new SyntaxToken(syntaxKind), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
-        public int ModifierListId { get; set; }
+        public byte ModifierListId { get; set; }
 
         [ProtoMember(2)]
         public AsciiStringReference ListIdentifier { get; set; }
@@ -27,6 +46,129 @@ namespace DevOps.Primitives.CSharp
 
         [ProtoMember(4)]
         public List<ModifierListAssociation> ModifierListAssociations { get; set; }
+
+        public static ModifierList Private => new ModifierList(SyntaxKind.PrivateKeyword);
+        public static ModifierList PrivateAbstract => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.AbstractKeyword)
+        });
+        public static ModifierList PrivateAbstractAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.AbstractKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PrivateAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PrivateOverride => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.OverrideKeyword)
+        });
+        public static ModifierList PrivateOverrideAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.OverrideKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PrivateReadonly => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.ReadOnlyKeyword)
+        });
+        public static ModifierList PrivateStatic => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword)
+        });
+        public static ModifierList PrivateStaticAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PrivateStaticReadonly => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword),
+            new ModifierListAssociation(SyntaxKind.ReadOnlyKeyword)
+        });
+        public static ModifierList PrivateVirtual => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.VirtualKeyword)
+        });
+        public static ModifierList PrivateVirtualAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PrivateKeyword),
+            new ModifierListAssociation(SyntaxKind.VirtualKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList Public => new ModifierList(SyntaxKind.PublicKeyword);
+        public static ModifierList PublicAbstract => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.AbstractKeyword)
+        });
+        public static ModifierList PublicAbstractAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.AbstractKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PublicAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PublicOverride => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.OverrideKeyword)
+        });
+        public static ModifierList PublicOverrideAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.OverrideKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PublicReadonly => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.ReadOnlyKeyword)
+        });
+        public static ModifierList PublicStatic => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword)
+        });
+        public static ModifierList PublicStaticAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
+        public static ModifierList PublicStaticReadonly => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.StaticKeyword),
+            new ModifierListAssociation(SyntaxKind.ReadOnlyKeyword)
+        });
+        public static ModifierList PublicVirtual => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.VirtualKeyword)
+        });
+        public static ModifierList PublicVirtualAsync => new ModifierList(new List<ModifierListAssociation>
+        {
+            new ModifierListAssociation(SyntaxKind.PublicKeyword),
+            new ModifierListAssociation(SyntaxKind.VirtualKeyword),
+            new ModifierListAssociation(SyntaxKind.AsyncKeyword)
+        });
 
         public SyntaxTokenList GetSyntaxTokenList(DocumentationCommentList documentationCommentList = null)
         {

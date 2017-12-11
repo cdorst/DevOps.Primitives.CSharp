@@ -17,6 +17,17 @@ namespace DevOps.Primitives.CSharp
     [Table("EnumMemberLists", Schema = nameof(CSharp))]
     public class EnumMemberList : IUniqueList<EnumMember, EnumMemberListAssociation>
     {
+        public EnumMemberList() { }
+        public EnumMemberList(List<EnumMemberListAssociation> enumMemberListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            EnumMemberListAssociations = enumMemberListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public EnumMemberList(EnumMemberListAssociation enumMemberListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<EnumMemberListAssociation> { enumMemberListAssociation }, listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int EnumMemberListId { get; set; }

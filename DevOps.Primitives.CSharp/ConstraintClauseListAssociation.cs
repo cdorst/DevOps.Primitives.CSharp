@@ -9,6 +9,13 @@ namespace DevOps.Primitives.CSharp
     [Table("ConstraintClauseListAssociations", Schema = nameof(CSharp))]
     public class ConstraintClauseListAssociation : IUniqueListAssociation<ConstraintClause>
     {
+        public ConstraintClauseListAssociation() { }
+        public ConstraintClauseListAssociation(ConstraintClause constraintClause, ConstraintClauseList constraintClauseList = null)
+        {
+            ConstraintClause = constraintClause;
+            ConstraintClauseList = constraintClauseList;
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ConstraintClauseListAssociationId { get; set; }

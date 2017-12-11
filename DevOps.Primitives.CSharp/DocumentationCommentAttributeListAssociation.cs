@@ -9,6 +9,21 @@ namespace DevOps.Primitives.CSharp
     [Table("DocumentationCommentAttributeListAssociations", Schema = nameof(CSharp))]
     public class DocumentationCommentAttributeListAssociation : IUniqueListAssociation<DocumentationCommentAttribute>
     {
+        public DocumentationCommentAttributeListAssociation() { }
+        public DocumentationCommentAttributeListAssociation(DocumentationCommentAttribute documentationCommentAttribute, DocumentationCommentAttributeList documentationCommentAttributeList = null)
+        {
+            DocumentationCommentAttribute = documentationCommentAttribute;
+            DocumentationCommentAttributeList = documentationCommentAttributeList;
+        }
+        public DocumentationCommentAttributeListAssociation(Identifier attribute, Identifier value, DocumentationCommentAttributeList documentationCommentAttributeList = null)
+            : this(new DocumentationCommentAttribute(attribute, value), documentationCommentAttributeList)
+        {
+        }
+        public DocumentationCommentAttributeListAssociation(string attribute, string value, DocumentationCommentAttributeList documentationCommentAttributeList = null)
+            : this(new Identifier(attribute), new Identifier(value), documentationCommentAttributeList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int DocumentationCommentAttributeListAssociationId { get; set; }

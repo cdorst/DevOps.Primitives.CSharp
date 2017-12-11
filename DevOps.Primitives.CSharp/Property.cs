@@ -11,6 +11,33 @@ namespace DevOps.Primitives.CSharp
     [Table("Properties", Schema = nameof(CSharp))]
     public class Property : ISortableMemberDeclaration, IUniqueListRecord
     {
+        public Property() { }
+        public Property(
+            Identifier identifier,
+            Identifier type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null)
+        {
+            Identifier = identifier;
+            Type = type;
+            AccessorList = accessorList;
+            ModifierList = modifierList;
+            DocumentationCommentList = documentationCommentList;
+            AttributeListCollection = attributeListCollection;
+        }
+        public Property(
+            string identifier,
+            string type,
+            AccessorList accessorList,
+            ModifierList modifierList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null)
+            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int PropertyId { get; set; }
@@ -38,7 +65,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(10)]
         public ModifierList ModifierList { get; set; }
         [ProtoMember(11)]
-        public int? ModifierListId { get; set; }
+        public byte? ModifierListId { get; set; }
 
         [ProtoMember(12)]
         public Identifier Type { get; set; }

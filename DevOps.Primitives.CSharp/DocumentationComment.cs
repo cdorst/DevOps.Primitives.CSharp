@@ -15,6 +15,21 @@ namespace DevOps.Primitives.CSharp
     [Table("DocumentationComments", Schema = nameof(CSharp))]
     public class DocumentationComment : IUniqueListRecord
     {
+        public const string SummaryElement = "summary";
+
+        public DocumentationComment() { }
+        public DocumentationComment(Identifier identifier, AsciiMaxStringReference text, bool includeNewLine = false, byte indentLevel = byte.MinValue)
+        {
+            Identifier = identifier;
+            Text = text;
+            IncludeNewLine = includeNewLine;
+            IndentLevel = indentLevel;
+        }
+        public DocumentationComment(string text, string identifier = SummaryElement, bool includeNewLine = false, byte indentLevel = byte.MinValue)
+            : this(new Identifier(identifier), new AsciiMaxStringReference(text), includeNewLine, indentLevel)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int DocumentationCommentId { get; set; }

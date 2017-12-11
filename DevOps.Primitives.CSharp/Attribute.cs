@@ -11,6 +11,17 @@ namespace DevOps.Primitives.CSharp
     [Table("Attributes", Schema = nameof(CSharp))]
     public class Attribute : IUniqueListRecord
     {
+        public Attribute() { }
+        public Attribute(Identifier identifier, AttributeArgumentListExpression argumentListExpression = null)
+        {
+            Identifier = identifier;
+            AttributeArgumentListExpression = argumentListExpression;
+        }
+        public Attribute(string identifier, string argumentListExpression = null)
+            : this(new Identifier(identifier), string.IsNullOrEmpty(argumentListExpression) ? null : new AttributeArgumentListExpression(argumentListExpression))
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int AttributeId { get; set; }

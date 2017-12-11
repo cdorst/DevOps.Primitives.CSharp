@@ -9,6 +9,21 @@ namespace DevOps.Primitives.CSharp
     [Table("ArgumentListAssociations", Schema = nameof(CSharp))]
     public class ArgumentListAssociation : IUniqueListAssociation<Argument>
     {
+        public ArgumentListAssociation() { }
+        public ArgumentListAssociation(Argument argument, ArgumentList argumentList = null)
+        {
+            Argument = argument;
+            ArgumentList = argumentList;
+        }
+        public ArgumentListAssociation(Identifier argument, ArgumentList argumentList = null)
+            : this(new Argument(argument), argumentList)
+        {
+        }
+        public ArgumentListAssociation(string argument, ArgumentList argumentList = null)
+            : this(new Identifier(argument), argumentList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ArgumentListAssociationId { get; set; }

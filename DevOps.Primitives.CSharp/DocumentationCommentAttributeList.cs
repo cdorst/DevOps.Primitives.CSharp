@@ -15,6 +15,29 @@ namespace DevOps.Primitives.CSharp
     [Table("DocumentationCommentAttributeLists", Schema = nameof(CSharp))]
     public class DocumentationCommentAttributeList : IUniqueList<DocumentationCommentAttribute, DocumentationCommentAttributeListAssociation>
     {
+        public DocumentationCommentAttributeList() { }
+        public DocumentationCommentAttributeList(List<DocumentationCommentAttributeListAssociation> documentationCommentAttributeListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            DocumentationCommentAttributeListAssociations = documentationCommentAttributeListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public DocumentationCommentAttributeList(DocumentationCommentAttributeListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<DocumentationCommentAttributeListAssociation> { argumentListAssociation }, listIdentifier)
+        {
+        }
+        public DocumentationCommentAttributeList(DocumentationCommentAttribute attribute, AsciiStringReference listIdentifier = null)
+            : this(new DocumentationCommentAttributeListAssociation(attribute), listIdentifier)
+        {
+        }
+        public DocumentationCommentAttributeList(Identifier attribute, Identifier value, AsciiStringReference listIdentifier = null)
+            : this(new DocumentationCommentAttribute(attribute, value), listIdentifier)
+        {
+        }
+        public DocumentationCommentAttributeList(string attribute, string value, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(attribute), new Identifier(value), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int DocumentationCommentAttributeListId { get; set; }

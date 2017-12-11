@@ -9,6 +9,13 @@ namespace DevOps.Primitives.CSharp
     [Table("EnumMemberListAssociations", Schema = nameof(CSharp))]
     public class EnumMemberListAssociation : IUniqueListAssociation<EnumMember>
     {
+        public EnumMemberListAssociation() { }
+        public EnumMemberListAssociation(EnumMember enumMember, EnumMemberList enumMemberList = null)
+        {
+            EnumMember = enumMember;
+            EnumMemberList = enumMemberList;
+        }
+
         [Key]
         [ProtoMember(1)]
         public int EnumMemberListAssociationId { get; set; }

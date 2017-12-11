@@ -11,6 +11,10 @@ namespace DevOps.Primitives.CSharp
     [Table("Arguments", Schema = nameof(CSharp))]
     public class Argument : IUniqueListRecord
     {
+        public Argument() { }
+        public Argument(Identifier identifier) { Identifier = identifier; }
+        public Argument(string identifier) : this(new Identifier(identifier)) { }
+
         [Key]
         [ProtoMember(1)]
         public int ArgumentId { get; set; }

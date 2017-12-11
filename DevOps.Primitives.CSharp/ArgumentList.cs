@@ -17,6 +17,29 @@ namespace DevOps.Primitives.CSharp
     [Table("ArgumentLists", Schema = nameof(CSharp))]
     public class ArgumentList : IUniqueList<Argument, ArgumentListAssociation>
     {
+        public ArgumentList() { }
+        public ArgumentList(List<ArgumentListAssociation> argumentListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            ArgumentListAssociations = argumentListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public ArgumentList(ArgumentListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<ArgumentListAssociation> { argumentListAssociation }, listIdentifier)
+        {
+        }
+        public ArgumentList(Argument argument, AsciiStringReference listIdentifier = null)
+            : this(new ArgumentListAssociation(argument), listIdentifier)
+        {
+        }
+        public ArgumentList(Identifier argument, AsciiStringReference listIdentifier = null)
+            : this(new Argument(argument), listIdentifier)
+        {
+        }
+        public ArgumentList(string argument, AsciiStringReference listIdentifier = null)
+            : this(new Identifier(argument), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int ArgumentListId { get; set; }
