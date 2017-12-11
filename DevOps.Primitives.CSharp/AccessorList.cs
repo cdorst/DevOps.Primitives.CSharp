@@ -51,13 +51,6 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public List<AccessorListAssociation> AccessorListAssociations { get; set; }
 
-        public static AccessorList AutoGet => new AccessorList(SyntaxKind.GetAccessorDeclaration);
-        public static AccessorList AutoGetSet => new AccessorList(new List<AccessorListAssociation>
-        {
-            new AccessorListAssociation(SyntaxKind.GetAccessorDeclaration),
-            new AccessorListAssociation(SyntaxKind.SetAccessorDeclaration)
-        });
-
         public AccessorListSyntax GetAccessorListSyntax()
             => AccessorListAssociations.Count == 1
             ? AccessorList(
