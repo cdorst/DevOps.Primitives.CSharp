@@ -7,6 +7,68 @@ namespace DevOps.Primitives.CSharp
     [ProtoContract]
     public class EnumDeclaration : TypeDeclaration
     {
+        public EnumDeclaration() { }
+        public EnumDeclaration(
+            Identifier identifier,
+            Namespace _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null,
+            EnumMemberList enumMemberList = null)
+            : base(
+                  identifier,
+                  _namespace,
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList)
+        {
+            EnumMemberList = enumMemberList;
+        }
+        public EnumDeclaration(
+            string identifier,
+            string _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null,
+            EnumMemberList enumMemberList = null)
+            : this(
+                  new Identifier(identifier),
+                  new Namespace(_namespace),
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList,
+                  enumMemberList)
+        {
+        }
+
         [ProtoMember(28)]
         public EnumMemberList EnumMemberList { get; set; }
         [ProtoMember(29)]

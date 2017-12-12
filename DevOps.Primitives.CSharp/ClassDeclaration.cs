@@ -9,6 +9,68 @@ namespace DevOps.Primitives.CSharp
     [ProtoContract]
     public class ClassDeclaration : TypeDeclaration
     {
+        public ClassDeclaration() { }
+        public ClassDeclaration(
+            Identifier identifier,
+            Namespace _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null,
+            Finalizer finalizer = null)
+            : base(
+                  identifier,
+                  _namespace,
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList)
+        {
+            Finalizer = finalizer;
+        }
+        public ClassDeclaration(
+            string identifier,
+            string _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null,
+            Finalizer finalizer = null)
+            : this(
+                  new Identifier(identifier),
+                  new Namespace(_namespace),
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList,
+                  finalizer)
+        {
+        }
+
         [ProtoMember(28)]
         public Finalizer Finalizer { get; set; }
         [ProtoMember(29)]

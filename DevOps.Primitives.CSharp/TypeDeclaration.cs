@@ -14,6 +14,63 @@ namespace DevOps.Primitives.CSharp
     [Table("TypeDeclarations", Schema = nameof(CSharp))]
     public class TypeDeclaration
     {
+        public TypeDeclaration() { }
+        public TypeDeclaration(
+            Identifier identifier,
+            Namespace _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null)
+        {
+            Identifier = identifier;
+            Namespace = _namespace;
+            UsingDirectiveList = usingDirectiveList;
+            DocumentationCommentList = documentationCommentList;
+            AttributeListCollection = attributeListCollection;
+            TypeParameterList = typeParameterList;
+            ConstraintClauseList = constraintClauseList;
+            BaseList = baseList;
+            ConstructorList = constructorList;
+            FieldList = fieldList;
+            MethodList = methodList;
+            PropertyList = propertyList;
+        }
+        public TypeDeclaration(
+            string identifier,
+            string _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null)
+            : this(
+                  new Identifier(identifier),
+                  new Namespace(_namespace),
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int TypeDeclarationId { get; set; }

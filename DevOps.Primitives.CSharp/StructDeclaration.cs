@@ -9,6 +9,64 @@ namespace DevOps.Primitives.CSharp
     [ProtoContract]
     public class StructDeclaration : TypeDeclaration
     {
+        public StructDeclaration() { }
+        public StructDeclaration(
+            Identifier identifier,
+            Namespace _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null)
+            : base(
+                  identifier,
+                  _namespace,
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList)
+        {
+        }
+        public StructDeclaration(
+            string identifier,
+            string _namespace,
+            UsingDirectiveList usingDirectiveList = null,
+            DocumentationCommentList documentationCommentList = null,
+            AttributeListCollection attributeListCollection = null,
+            TypeParameterList typeParameterList = null,
+            ConstraintClauseList constraintClauseList = null,
+            BaseList baseList = null,
+            ConstructorList constructorList = null,
+            FieldList fieldList = null,
+            MethodList methodList = null,
+            PropertyList propertyList = null)
+            : this(
+                  new Identifier(identifier),
+                  new Namespace(_namespace),
+                  usingDirectiveList,
+                  documentationCommentList,
+                  attributeListCollection,
+                  typeParameterList,
+                  constraintClauseList,
+                  baseList,
+                  constructorList,
+                  fieldList,
+                  methodList,
+                  propertyList)
+        {
+        }
+
         protected override BaseTypeDeclarationSyntax GetTypeDeclarationSyntax()
         {
             var hasAttributes = AttributeListCollection != null;
