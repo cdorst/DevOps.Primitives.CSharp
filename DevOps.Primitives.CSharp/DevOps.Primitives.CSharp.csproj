@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="CDorst.DevOps.Primitives.Strings" Version="1.0.4" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.6.0" />
   </ItemGroup>
 
 </Project>
