@@ -14,6 +14,21 @@ namespace DevOps.Primitives.CSharp
     [Table("MethodLists", Schema = nameof(CSharp))]
     public class MethodList : IUniqueList<Method, MethodListAssociation>
     {
+        public MethodList() { }
+        public MethodList(List<MethodListAssociation> constraintListAssociations, AsciiStringReference listIdentifier = null)
+        {
+            MethodListAssociations = constraintListAssociations;
+            ListIdentifier = listIdentifier;
+        }
+        public MethodList(MethodListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
+            : this(new List<MethodListAssociation> { argumentListAssociation }, listIdentifier)
+        {
+        }
+        public MethodList(Method constraint, AsciiStringReference listIdentifier = null)
+            : this(new MethodListAssociation(constraint), listIdentifier)
+        {
+        }
+
         [Key]
         [ProtoMember(1)]
         public int MethodListId { get; set; }

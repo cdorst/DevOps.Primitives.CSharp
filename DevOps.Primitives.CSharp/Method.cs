@@ -13,8 +13,23 @@ namespace DevOps.Primitives.CSharp
     public class Method : ISortableMemberDeclaration, IUniqueListRecord
     {
         public Method() { }
-        public Method(Identifier identifier, Identifier type, Expression arrowClauseExpression = null, Block block = null, DocumentationCommentList documentationCommentList = null, ModifierList modifierList = null) { }
-        public Method() { }
+        public Method(Identifier identifier, Identifier type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+        {
+            Identifier = identifier;
+            Type = type;
+            ArrowClauseExpressionValue = arrowClauseExpression;
+            Block = block;
+            DocumentationCommentList = documentationCommentList;
+            ModifierList = modifierList;
+        }
+        public Method(string identifier, string type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+            : this(new Identifier(identifier), new Identifier(type), arrowClauseExpression, block, modifierList, documentationCommentList)
+        {
+        }
+        public Method(string identifier, string type, string arrowClauseExpression, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+            : this(new Identifier(identifier), new Identifier(type), new Expression(arrowClauseExpression), null, modifierList, documentationCommentList)
+        {
+        }
 
         [Key]
         [ProtoMember(1)]
