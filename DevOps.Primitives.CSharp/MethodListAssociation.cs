@@ -15,16 +15,16 @@ namespace DevOps.Primitives.CSharp
             Method = method;
             MethodList = methodList;
         }
-        public MethodListAssociation(Identifier identifier, Identifier type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
-            : this(new Method(identifier, type, arrowClauseExpression, block, modifierList, documentationCommentList), methodList)
+        public MethodListAssociation(Identifier identifier, Identifier type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
+            : this(new Method(identifier, type, parameterList, arrowClauseExpression, block, modifierList, documentationCommentList), methodList)
         {
         }
-        public MethodListAssociation(string identifier, string type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
-            : this(new Identifier(identifier), new Identifier(type), arrowClauseExpression, block, modifierList, documentationCommentList, methodList)
+        public MethodListAssociation(string identifier, string type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
+            : this(new Identifier(identifier), new Identifier(type), parameterList, arrowClauseExpression, block, modifierList, documentationCommentList, methodList)
         {
         }
-        public MethodListAssociation(string identifier, string type, string arrowClauseExpression, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
-            : this(new Identifier(identifier), new Identifier(type), new Expression(arrowClauseExpression), null, modifierList, documentationCommentList, methodList)
+        public MethodListAssociation(string identifier, string type, string arrowClauseExpression, ParameterList parameterList = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, MethodList methodList = null)
+            : this(new Identifier(identifier), new Identifier(type), parameterList, new Expression(arrowClauseExpression), null, modifierList, documentationCommentList, methodList)
         {
         }
 
