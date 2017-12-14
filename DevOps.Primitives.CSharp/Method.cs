@@ -13,7 +13,7 @@ namespace DevOps.Primitives.CSharp
     public class Method : ISortableMemberDeclaration, IUniqueListRecord
     {
         public Method() { }
-        public Method(Identifier identifier, Identifier type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+        public Method(Identifier identifier, Identifier type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
         {
             Identifier = identifier;
             Type = type;
@@ -21,13 +21,18 @@ namespace DevOps.Primitives.CSharp
             Block = block;
             DocumentationCommentList = documentationCommentList;
             ModifierList = modifierList;
+            ParameterList = parameterList;
         }
-        public Method(string identifier, string type, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
-            : this(new Identifier(identifier), new Identifier(type), arrowClauseExpression, block, modifierList, documentationCommentList)
+        public Method(string identifier, string type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+            : this(new Identifier(identifier), new Identifier(type), parameterList, arrowClauseExpression, block, modifierList, documentationCommentList)
         {
         }
-        public Method(string identifier, string type, string arrowClauseExpression, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
-            : this(new Identifier(identifier), new Identifier(type), new Expression(arrowClauseExpression), null, modifierList, documentationCommentList)
+        public Method(string identifier, string type, ParameterList parameterList = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+            : this(new Identifier(identifier), new Identifier(type), parameterList, null, block, modifierList, documentationCommentList)
+        {
+        }
+        public Method(string identifier, string type, string arrowClauseExpression, ParameterList parameterList = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null)
+            : this(new Identifier(identifier), new Identifier(type), parameterList, new Expression(arrowClauseExpression), null, modifierList, documentationCommentList)
         {
         }
 
