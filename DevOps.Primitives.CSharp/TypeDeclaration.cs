@@ -18,6 +18,7 @@ namespace DevOps.Primitives.CSharp
         public TypeDeclaration(
             Identifier identifier,
             Namespace _namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -31,6 +32,7 @@ namespace DevOps.Primitives.CSharp
         {
             Identifier = identifier;
             Namespace = _namespace;
+            ModifierList = modifierList;
             UsingDirectiveList = usingDirectiveList;
             DocumentationCommentList = documentationCommentList;
             AttributeListCollection = attributeListCollection;
@@ -44,7 +46,8 @@ namespace DevOps.Primitives.CSharp
         }
         public TypeDeclaration(
             string identifier,
-            string _namespace,
+            string @namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -57,7 +60,8 @@ namespace DevOps.Primitives.CSharp
             PropertyList propertyList = null)
             : this(
                   new Identifier(identifier),
-                  new Namespace(_namespace),
+                  new Namespace(@namespace),
+                  modifierList,
                   usingDirectiveList,
                   documentationCommentList,
                   attributeListCollection,

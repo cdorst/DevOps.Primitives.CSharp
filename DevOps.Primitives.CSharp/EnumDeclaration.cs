@@ -10,7 +10,8 @@ namespace DevOps.Primitives.CSharp
         public EnumDeclaration() { }
         public EnumDeclaration(
             Identifier identifier,
-            Namespace _namespace,
+            Namespace @namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -24,7 +25,8 @@ namespace DevOps.Primitives.CSharp
             EnumMemberList enumMemberList = null)
             : base(
                   identifier,
-                  _namespace,
+                  @namespace,
+                  modifierList,
                   usingDirectiveList,
                   documentationCommentList,
                   attributeListCollection,
@@ -40,7 +42,8 @@ namespace DevOps.Primitives.CSharp
         }
         public EnumDeclaration(
             string identifier,
-            string _namespace,
+            string @namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -54,7 +57,8 @@ namespace DevOps.Primitives.CSharp
             EnumMemberList enumMemberList = null)
             : this(
                   new Identifier(identifier),
-                  new Namespace(_namespace),
+                  new Namespace(@namespace),
+                  modifierList,
                   usingDirectiveList,
                   documentationCommentList,
                   attributeListCollection,

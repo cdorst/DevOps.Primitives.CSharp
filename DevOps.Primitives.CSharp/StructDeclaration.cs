@@ -12,7 +12,8 @@ namespace DevOps.Primitives.CSharp
         public StructDeclaration() { }
         public StructDeclaration(
             Identifier identifier,
-            Namespace _namespace,
+            Namespace @namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -25,7 +26,8 @@ namespace DevOps.Primitives.CSharp
             PropertyList propertyList = null)
             : base(
                   identifier,
-                  _namespace,
+                  @namespace,
+                  modifierList,
                   usingDirectiveList,
                   documentationCommentList,
                   attributeListCollection,
@@ -40,7 +42,8 @@ namespace DevOps.Primitives.CSharp
         }
         public StructDeclaration(
             string identifier,
-            string _namespace,
+            string @namespace,
+            ModifierList modifierList = null,
             UsingDirectiveList usingDirectiveList = null,
             DocumentationCommentList documentationCommentList = null,
             AttributeListCollection attributeListCollection = null,
@@ -53,7 +56,8 @@ namespace DevOps.Primitives.CSharp
             PropertyList propertyList = null)
             : this(
                   new Identifier(identifier),
-                  new Namespace(_namespace),
+                  new Namespace(@namespace),
+                  modifierList,
                   usingDirectiveList,
                   documentationCommentList,
                   attributeListCollection,
