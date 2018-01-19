@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
 using System.ComponentModel.DataAnnotations;
@@ -24,7 +25,16 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(3)]
         public int IdentifierId { get; set; }
 
+        [ProtoMember(4)]
+        public bool UsingStatic { get; set; }
+
         public UsingDirectiveSyntax GetUsingDirectiveSyntax()
+            => !UsingStatic
+            ? GetUsing()
+            : GetUsing().WithStaticKeyword(
+                Token(SyntaxKind.StaticKeyword));
+
+        private UsingDirectiveSyntax GetUsing()
             => UsingDirective(Identifier.GetNameSyntax());
     }
 }
