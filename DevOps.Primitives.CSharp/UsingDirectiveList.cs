@@ -56,7 +56,10 @@ namespace DevOps.Primitives.CSharp
                     .GetUsingDirectiveSyntax())
             : List(
                 UsingDirectiveListAssociations
-                    .Select(s => s.UsingDirective.GetUsingDirectiveSyntax()));
+                    .Select(s => s.UsingDirective)
+                    .OrderBy(u => u.UsingStatic)
+                    .ThenBy(u => u.Identifier.Name.Value)
+                    .Select(u => u.GetUsingDirectiveSyntax()));
 
         public List<UsingDirectiveListAssociation> GetAssociations() => UsingDirectiveListAssociations;
 
