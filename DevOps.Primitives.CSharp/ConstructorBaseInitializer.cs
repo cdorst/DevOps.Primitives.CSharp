@@ -12,7 +12,11 @@ namespace DevOps.Primitives.CSharp
     public class ConstructorBaseInitializer
     {
         public ConstructorBaseInitializer() { }
-        public ConstructorBaseInitializer(ArgumentList argumentList) { ArgumentList = argumentList; }
+        public ConstructorBaseInitializer(ArgumentList argumentList, SyntaxKind kind = SyntaxKind.BaseConstructorInitializer)
+        {
+            ArgumentList = argumentList;
+            Kind = kind;
+        }
 
         [Key]
         [ProtoMember(1)]
@@ -23,9 +27,11 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(3)]
         public int ArgumentListId { get; set; }
 
+        [ProtoMember(4)]
+        public SyntaxKind Kind { get; set; }
+
         public ConstructorInitializerSyntax GetConstructorInitializerSyntax()
-            => ConstructorInitializer(
-                SyntaxKind.BaseConstructorInitializer,
+            => ConstructorInitializer(Kind,
                 ArgumentList.GetArgumentListSyntax());
     }
 }
