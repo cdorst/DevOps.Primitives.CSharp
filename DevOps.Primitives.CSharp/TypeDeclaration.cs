@@ -11,6 +11,11 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace DevOps.Primitives.CSharp
 {
     [ProtoContract]
+    // https://github.com/mgravell/protobuf-net#inheritance
+    [ProtoInclude(96, typeof(ClassDeclaration))]
+    [ProtoInclude(97, typeof(EnumDeclaration))]
+    [ProtoInclude(98, typeof(InterfaceDeclaration))]
+    [ProtoInclude(99, typeof(StructDeclaration))]
     [Table("TypeDeclarations", Schema = nameof(CSharp))]
     public class TypeDeclaration
     {
