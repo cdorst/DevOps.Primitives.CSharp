@@ -43,7 +43,7 @@ namespace DevOps.Primitives.CSharp
         {
             var hasAttributes = AttributeListCollection != null;
             var hasModifiers = ModifierList != null;
-            var declaration = ClassDeclaration(
+            var declaration = InterfaceDeclaration(
                 Identifier.GetSyntaxToken((!hasAttributes && !hasModifiers) ? DocumentationCommentList : null));
             if (hasAttributes)
             {
@@ -72,10 +72,6 @@ namespace DevOps.Primitives.CSharp
             }
             // Get members
             var memberList = new List<MemberDeclarationSyntax>();
-            if (ConstructorList != null)
-            {
-                memberList.AddRange(ConstructorList.GetMemberDeclarationSyntax());
-            }
             if (PropertyList != null)
             {
                 memberList.AddRange(PropertyList.GetMemberDeclarationSyntax());
