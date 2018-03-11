@@ -37,7 +37,7 @@ namespace DevOps.Primitives.CSharp
         public int? TypeArgumentListId { get; set; }
 
         public SimpleBaseTypeSyntax GetSimpleBaseTypeSyntax()
-            => TypeArgumentListId == null
+            => TypeArgumentList == null
             ? SimpleBaseType(
                 ParseTypeName(Identifier.Name.Value))
             : SimpleBaseType(
