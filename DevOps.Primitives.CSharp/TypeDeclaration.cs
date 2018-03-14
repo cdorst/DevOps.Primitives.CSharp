@@ -173,7 +173,7 @@ namespace DevOps.Primitives.CSharp
             {
                 GetFormattedSyntaxNode().WriteTo(stringWriter);
             }
-            return stringBuilder.ToString();
+            return stringBuilder.AppendLine().ToString();
         }
 
         protected virtual BaseTypeDeclarationSyntax GetTypeDeclarationSyntax()
