@@ -74,6 +74,7 @@ namespace DevOps.Primitives.CSharp
 
         public MemberDeclarationSyntax GetMemberDeclarationSyntax()
         {
+
             var hasAttributes = AttributeListCollection != null;
             var hasModifiers = ModifierList != null;
             var declarator = VariableDeclarator(
@@ -87,7 +88,7 @@ namespace DevOps.Primitives.CSharp
             var declaration = FieldDeclaration(
                 VariableDeclaration(
                     IdentifierName(
-                        Identifier.GetSyntaxToken((!hasAttributes && !hasModifiers) ? DocumentationCommentList : null)))
+                        Type.GetSyntaxToken((!hasAttributes && !hasModifiers) ? DocumentationCommentList : null)))
                     .WithVariables(
                         SingletonSeparatedList(declarator)));
             if (hasAttributes)
