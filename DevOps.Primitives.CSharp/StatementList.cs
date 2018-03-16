@@ -47,16 +47,8 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public List<StatementListAssociation> StatementListAssociations { get; set; }
 
-        public SyntaxList<StatementSyntax> GetStatementListSyntax()
-            => StatementListAssociations.Count == 1
-            ? SingletonList(
-                StatementListAssociations
-                    .First()
-                    .Statement
-                    .GetStatementSyntax())
-            : List(
-                StatementListAssociations
-                    .Select(s => s.Statement.GetStatementSyntax()));
+        public IEnumerable<StatementSyntax> GetStatementListSyntax()
+            => StatementListAssociations.Select(s => s.Statement.GetStatementSyntax());
 
         public List<StatementListAssociation> GetAssociations() => StatementListAssociations;
 
