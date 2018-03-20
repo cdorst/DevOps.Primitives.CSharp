@@ -25,7 +25,6 @@ namespace DevOps.Primitives.CSharp
         public BlockSyntax GetBlockSyntax()
             => StatementList == null
             ? Block()
-            : Block(
-                StatementList.GetStatementListSyntax());
+            : Block().WithStatements(StatementList.GetStatementListSyntax());
     }
 }

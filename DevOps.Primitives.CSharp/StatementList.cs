@@ -47,8 +47,8 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public List<StatementListAssociation> StatementListAssociations { get; set; }
 
-        public IEnumerable<StatementSyntax> GetStatementListSyntax()
-            => StatementListAssociations.Select(s => s.Statement.GetStatementSyntax());
+        public SyntaxList<StatementSyntax> GetStatementListSyntax()
+            => List(StatementListAssociations.Select(s => s.Statement.GetStatementSyntax()));
 
         public List<StatementListAssociation> GetAssociations() => StatementListAssociations;
 
