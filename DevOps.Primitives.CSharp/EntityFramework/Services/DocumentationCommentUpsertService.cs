@@ -26,6 +26,8 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         {
             record.Identifier = await _identifiers.UpsertAsync(record.Identifier);
             record.IdentifierId = record.Identifier?.IdentifierId ?? record.IdentifierId;
+            record.Text = await _strings.UpsertAsync(record.Text);
+            record.TextId = record.Text?.AsciiMaxStringReferenceId ?? record.TextId;
             return record;
         }
 
