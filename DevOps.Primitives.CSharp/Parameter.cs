@@ -1,4 +1,5 @@
 ﻿using Common.EntityFrameworkServices;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
 using System.ComponentModel.DataAnnotations;
@@ -12,15 +13,16 @@ namespace DevOps.Primitives.CSharp
     public class Parameter : IUniqueListRecord
     {
         public Parameter() { }
-        public Parameter(Identifier identifier, Identifier type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null)
+        public Parameter(Identifier identifier, Identifier type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null, bool useThisModifier = false)
         {
             Identifier = identifier;
             Type = type;
             DefaultValue = defaultValue;
             AttributeListCollection = attributeListCollection;
+            UseThisModifier = useThisModifier;
         }
-        public Parameter(string identifier, string type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null)
-            : this(new Identifier(identifier), new Identifier(type), defaultValue, attributeListCollection)
+        public Parameter(string identifier, string type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null, bool useThisModifier = false)
+            : this(new Identifier(identifier), new Identifier(type), defaultValue, attributeListCollection, useThisModifier)
         {
         }
 
@@ -48,6 +50,9 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(9)]
         public int TypeId { get; set; }
 
+        [ProtoMember(10)]
+        public bool? UseThisModifier { get; set; }
+
         public ParameterSyntax GetParameterSyntax()
         {
             var parameter = Parameter(
@@ -64,6 +69,12 @@ namespace DevOps.Primitives.CSharp
                 parameter = parameter.WithDefault(
                     EqualsValueClause(
                         DefaultValue.GetExpressionSyntax()));
+            }
+            if (UseThisModifier ?? false)
+            {
+                parameter = parameter.WithModifiers(
+                    TokenList(
+                        Token(SyntaxKind.ThisKeyword)));
             }
             return parameter;
         }

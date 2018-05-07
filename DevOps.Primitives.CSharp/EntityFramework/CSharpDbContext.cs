@@ -178,7 +178,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework
             modelBuilder.Entity<Namespace>()
                 .HasIndex(e => new { e.IdentifierId }).IsUnique();
             modelBuilder.Entity<Parameter>()
-                .HasIndex(e => new { e.AttributeListCollectionId, e.DefaultValueId, e.IdentifierId, e.TypeId }).IsUnique();
+                .HasIndex(e => new { e.AttributeListCollectionId, e.DefaultValueId, e.IdentifierId, e.TypeId, e.UseThisModifier }).IsUnique();
             modelBuilder.Entity<ParameterList>()
                 .HasIndex(e => new { e.ListIdentifierId }).IsUnique();
             modelBuilder.Entity<ParameterListAssociation>()

@@ -52,6 +52,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
                 => ((existing.AttributeListCollectionId == null && record.AttributeListCollectionId == null) || (existing.AttributeListCollectionId == record.AttributeListCollectionId))
                 && ((existing.DefaultValueId == null && record.DefaultValueId == null) || (existing.DefaultValueId == record.DefaultValueId))
                 && existing.IdentifierId == record.IdentifierId
-                && existing.TypeId == record.TypeId;
+                && existing.TypeId == record.TypeId
+                && ((existing.UseThisModifier == null && record.UseThisModifier == null) || (existing.UseThisModifier == record.UseThisModifier));
     }
 }
