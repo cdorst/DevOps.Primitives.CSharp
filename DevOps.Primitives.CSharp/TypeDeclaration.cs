@@ -48,8 +48,8 @@ namespace DevOps.Primitives.CSharp
             FieldList = fieldList;
             MethodList = methodList;
             PropertyList = propertyList;
-this.Identifier.ToString()
         }
+
         public TypeDeclaration(
             string identifier,
             string @namespace,
