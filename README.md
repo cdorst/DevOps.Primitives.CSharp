@@ -26,12 +26,13 @@ Invoke `ToString()` to generate a source-code document as `string`.
 var classDeclaration = new ClassDeclaration("TypeName", "Namespace");
 
 var @namespace = classDeclaration.GetNamespace();
-var name = classDeclaration.GetName();
-var csharpCodeDocument = classDeclartion.ToString();
-File.WriteAllText(Path.Combine(
+var fileName = classDeclaration.GetFileName();
+var path = Path.Combine(
+    /*Root*/ Environment.CurrentDirectory,
     /*Path*/ Path.Combine(@namespace.Split('.')),
-    /*File*/ string.Concat(name, ".cs")),
-    /*Text*/ csharpCodeDocument);
+    /*File*/ fileName);
+var csharpCodeDocument = classDeclartion.ToString();
+File.WriteAllText(path, csharpCodeDocument);
 ```
 
 Invoke `GetCompilationUnitSyntax()` to generate a `Microsoft.CodeAnalysis.CSharp` ("Roslyn") syntax tree.

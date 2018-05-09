@@ -164,11 +164,14 @@ namespace DevOps.Primitives.CSharp
                         GetTypeDeclarationSyntax())));
         }
 
-        public string GetTypeName()
-            => Identifier.ToString();
+        public string GetFileName()
+            => string.Concat(GetTypeName(), ".cs");
 
         public string GetNamespace()
             => Namespace.Identifier.Name.Value;
+
+        public string GetTypeName()
+            => Identifier.ToString();
 
         public override string ToString()
         {
