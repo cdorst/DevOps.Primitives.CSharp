@@ -1,6 +1,6 @@
 # DevOps.Primitives.CSharp
 
-Represents C#-language concepts as C# entity types
+Entity types for C# programming-language concepts
 
 ## Available on NuGet
 
