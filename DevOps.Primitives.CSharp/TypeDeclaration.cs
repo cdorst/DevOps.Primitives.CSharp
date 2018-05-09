@@ -48,6 +48,7 @@ namespace DevOps.Primitives.CSharp
             FieldList = fieldList;
             MethodList = methodList;
             PropertyList = propertyList;
+this.Identifier.ToString()
         }
         public TypeDeclaration(
             string identifier,
@@ -162,6 +163,9 @@ namespace DevOps.Primitives.CSharp
                     Namespace.GetNamespaceDeclaration(
                         GetTypeDeclarationSyntax())));
         }
+
+        public string GetName()
+            => Identifier.ToString();
 
         public string GetNamespace()
             => Namespace.Identifier.Name.Value;

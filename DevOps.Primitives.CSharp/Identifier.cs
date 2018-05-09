@@ -42,5 +42,8 @@ namespace DevOps.Primitives.CSharp
 
         public TypeSyntax GetTypeSyntax()
             => ParseTypeName(Name.Value);
+
+        public override string ToString()
+            => Name.Value;
     }
 }
