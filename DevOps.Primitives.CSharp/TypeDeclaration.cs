@@ -164,7 +164,7 @@ namespace DevOps.Primitives.CSharp
                         GetTypeDeclarationSyntax())));
         }
 
-        public string GetName()
+        public string GetTypeName()
             => Identifier.ToString();
 
         public string GetNamespace()
