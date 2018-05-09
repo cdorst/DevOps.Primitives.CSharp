@@ -14,7 +14,7 @@ This library enables meta-programming tasks for C# type declarations:
 
 ## Usage Notes
 
-Compose your `TypeDeclaration` graphs using the following derived types:
+Compose `TypeDeclaration` graphs using the following types:
 - `ClassDeclaration`
 - `EnumDeclaration`
 - `InterfaceDeclaration`
