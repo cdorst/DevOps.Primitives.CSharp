@@ -36,6 +36,7 @@ before_build:
 - cmd: dotnet restore
 build:
   verbosity: minimal
+configuration: Release
 after_build:
 - ps: >-
     & dotnet c:\projects\nuget\tools_10\after.dll CDorst nuget c:\projects\nuget\tmp
