@@ -18,7 +18,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework.Services
         public AccessorUpsertService(ICacheService<Accessor> cache, TDbContext database, ILogger<UpsertService<TDbContext, Accessor>> logger, IUpsertService<TDbContext, Block> blocks, IUpsertService<TDbContext, Expression> expressions, IUpsertUniqueListService<TDbContext, SyntaxToken, ModifierList, ModifierListAssociation> modifierLists, IUpsertService<TDbContext, SyntaxToken> syntaxTokens)
             : base(cache, database, logger, database.Accessors)
         {
-            CacheKey = record => $"{nameof(CSharp)}.{nameof(Accessor)}={record.BodyId}:{record.SyntaxTokenId}";
+            CacheKey = record => $"{nameof(CSharp)}.{nameof(Accessor)}={record.ArrowClauseExpressionBodyId}:{record.BodyId}:{record.ModifierListId}:{record.SyntaxTokenId}";
             _blocks = blocks ?? throw new ArgumentNullException(nameof(blocks));
             _expressions = expressions ?? throw new ArgumentNullException(nameof(expressions));
             _modifierLists = modifierLists ?? throw new ArgumentNullException(nameof(modifierLists));

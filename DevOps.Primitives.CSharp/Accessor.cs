@@ -13,23 +13,31 @@ namespace DevOps.Primitives.CSharp
     public class Accessor : IUniqueListRecord
     {
         public Accessor() { }
-        public Accessor(SyntaxToken syntaxToken, Block block = null, ModifierList modifierList = null)
+        public Accessor(SyntaxToken syntaxToken)
+        {
+            SyntaxToken = syntaxToken;
+        }
+        public Accessor(SyntaxKind syntaxKind)
+            : this(new SyntaxToken(syntaxKind))
+        {
+        }
+        public Accessor(SyntaxToken syntaxToken, Block block, ModifierList modifierList = null)
+            : this(syntaxToken)
         {
             Body = block;
             ModifierList = modifierList;
-            SyntaxToken = syntaxToken;
         }
-        public Accessor(SyntaxKind syntaxKind, Block block = null, ModifierList modifierList = null)
+        public Accessor(SyntaxKind syntaxKind, Block block, ModifierList modifierList = null)
             : this(new SyntaxToken(syntaxKind), block, modifierList)
         {
         }
-        public Accessor(SyntaxToken syntaxToken, Expression arrowClauseExpression = null, ModifierList modifierList = null)
+        public Accessor(SyntaxToken syntaxToken, Expression arrowClauseExpression, ModifierList modifierList = null)
+            : this(syntaxToken)
         {
             ArrowClauseExpressionBody = arrowClauseExpression;
             ModifierList = modifierList;
-            SyntaxToken = syntaxToken;
         }
-        public Accessor(SyntaxKind syntaxKind, Expression arrowClauseExpression = null, ModifierList modifierList = null)
+        public Accessor(SyntaxKind syntaxKind, Expression arrowClauseExpression, ModifierList modifierList = null)
             : this(new SyntaxToken(syntaxKind), arrowClauseExpression, modifierList)
         {
         }
