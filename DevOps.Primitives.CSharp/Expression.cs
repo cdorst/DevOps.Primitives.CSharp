@@ -24,6 +24,9 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(3)]
         public int TextId { get; set; }
 
+        public ArrowExpressionClauseSyntax GetArrowExpressionClauseSyntax()
+            => ArrowExpressionClause(GetExpressionSyntax());
+
         public ExpressionSyntax GetExpressionSyntax()
             => ParseExpression(
                 Text.Value);

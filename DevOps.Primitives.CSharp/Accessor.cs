@@ -13,13 +13,24 @@ namespace DevOps.Primitives.CSharp
     public class Accessor : IUniqueListRecord
     {
         public Accessor() { }
-        public Accessor(SyntaxToken syntaxToken, Block block = null)
+        public Accessor(SyntaxToken syntaxToken, Block block = null, ModifierList modifierList = null)
         {
-            SyntaxToken = syntaxToken;
             Body = block;
+            ModifierList = modifierList;
+            SyntaxToken = syntaxToken;
         }
-        public Accessor(SyntaxKind syntaxKind, Block block = null)
-            : this(new SyntaxToken(syntaxKind), block)
+        public Accessor(SyntaxKind syntaxKind, Block block = null, ModifierList modifierList = null)
+            : this(new SyntaxToken(syntaxKind), block, modifierList)
+        {
+        }
+        public Accessor(SyntaxToken syntaxToken, Expression arrowClauseExpression = null, ModifierList modifierList = null)
+        {
+            ArrowClauseExpressionBody = arrowClauseExpression;
+            ModifierList = modifierList;
+            SyntaxToken = syntaxToken;
+        }
+        public Accessor(SyntaxKind syntaxKind, Expression arrowClauseExpression = null, ModifierList modifierList = null)
+            : this(new SyntaxToken(syntaxKind), arrowClauseExpression, modifierList)
         {
         }
 
@@ -28,22 +39,34 @@ namespace DevOps.Primitives.CSharp
         public int AccessorId { get; set; }
 
         [ProtoMember(2)]
-        public Block Body { get; set; }
+        public Expression ArrowClauseExpressionBody { get; set; }
         [ProtoMember(3)]
-        public int? BodyId { get; set; }
+        public int? ArrowClauseExpressionBodyId { get; set; }
 
         [ProtoMember(4)]
-        public SyntaxToken SyntaxToken { get; set; }
+        public Block Body { get; set; }
         [ProtoMember(5)]
+        public int? BodyId { get; set; }
+
+        [ProtoMember(6)]
+        public ModifierList ModifierList { get; set; }
+        [ProtoMember(7)]
+        public byte? ModifierListId { get; set; }
+
+        [ProtoMember(8)]
+        public SyntaxToken SyntaxToken { get; set; }
+        [ProtoMember(9)]
         public short SyntaxTokenId { get; set; }
 
         public AccessorDeclarationSyntax GetAccessorDeclarationSyntax()
         {
             var accessor = AccessorDeclaration(
                 SyntaxToken.SyntaxKind);
-            return (Body == null)
-                ? accessor.WithSemicolonToken(Token(SyntaxKind.SemicolonToken))
-                : accessor.WithBody(Body.GetBlockSyntax());
+            if (ModifierList != null) accessor = accessor.WithModifiers(ModifierList.GetSyntaxTokenList());
+            if (Body != null) return accessor.WithBody(Body.GetBlockSyntax());
+            if (ArrowClauseExpressionBody != null)
+                accessor = accessor.WithExpressionBody(ArrowClauseExpressionBody.GetArrowExpressionClauseSyntax());
+            return accessor.WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
         }
     }
 }

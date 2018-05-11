@@ -127,8 +127,7 @@ namespace DevOps.Primitives.CSharp
             return (ArrowClauseExpressionValue != null)
                 ? declaration
                     .WithExpressionBody(
-                        ArrowExpressionClause(
-                            ArrowClauseExpressionValue.GetExpressionSyntax()))
+                        ArrowClauseExpressionValue.GetArrowExpressionClauseSyntax())
                     .WithSemicolonToken(
                         Token(SyntaxKind.SemicolonToken))
                 : (Block != null)

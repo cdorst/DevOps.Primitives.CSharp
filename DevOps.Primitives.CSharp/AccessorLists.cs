@@ -11,5 +11,20 @@ namespace DevOps.Primitives.CSharp
             new AccessorListAssociation(SyntaxKind.GetAccessorDeclaration),
             new AccessorListAssociation(SyntaxKind.SetAccessorDeclaration)
         });
+        public static AccessorList GetPrivateSet(Block getBlock, Block setBlock) => new AccessorList(new List<AccessorListAssociation>
+        {
+            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getBlock)),
+            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setBlock, ModifierLists.Private))
+        });
+        public static AccessorList GetPrivateSet(Block getBlock, Expression setExpression) => new AccessorList(new List<AccessorListAssociation>
+        {
+            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getBlock)),
+            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setExpression, ModifierLists.Private))
+        });
+        public static AccessorList GetPrivateSet(Expression getExpression, Expression setExpression) => new AccessorList(new List<AccessorListAssociation>
+        {
+            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getExpression)),
+            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setExpression, ModifierLists.Private))
+        });
     }
 }

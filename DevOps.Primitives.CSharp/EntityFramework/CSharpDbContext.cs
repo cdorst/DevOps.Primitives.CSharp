@@ -88,7 +88,7 @@ namespace DevOps.Primitives.CSharp.EntityFramework
         private void AddIndexes(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Accessor>()
-                .HasIndex(e => new { e.BodyId, e.SyntaxTokenId }).IsUnique();
+                .HasIndex(e => new { e.ArrowClauseExpressionBodyId, e.BodyId, e.ModifierListId, e.SyntaxTokenId }).IsUnique();
             modelBuilder.Entity<AccessorList>()
                 .HasIndex(e => new { e.ListIdentifierId }).IsUnique();
             modelBuilder.Entity<AccessorListAssociation>()
