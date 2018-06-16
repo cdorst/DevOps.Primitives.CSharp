@@ -5,12 +5,13 @@
     <Description>EF Core entities and services for C# type declarations</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CDorst.DevOps.Primitives.CSharp</PackageId>
+    <LangVersion>latest</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>7.0.3</Version>
+    <Version>8.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CDorst.DevOps.Primitives.Strings" Version="2.0.2" />
+    <PackageReference Include="CDorst.DevOps.Primitives.Strings" Version="3.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.8.2" />
   </ItemGroup>
 

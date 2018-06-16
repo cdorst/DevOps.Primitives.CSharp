@@ -18,21 +18,21 @@ namespace DevOps.Primitives.CSharp
     public class BaseList : IUniqueList<BaseType, BaseListAssociation>
     {
         public BaseList() { }
-        public BaseList(List<BaseListAssociation> baseListAssociations, AsciiStringReference listIdentifier = null)
+        public BaseList(in List<BaseListAssociation> baseListAssociations, in AsciiStringReference listIdentifier = default)
         {
             BaseListAssociations = baseListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public BaseList(BaseListAssociation baseListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<BaseListAssociation> { baseListAssociation }, listIdentifier)
+        public BaseList(in BaseListAssociation baseListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<BaseListAssociation> { baseListAssociation }, in listIdentifier)
         {
         }
-        public BaseList(Identifier baseType, AsciiStringReference listIdentifier = null)
-            : this(new BaseListAssociation(baseType), listIdentifier)
+        public BaseList(in Identifier baseType, in AsciiStringReference listIdentifier = default)
+            : this(new BaseListAssociation(in baseType), in listIdentifier)
         {
         }
-        public BaseList(string baseType, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(baseType), listIdentifier)
+        public BaseList(in string baseType, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in baseType), in listIdentifier)
         {
         }
 
@@ -76,11 +76,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<BaseListAssociation> GetAssociations() => BaseListAssociations;
 
-        public void SetRecords(List<BaseType> records)
+        public void SetRecords(in List<BaseType> records)
         {
-            BaseListAssociations = UniqueListAssociationsFactory<BaseType, BaseListAssociation>.Create(records);
+            BaseListAssociations = UniqueListAssociationsFactory<BaseType, BaseListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<BaseType>.Create(records, r => r.BaseTypeId));
+                UniqueListIdentifierFactory<BaseType>.Create(in records, r => r.BaseTypeId));
         }
     }
 }

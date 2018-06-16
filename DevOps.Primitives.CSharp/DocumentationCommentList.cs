@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using static System.Environment;
 
 namespace DevOps.Primitives.CSharp
 {
@@ -18,26 +19,26 @@ namespace DevOps.Primitives.CSharp
     public class DocumentationCommentList : IUniqueList<DocumentationComment, DocumentationCommentListAssociation>
     {
         public DocumentationCommentList() { }
-        public DocumentationCommentList(List<DocumentationCommentListAssociation> documentationCommentListAssociations, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
+        public DocumentationCommentList(in List<DocumentationCommentListAssociation> documentationCommentListAssociations, in bool includeNewLine = false, in AsciiStringReference listIdentifier = default)
         {
             DocumentationComments = documentationCommentListAssociations;
             IncludeNewLine = includeNewLine;
             ListIdentifier = listIdentifier;
         }
-        public DocumentationCommentList(DocumentationCommentListAssociation documentationCommentListAssociations, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
-            : this(new List<DocumentationCommentListAssociation> { documentationCommentListAssociations }, includeNewLine, listIdentifier)
+        public DocumentationCommentList(in DocumentationCommentListAssociation documentationCommentListAssociations, in bool includeNewLine = false, in AsciiStringReference listIdentifier = default)
+            : this(new List<DocumentationCommentListAssociation> { documentationCommentListAssociations }, in includeNewLine, in listIdentifier)
         {
         }
-        public DocumentationCommentList(DocumentationComment documentationComment, bool includeNewLine = false, AsciiStringReference listIdentifier = null)
-            : this(new DocumentationCommentListAssociation(documentationComment), includeNewLine, listIdentifier)
+        public DocumentationCommentList(in DocumentationComment documentationComment, in bool includeNewLine = false, in AsciiStringReference listIdentifier = default)
+            : this(new DocumentationCommentListAssociation(in documentationComment), in includeNewLine, in listIdentifier)
         {
         }
-        public DocumentationCommentList(Identifier identifier, AsciiMaxStringReference text, bool includeNewLine = false, byte indentLevel = byte.MinValue, bool includeNewLineAtListLevel = false, AsciiStringReference listIdentifier = null)
-            : this(new DocumentationComment(identifier, text, includeNewLine, indentLevel), includeNewLineAtListLevel, listIdentifier)
+        public DocumentationCommentList(in Identifier identifier, in AsciiMaxStringReference text, in bool includeNewLine = false, in byte indentLevel = byte.MinValue, in bool includeNewLineAtListLevel = false, in AsciiStringReference listIdentifier = default)
+            : this(new DocumentationComment(in identifier, in text, in includeNewLine, in indentLevel), in includeNewLineAtListLevel, in listIdentifier)
         {
         }
-        public DocumentationCommentList(string identifier, string text, bool includeNewLine = false, byte indentLevel = byte.MinValue, bool includeNewLineAtListLevel = false, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(identifier), new AsciiMaxStringReference(text), includeNewLine, indentLevel, includeNewLineAtListLevel, listIdentifier)
+        public DocumentationCommentList(in string identifier, in string text, in bool includeNewLine = false, in byte indentLevel = byte.MinValue, in bool includeNewLineAtListLevel = false, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in identifier), new AsciiMaxStringReference(in text), in includeNewLine, in indentLevel, in includeNewLineAtListLevel, in listIdentifier)
         {
         }
 
@@ -76,17 +77,17 @@ namespace DevOps.Primitives.CSharp
                     TokenList(
                         XmlTextNewLine(
                             TriviaList(),
-                            Environment.NewLine,
-                            Environment.NewLine,
+                            NewLine,
+                            NewLine,
                             TriviaList())));
 
         public List<DocumentationCommentListAssociation> GetAssociations() => DocumentationComments;
 
-        public void SetRecords(List<DocumentationComment> records)
+        public void SetRecords(in List<DocumentationComment> records)
         {
-            DocumentationComments = UniqueListAssociationsFactory<DocumentationComment, DocumentationCommentListAssociation>.Create(records);
+            DocumentationComments = UniqueListAssociationsFactory<DocumentationComment, DocumentationCommentListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<DocumentationComment>.Create(records, r => r.DocumentationCommentId));
+                UniqueListIdentifierFactory<DocumentationComment>.Create(in records, r => r.DocumentationCommentId));
         }
     }
 }

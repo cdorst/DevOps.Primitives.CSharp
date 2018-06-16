@@ -10,17 +10,17 @@ namespace DevOps.Primitives.CSharp
     public class ParameterListAssociation : IUniqueListAssociation<Parameter>
     {
         public ParameterListAssociation() { }
-        public ParameterListAssociation(Parameter parameter, ParameterList parameterList = null)
+        public ParameterListAssociation(in Parameter parameter, in ParameterList parameterList = default)
         {
             Parameter = parameter;
             ParameterList = parameterList;
         }
-        public ParameterListAssociation(Identifier identifier, Identifier type, Expression defaultValue = null, ParameterList parameterList = null)
-            : this (new Parameter(identifier, type, defaultValue), parameterList)
+        public ParameterListAssociation(in Identifier identifier, in Identifier type, in Expression defaultValue = default, in ParameterList parameterList = default)
+            : this (new Parameter(in identifier, in type, in defaultValue), in parameterList)
         {
         }
-        public ParameterListAssociation(string identifier, string type, Expression defaultValue = null, ParameterList parameterList = null)
-            : this(new Identifier(identifier), new Identifier(type), defaultValue, parameterList)
+        public ParameterListAssociation(in string identifier, in string type, in Expression defaultValue = default, in ParameterList parameterList = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in defaultValue, in parameterList)
         {
         }
 
@@ -40,10 +40,10 @@ namespace DevOps.Primitives.CSharp
 
         public Parameter GetRecord() => Parameter;
 
-        public void SetRecord(Parameter record)
+        public void SetRecord(in Parameter record)
         {
             Parameter = record;
-            ParameterId = Parameter.ParameterId;
+            ParameterId = record.ParameterId;
         }
     }
 }

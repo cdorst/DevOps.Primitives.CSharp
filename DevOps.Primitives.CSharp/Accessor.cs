@@ -13,32 +13,32 @@ namespace DevOps.Primitives.CSharp
     public class Accessor : IUniqueListRecord
     {
         public Accessor() { }
-        public Accessor(SyntaxToken syntaxToken)
+        public Accessor(in SyntaxToken syntaxToken)
         {
             SyntaxToken = syntaxToken;
         }
-        public Accessor(SyntaxKind syntaxKind)
-            : this(new SyntaxToken(syntaxKind))
+        public Accessor(in SyntaxKind syntaxKind)
+            : this(new SyntaxToken(in syntaxKind))
         {
         }
-        public Accessor(SyntaxToken syntaxToken, Block block, ModifierList modifierList = null)
-            : this(syntaxToken)
+        public Accessor(in SyntaxToken syntaxToken, in Block block, in ModifierList modifierList = default)
+            : this(in syntaxToken)
         {
             Body = block;
             ModifierList = modifierList;
         }
-        public Accessor(SyntaxKind syntaxKind, Block block, ModifierList modifierList = null)
-            : this(new SyntaxToken(syntaxKind), block, modifierList)
+        public Accessor(in SyntaxKind syntaxKind, in Block block, in ModifierList modifierList = default)
+            : this(new SyntaxToken(in syntaxKind), in block, in modifierList)
         {
         }
-        public Accessor(SyntaxToken syntaxToken, Expression arrowClauseExpression, ModifierList modifierList = null)
-            : this(syntaxToken)
+        public Accessor(in SyntaxToken syntaxToken, in Expression arrowClauseExpression, in ModifierList modifierList = default)
+            : this(in syntaxToken)
         {
             ArrowClauseExpressionBody = arrowClauseExpression;
             ModifierList = modifierList;
         }
-        public Accessor(SyntaxKind syntaxKind, Expression arrowClauseExpression, ModifierList modifierList = null)
-            : this(new SyntaxToken(syntaxKind), arrowClauseExpression, modifierList)
+        public Accessor(in SyntaxKind syntaxKind, in Expression arrowClauseExpression, in ModifierList modifierList = default)
+            : this(new SyntaxToken(in syntaxKind), in arrowClauseExpression, in modifierList)
         {
         }
 

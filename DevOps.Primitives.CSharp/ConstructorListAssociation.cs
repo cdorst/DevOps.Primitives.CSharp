@@ -10,7 +10,7 @@ namespace DevOps.Primitives.CSharp
     public class ConstructorListAssociation : IUniqueListAssociation<Constructor>
     {
         public ConstructorListAssociation() { }
-        public ConstructorListAssociation(Constructor constructor, ConstructorList constructorList = null)
+        public ConstructorListAssociation(in Constructor constructor, in ConstructorList constructorList = default)
         {
             Constructor = constructor;
             ConstructorList = constructorList;
@@ -32,7 +32,7 @@ namespace DevOps.Primitives.CSharp
 
         public Constructor GetRecord() => Constructor;
 
-        public void SetRecord(Constructor record)
+        public void SetRecord(in Constructor record)
         {
             Constructor = record;
             ConstructorId = Constructor.ConstructorId;

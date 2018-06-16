@@ -16,25 +16,25 @@ namespace DevOps.Primitives.CSharp
     public class DocumentationCommentAttributeList : IUniqueList<DocumentationCommentAttribute, DocumentationCommentAttributeListAssociation>
     {
         public DocumentationCommentAttributeList() { }
-        public DocumentationCommentAttributeList(List<DocumentationCommentAttributeListAssociation> documentationCommentAttributeListAssociations, AsciiStringReference listIdentifier = null)
+        public DocumentationCommentAttributeList(in List<DocumentationCommentAttributeListAssociation> documentationCommentAttributeListAssociations, in AsciiStringReference listIdentifier = default)
         {
             DocumentationCommentAttributeListAssociations = documentationCommentAttributeListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public DocumentationCommentAttributeList(DocumentationCommentAttributeListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<DocumentationCommentAttributeListAssociation> { argumentListAssociation }, listIdentifier)
+        public DocumentationCommentAttributeList(in DocumentationCommentAttributeListAssociation argumentListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<DocumentationCommentAttributeListAssociation> { argumentListAssociation }, in listIdentifier)
         {
         }
-        public DocumentationCommentAttributeList(DocumentationCommentAttribute attribute, AsciiStringReference listIdentifier = null)
-            : this(new DocumentationCommentAttributeListAssociation(attribute), listIdentifier)
+        public DocumentationCommentAttributeList(in DocumentationCommentAttribute attribute, in AsciiStringReference listIdentifier = default)
+            : this(new DocumentationCommentAttributeListAssociation(in attribute), in listIdentifier)
         {
         }
-        public DocumentationCommentAttributeList(Identifier attribute, Identifier value, AsciiStringReference listIdentifier = null)
-            : this(new DocumentationCommentAttribute(attribute, value), listIdentifier)
+        public DocumentationCommentAttributeList(in Identifier attribute, in Identifier value, in AsciiStringReference listIdentifier = default)
+            : this(new DocumentationCommentAttribute(in attribute, in value), in listIdentifier)
         {
         }
-        public DocumentationCommentAttributeList(string attribute, string value, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(attribute), new Identifier(value), listIdentifier)
+        public DocumentationCommentAttributeList(in string attribute, in string value, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in attribute), new Identifier(in value), in listIdentifier)
         {
         }
 
@@ -69,11 +69,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<DocumentationCommentAttributeListAssociation> GetAssociations() => DocumentationCommentAttributeListAssociations;
 
-        public void SetRecords(List<DocumentationCommentAttribute> records)
+        public void SetRecords(in List<DocumentationCommentAttribute> records)
         {
-            DocumentationCommentAttributeListAssociations = UniqueListAssociationsFactory<DocumentationCommentAttribute, DocumentationCommentAttributeListAssociation>.Create(records);
+            DocumentationCommentAttributeListAssociations = UniqueListAssociationsFactory<DocumentationCommentAttribute, DocumentationCommentAttributeListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<DocumentationCommentAttribute>.Create(records, r => r.DocumentationCommentAttributeId));
+                UniqueListIdentifierFactory<DocumentationCommentAttribute>.Create(in records, r => r.DocumentationCommentAttributeId));
         }
     }
 }

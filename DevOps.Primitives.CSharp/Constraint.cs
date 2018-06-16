@@ -13,8 +13,8 @@ namespace DevOps.Primitives.CSharp
     public class Constraint : IUniqueListRecord
     {
         public Constraint() { }
-        public Constraint(Identifier identifier) { Identifier = identifier; }
-        public Constraint(string identifier) : this(new Identifier(identifier)) { }
+        public Constraint(in Identifier identifier) { Identifier = identifier; }
+        public Constraint(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]

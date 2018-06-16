@@ -8,7 +8,7 @@ namespace DevOps.Primitives.CSharp
 {
     public static class MemberDeclarationSorter
     {
-        public static IEnumerable<MemberDeclarationSyntax> Sort(IEnumerable<ISortableMemberDeclaration> declarations)
+        public static IEnumerable<MemberDeclarationSyntax> Sort(in IEnumerable<ISortableMemberDeclaration> declarations)
         {
             var ranked = Rank(declarations);
             return ranked
@@ -66,6 +66,7 @@ namespace DevOps.Primitives.CSharp
                 else rank = isReadOnly ? 18 : 19;
             }
             if (isConstant) rank = rank - 20; // Sort const fields above non-const fields
+            if (rank < 0) return byte.MinValue;
             return unchecked((byte)rank);
         }
     }

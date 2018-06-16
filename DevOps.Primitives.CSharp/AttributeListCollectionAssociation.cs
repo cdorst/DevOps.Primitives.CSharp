@@ -10,17 +10,17 @@ namespace DevOps.Primitives.CSharp
     public class AttributeListCollectionAssociation : IUniqueListAssociation<Attribute>
     {
         public AttributeListCollectionAssociation() { }
-        public AttributeListCollectionAssociation(Attribute attribute, AttributeListCollection attributeListCollection = null)
+        public AttributeListCollectionAssociation(in Attribute attribute, in AttributeListCollection attributeListCollection = default)
         {
             Attribute = attribute;
             AttributeListCollection = attributeListCollection;
         }
-        public AttributeListCollectionAssociation(Identifier attribute, AttributeListCollection attributeListCollection = null)
-            : this(new Attribute(attribute), attributeListCollection)
+        public AttributeListCollectionAssociation(in Identifier attribute, in AttributeListCollection attributeListCollection = default)
+            : this(new Attribute(in attribute), in attributeListCollection)
         {
         }
-        public AttributeListCollectionAssociation(string attribute, AttributeListCollection attributeListCollection = null)
-            : this(new Identifier(attribute), attributeListCollection)
+        public AttributeListCollectionAssociation(in string attribute, in AttributeListCollection attributeListCollection = default)
+            : this(new Identifier(in attribute), in attributeListCollection)
         {
         }
 
@@ -40,7 +40,7 @@ namespace DevOps.Primitives.CSharp
 
         public Attribute GetRecord() => Attribute;
 
-        public void SetRecord(Attribute record)
+        public void SetRecord(in Attribute record)
         {
             Attribute = record;
             AttributeId = Attribute.AttributeId;

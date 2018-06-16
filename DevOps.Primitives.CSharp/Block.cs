@@ -11,7 +11,7 @@ namespace DevOps.Primitives.CSharp
     public class Block
     {
         public Block() { }
-        public Block(StatementList statementList) { StatementList = statementList; }
+        public Block(in StatementList statementList) { StatementList = statementList; }
 
         [Key]
         [ProtoMember(1)]

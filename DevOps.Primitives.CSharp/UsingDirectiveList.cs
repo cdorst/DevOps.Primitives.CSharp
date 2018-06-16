@@ -17,21 +17,21 @@ namespace DevOps.Primitives.CSharp
     public class UsingDirectiveList : IUniqueList<UsingDirective, UsingDirectiveListAssociation>
     {
         public UsingDirectiveList() { }
-        public UsingDirectiveList(List<UsingDirectiveListAssociation> usingDirectiveListAssociations, AsciiStringReference listIdentifier = null)
+        public UsingDirectiveList(in List<UsingDirectiveListAssociation> usingDirectiveListAssociations, in AsciiStringReference listIdentifier = default)
         {
             UsingDirectiveListAssociations = usingDirectiveListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public UsingDirectiveList(UsingDirectiveListAssociation usingDirectiveListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<UsingDirectiveListAssociation> { usingDirectiveListAssociation }, listIdentifier)
+        public UsingDirectiveList(in UsingDirectiveListAssociation usingDirectiveListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<UsingDirectiveListAssociation> { usingDirectiveListAssociation }, in listIdentifier)
         {
         }
-        public UsingDirectiveList(Identifier usingDirective, AsciiStringReference listIdentifier = null)
-            : this(new UsingDirectiveListAssociation(usingDirective), listIdentifier)
+        public UsingDirectiveList(in Identifier usingDirective, in AsciiStringReference listIdentifier = default)
+            : this(new UsingDirectiveListAssociation(in usingDirective), in listIdentifier)
         {
         }
-        public UsingDirectiveList(string usingDirective, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(usingDirective), listIdentifier)
+        public UsingDirectiveList(in string usingDirective, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in usingDirective), in listIdentifier)
         {
         }
 
@@ -63,11 +63,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<UsingDirectiveListAssociation> GetAssociations() => UsingDirectiveListAssociations;
 
-        public void SetRecords(List<UsingDirective> records)
+        public void SetRecords(in List<UsingDirective> records)
         {
-            UsingDirectiveListAssociations = UniqueListAssociationsFactory<UsingDirective, UsingDirectiveListAssociation>.Create(records);
+            UsingDirectiveListAssociations = UniqueListAssociationsFactory<UsingDirective, UsingDirectiveListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<UsingDirective>.Create(records, r => r.UsingDirectiveId));
+                UniqueListIdentifierFactory<UsingDirective>.Create(in records, r => r.UsingDirectiveId));
         }
     }
 }

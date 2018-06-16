@@ -11,13 +11,13 @@ namespace DevOps.Primitives.CSharp
     public class Finalizer
     {
         public Finalizer() { }
-        public Finalizer(Identifier identifier, Block block)
+        public Finalizer(in Identifier identifier, in Block block)
         {
-            Identifier = identifier;
             Block = block;
+            Identifier = identifier;
         }
-        public Finalizer(string identifier, Block block)
-            : this(new Identifier(identifier), block)
+        public Finalizer(in string identifier, in Block block)
+            : this(new Identifier(in identifier), in block)
         {
         }
 

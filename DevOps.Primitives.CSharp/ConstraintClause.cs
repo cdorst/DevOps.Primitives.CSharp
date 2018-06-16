@@ -12,13 +12,13 @@ namespace DevOps.Primitives.CSharp
     public class ConstraintClause : IUniqueListRecord
     {
         public ConstraintClause() { }
-        public ConstraintClause(Identifier identifier, ConstraintList constraintList)
+        public ConstraintClause(in Identifier identifier, in ConstraintList constraintList)
         {
             Identifier = identifier;
             ConstraintList = constraintList;
         }
-        public ConstraintClause(string identifier, ConstraintList constraintList)
-            : this(new Identifier(identifier), constraintList)
+        public ConstraintClause(in string identifier, in ConstraintList constraintList)
+            : this(new Identifier(in identifier), in constraintList)
         {
         }
 

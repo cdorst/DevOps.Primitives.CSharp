@@ -12,7 +12,7 @@ namespace DevOps.Primitives.CSharp
     public class SyntaxToken : IUniqueListRecord
     {
         public SyntaxToken() { }
-        public SyntaxToken(SyntaxKind syntaxKind) { SyntaxKind = syntaxKind; }
+        public SyntaxToken(in SyntaxKind syntaxKind) { SyntaxKind = syntaxKind; }
 
         [Key]
         [ProtoMember(1)]

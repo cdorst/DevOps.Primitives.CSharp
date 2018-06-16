@@ -21,19 +21,19 @@ namespace DevOps.Primitives.CSharp
     {
         public TypeDeclaration() { }
         public TypeDeclaration(
-            Identifier identifier,
-            Namespace _namespace,
-            ModifierList modifierList = null,
-            UsingDirectiveList usingDirectiveList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            TypeParameterList typeParameterList = null,
-            ConstraintClauseList constraintClauseList = null,
-            BaseList baseList = null,
-            ConstructorList constructorList = null,
-            FieldList fieldList = null,
-            MethodList methodList = null,
-            PropertyList propertyList = null)
+            in Identifier identifier,
+            in Namespace _namespace,
+            in ModifierList modifierList = default,
+            in UsingDirectiveList usingDirectiveList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in TypeParameterList typeParameterList = default,
+            in ConstraintClauseList constraintClauseList = default,
+            in BaseList baseList = default,
+            in ConstructorList constructorList = default,
+            in FieldList fieldList = default,
+            in MethodList methodList = default,
+            in PropertyList propertyList = default)
         {
             Identifier = identifier;
             Namespace = _namespace;
@@ -51,33 +51,33 @@ namespace DevOps.Primitives.CSharp
         }
 
         public TypeDeclaration(
-            string identifier,
-            string @namespace,
-            ModifierList modifierList = null,
-            UsingDirectiveList usingDirectiveList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            TypeParameterList typeParameterList = null,
-            ConstraintClauseList constraintClauseList = null,
-            BaseList baseList = null,
-            ConstructorList constructorList = null,
-            FieldList fieldList = null,
-            MethodList methodList = null,
-            PropertyList propertyList = null)
+            in string identifier,
+            in string @namespace,
+            in ModifierList modifierList = default,
+            in UsingDirectiveList usingDirectiveList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in TypeParameterList typeParameterList = default,
+            in ConstraintClauseList constraintClauseList = default,
+            in BaseList baseList = default,
+            in ConstructorList constructorList = default,
+            in FieldList fieldList = default,
+            in MethodList methodList = default,
+            in PropertyList propertyList = default)
             : this(
-                  new Identifier(identifier),
-                  new Namespace(@namespace),
-                  modifierList,
-                  usingDirectiveList,
-                  documentationCommentList,
-                  attributeListCollection,
-                  typeParameterList,
-                  constraintClauseList,
-                  baseList,
-                  constructorList,
-                  fieldList,
-                  methodList,
-                  propertyList)
+                  new Identifier(in identifier),
+                  new Namespace(in @namespace),
+                  in modifierList,
+                  in usingDirectiveList,
+                  in documentationCommentList,
+                  in attributeListCollection,
+                  in typeParameterList,
+                  in constraintClauseList,
+                  in baseList,
+                  in constructorList,
+                  in fieldList,
+                  in methodList,
+                  in propertyList)
         {
         }
 
@@ -183,8 +183,7 @@ namespace DevOps.Primitives.CSharp
             return stringBuilder.AppendLine().ToString();
         }
 
-        protected virtual BaseTypeDeclarationSyntax GetTypeDeclarationSyntax()
-            => default(BaseTypeDeclarationSyntax);
+        protected virtual BaseTypeDeclarationSyntax GetTypeDeclarationSyntax() => default;
 
         private SyntaxNode GetFormattedSyntaxNode()
             => Formatter.Format(

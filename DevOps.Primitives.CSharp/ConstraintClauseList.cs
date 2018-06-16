@@ -17,13 +17,13 @@ namespace DevOps.Primitives.CSharp
     public class ConstraintClauseList : IUniqueList<ConstraintClause, ConstraintClauseListAssociation>
     {
         public ConstraintClauseList() { }
-        public ConstraintClauseList(List<ConstraintClauseListAssociation> constraintClauseListAssociations, AsciiStringReference listIdentifier = null)
+        public ConstraintClauseList(in List<ConstraintClauseListAssociation> constraintClauseListAssociations, in AsciiStringReference listIdentifier = default)
         {
             ConstraintClauseListAssociations = constraintClauseListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public ConstraintClauseList(ConstraintClauseListAssociation constraintClauseListAssociations, AsciiStringReference listIdentifier = null)
-            : this(new List<ConstraintClauseListAssociation> { constraintClauseListAssociations }, listIdentifier)
+        public ConstraintClauseList(in ConstraintClauseListAssociation constraintClauseListAssociations, in AsciiStringReference listIdentifier = default)
+            : this(new List<ConstraintClauseListAssociation> { constraintClauseListAssociations }, in listIdentifier)
         {
         }
 
@@ -52,11 +52,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<ConstraintClauseListAssociation> GetAssociations() => ConstraintClauseListAssociations;
 
-        public void SetRecords(List<ConstraintClause> records)
+        public void SetRecords(in List<ConstraintClause> records)
         {
-            ConstraintClauseListAssociations = UniqueListAssociationsFactory<ConstraintClause, ConstraintClauseListAssociation>.Create(records);
+            ConstraintClauseListAssociations = UniqueListAssociationsFactory<ConstraintClause, ConstraintClauseListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<ConstraintClause>.Create(records, r => r.ConstraintClauseId));
+                UniqueListIdentifierFactory<ConstraintClause>.Create(in records, r => r.ConstraintClauseId));
         }
     }
 }

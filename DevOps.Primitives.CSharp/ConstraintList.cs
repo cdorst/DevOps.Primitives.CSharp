@@ -18,25 +18,25 @@ namespace DevOps.Primitives.CSharp
     public class ConstraintList : IUniqueList<Constraint, ConstraintListAssociation>
     {
         public ConstraintList() { }
-        public ConstraintList(List<ConstraintListAssociation> constraintListAssociations, AsciiStringReference listIdentifier = null)
+        public ConstraintList(in List<ConstraintListAssociation> constraintListAssociations, in AsciiStringReference listIdentifier = default)
         {
             ConstraintListAssociations = constraintListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public ConstraintList(ConstraintListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<ConstraintListAssociation> { argumentListAssociation }, listIdentifier)
+        public ConstraintList(in ConstraintListAssociation argumentListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<ConstraintListAssociation> { argumentListAssociation }, in listIdentifier)
         {
         }
-        public ConstraintList(Constraint constraint, AsciiStringReference listIdentifier = null)
-            : this(new ConstraintListAssociation(constraint), listIdentifier)
+        public ConstraintList(in Constraint constraint, in AsciiStringReference listIdentifier = default)
+            : this(new ConstraintListAssociation(in constraint), in listIdentifier)
         {
         }
-        public ConstraintList(Identifier constraint, AsciiStringReference listIdentifier = null)
-            : this(new Constraint(constraint), listIdentifier)
+        public ConstraintList(in Identifier constraint, in AsciiStringReference listIdentifier = default)
+            : this(new Constraint(in constraint), in listIdentifier)
         {
         }
-        public ConstraintList(string constraint, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(constraint), listIdentifier)
+        public ConstraintList(in string constraint, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in constraint), in listIdentifier)
         {
         }
 
@@ -77,11 +77,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<ConstraintListAssociation> GetAssociations() => ConstraintListAssociations;
 
-        public void SetRecords(List<Constraint> records)
+        public void SetRecords(in List<Constraint> records)
         {
-            ConstraintListAssociations = UniqueListAssociationsFactory<Constraint, ConstraintListAssociation>.Create(records);
+            ConstraintListAssociations = UniqueListAssociationsFactory<Constraint, ConstraintListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Constraint>.Create(records, r => r.ConstraintId));
+                UniqueListIdentifierFactory<Constraint>.Create(in records, r => r.ConstraintId));
         }
     }
 }

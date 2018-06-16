@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class AttributeArgumentListExpression
     {
         public AttributeArgumentListExpression() { }
-        public AttributeArgumentListExpression(AsciiMaxStringReference expression) { Expression = expression; }
-        public AttributeArgumentListExpression(string expression) : this(new AsciiMaxStringReference(expression)) { }
+        public AttributeArgumentListExpression(in AsciiMaxStringReference expression) { Expression = expression; }
+        public AttributeArgumentListExpression(in string expression) : this(new AsciiMaxStringReference(in expression)) { }
 
         [Key]
         [ProtoMember(1)]

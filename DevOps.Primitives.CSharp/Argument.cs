@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class Argument : IUniqueListRecord
     {
         public Argument() { }
-        public Argument(Identifier identifier) { Identifier = identifier; }
-        public Argument(string identifier) : this(new Identifier(identifier)) { }
+        public Argument(in Identifier identifier) { Identifier = identifier; }
+        public Argument(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]

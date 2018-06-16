@@ -10,21 +10,67 @@ namespace DevOps.Primitives.CSharp
     public class MethodListAssociation : IUniqueListAssociation<Method>
     {
         public MethodListAssociation() { }
-        public MethodListAssociation(Method method, MethodList methodList = null)
+        public MethodListAssociation(in Method method, in MethodList methodList = default)
         {
             Method = method;
             MethodList = methodList;
         }
-        public MethodListAssociation(Identifier identifier, Identifier type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null, MethodList methodList = null)
-            : this(new Method(identifier, type, parameterList, arrowClauseExpression, block, modifierList, documentationCommentList, attributes), methodList)
+        public MethodListAssociation(
+            in Identifier identifier,
+            in Identifier type,
+            in ParameterList parameterList = default,
+            in Expression arrowClauseExpression = default,
+            in Block block = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default,
+            in MethodList methodList = default)
+            : this(
+                  new Method(in identifier, in type, in parameterList, in arrowClauseExpression, in block, in modifierList, in documentationCommentList, in attributes),
+                  in methodList)
         {
         }
-        public MethodListAssociation(string identifier, string type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null, MethodList methodList = null)
-            : this(new Identifier(identifier), new Identifier(type), parameterList, arrowClauseExpression, block, modifierList, documentationCommentList, attributes, methodList)
+        public MethodListAssociation(
+            in string identifier,
+            in string type,
+            in ParameterList parameterList = default,
+            in Expression arrowClauseExpression = default,
+            in Block block = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default,
+            in MethodList methodList = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in parameterList,
+                  in arrowClauseExpression,
+                  in block,
+                  in modifierList,
+                  in documentationCommentList,
+                  in attributes,
+                  in methodList)
         {
         }
-        public MethodListAssociation(string identifier, string type, string arrowClauseExpression, ParameterList parameterList = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null, MethodList methodList = null)
-            : this(new Identifier(identifier), new Identifier(type), parameterList, new Expression(arrowClauseExpression), null, modifierList, documentationCommentList, attributes, methodList)
+        public MethodListAssociation(
+            in string identifier,
+            in string type,
+            in string arrowClauseExpression,
+            in ParameterList parameterList = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default,
+            in MethodList methodList = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in parameterList,
+                  new Expression(in arrowClauseExpression),
+                  block: null,
+                  in modifierList,
+                  in documentationCommentList,
+                  in attributes,
+                  in methodList)
         {
         }
 
@@ -44,10 +90,10 @@ namespace DevOps.Primitives.CSharp
 
         public Method GetRecord() => Method;
 
-        public void SetRecord(Method record)
+        public void SetRecord(in Method record)
         {
             Method = record;
-            MethodId = Method.MethodId;
+            MethodId = record.MethodId;
         }
     }
 }

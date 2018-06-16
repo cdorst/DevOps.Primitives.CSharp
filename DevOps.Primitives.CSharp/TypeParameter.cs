@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class TypeParameter : IUniqueListRecord
     {
         public TypeParameter() { }
-        public TypeParameter(Identifier identifier) { Identifier = identifier; }
-        public TypeParameter(string identifier) : this(new Identifier(identifier)) { }
+        public TypeParameter(in Identifier identifier) { Identifier = identifier; }
+        public TypeParameter(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]

@@ -17,25 +17,29 @@ namespace DevOps.Primitives.CSharp
     public class AccessorList : IUniqueList<Accessor, AccessorListAssociation>
     {
         public AccessorList() { }
-        public AccessorList(List<AccessorListAssociation> accessorListAssociations, AsciiStringReference listIdentifier = null)
+        public AccessorList(in List<AccessorListAssociation> accessorListAssociations, in AsciiStringReference listIdentifier = default)
         {
             AccessorListAssociations = accessorListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public AccessorList(AccessorListAssociation accessorListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<AccessorListAssociation> { accessorListAssociation }, listIdentifier)
+        public AccessorList(params AccessorListAssociation[] associations)
+            : this(associations.ToList())
         {
         }
-        public AccessorList(Accessor accessor, AsciiStringReference listIdentifier = null)
-            : this(new AccessorListAssociation(accessor), listIdentifier)
+        public AccessorList(in AccessorListAssociation accessorListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<AccessorListAssociation> { accessorListAssociation }, in listIdentifier)
         {
         }
-        public AccessorList(SyntaxToken syntaxToken, AsciiStringReference listIdentifier = null)
-            : this(new Accessor(syntaxToken), listIdentifier)
+        public AccessorList(in Accessor accessor, in AsciiStringReference listIdentifier = default)
+            : this(new AccessorListAssociation(in accessor), in listIdentifier)
         {
         }
-        public AccessorList(SyntaxKind syntaxKind, AsciiStringReference listIdentifier = null)
-            : this(new SyntaxToken(syntaxKind), listIdentifier)
+        public AccessorList(in SyntaxToken syntaxToken, in AsciiStringReference listIdentifier = default)
+            : this(new Accessor(in syntaxToken), in listIdentifier)
+        {
+        }
+        public AccessorList(in SyntaxKind syntaxKind, in AsciiStringReference listIdentifier = default)
+            : this(new SyntaxToken(in syntaxKind), in listIdentifier)
         {
         }
 
@@ -67,11 +71,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<AccessorListAssociation> GetAssociations() => AccessorListAssociations;
 
-        public void SetRecords(List<Accessor> records)
+        public void SetRecords(in List<Accessor> records)
         {
-            AccessorListAssociations = UniqueListAssociationsFactory<Accessor, AccessorListAssociation>.Create(records);
+            AccessorListAssociations = UniqueListAssociationsFactory<Accessor, AccessorListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Accessor>.Create(records, r => r.AccessorId));
+                UniqueListIdentifierFactory<Accessor>.Create(in records, r => r.AccessorId));
         }
     }
 }

@@ -11,17 +11,17 @@ namespace DevOps.Primitives.CSharp
     public class DocumentationCommentListAssociation : IUniqueListAssociation<DocumentationComment>
     {
         public DocumentationCommentListAssociation() { }
-        public DocumentationCommentListAssociation(DocumentationComment documentationComment, DocumentationCommentList documentationCommentList = null)
+        public DocumentationCommentListAssociation(in DocumentationComment documentationComment, in DocumentationCommentList documentationCommentList = default)
         {
             DocumentationComment = documentationComment;
             DocumentationCommentList = documentationCommentList;
         }
-        public DocumentationCommentListAssociation(Identifier identifier, AsciiMaxStringReference text, bool includeNewLine = false, byte indentLevel = byte.MinValue, DocumentationCommentList documentationCommentList = null)
-            : this(new DocumentationComment(identifier, text, includeNewLine, indentLevel), documentationCommentList)
+        public DocumentationCommentListAssociation(in Identifier identifier, in AsciiMaxStringReference text, in bool includeNewLine = false, in byte indentLevel = byte.MinValue, in DocumentationCommentList documentationCommentList = default)
+            : this(new DocumentationComment(in identifier, in text, in includeNewLine, in indentLevel), in documentationCommentList)
         {
         }
-        public DocumentationCommentListAssociation(string identifier, string text, bool includeNewLine = false, byte indentLevel = byte.MinValue, DocumentationCommentList documentationCommentList = null)
-            : this(new Identifier(identifier), new AsciiMaxStringReference(text), includeNewLine, indentLevel, documentationCommentList)
+        public DocumentationCommentListAssociation(in string identifier, in string text, in bool includeNewLine = false, in byte indentLevel = byte.MinValue, in DocumentationCommentList documentationCommentList = default)
+            : this(new Identifier(in identifier), new AsciiMaxStringReference(in text), in includeNewLine, in indentLevel, in documentationCommentList)
         {
         }
 
@@ -41,7 +41,7 @@ namespace DevOps.Primitives.CSharp
 
         public DocumentationComment GetRecord() => DocumentationComment;
 
-        public void SetRecord(DocumentationComment record)
+        public void SetRecord(in DocumentationComment record)
         {
             DocumentationComment = record;
             DocumentationCommentId = DocumentationComment.DocumentationCommentId;

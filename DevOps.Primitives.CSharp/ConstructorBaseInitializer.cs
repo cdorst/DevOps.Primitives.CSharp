@@ -12,7 +12,7 @@ namespace DevOps.Primitives.CSharp
     public class ConstructorBaseInitializer
     {
         public ConstructorBaseInitializer() { }
-        public ConstructorBaseInitializer(ArgumentList argumentList, SyntaxKind kind = SyntaxKind.BaseConstructorInitializer)
+        public ConstructorBaseInitializer(in ArgumentList argumentList, in SyntaxKind kind = SyntaxKind.BaseConstructorInitializer)
         {
             ArgumentList = argumentList;
             Kind = kind;

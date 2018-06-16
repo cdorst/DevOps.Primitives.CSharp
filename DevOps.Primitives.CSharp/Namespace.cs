@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class Namespace
     {
         public Namespace() { }
-        public Namespace(Identifier identifier) { Identifier = identifier; }
-        public Namespace(string identifier) : this(new Identifier(identifier)) { }
+        public Namespace(in Identifier identifier) { Identifier = identifier; }
+        public Namespace(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]
@@ -24,7 +24,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(3)]
         public int IdentifierId { get; set; }
 
-        public NamespaceDeclarationSyntax GetNamespaceDeclaration(SyntaxNode typeDeclaration)
+        public NamespaceDeclarationSyntax GetNamespaceDeclaration(in SyntaxNode typeDeclaration)
             => NamespaceDeclaration(Identifier.GetNameSyntax())
                 .WithMembers(SingletonList(typeDeclaration));
     }

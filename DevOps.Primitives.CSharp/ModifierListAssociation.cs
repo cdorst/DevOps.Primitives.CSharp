@@ -11,12 +11,12 @@ namespace DevOps.Primitives.CSharp
     public class ModifierListAssociation : IUniqueListAssociation<SyntaxToken>
     {
         public ModifierListAssociation() { }
-        public ModifierListAssociation(SyntaxToken syntaxToken, ModifierList modifierList = null)
+        public ModifierListAssociation(in SyntaxToken syntaxToken, in ModifierList modifierList = default)
         {
             SyntaxToken = syntaxToken;
             ModifierList = modifierList;
         }
-        public ModifierListAssociation(SyntaxKind syntaxKind, ModifierList modifierList = null)
+        public ModifierListAssociation(in SyntaxKind syntaxKind, in ModifierList modifierList = default)
             : this(new SyntaxToken(syntaxKind), modifierList)
         {
         }
@@ -37,10 +37,10 @@ namespace DevOps.Primitives.CSharp
 
         public SyntaxToken GetRecord() => SyntaxToken;
 
-        public void SetRecord(SyntaxToken record)
+        public void SetRecord(in SyntaxToken record)
         {
             SyntaxToken = record;
-            SyntaxTokenId = SyntaxToken.SyntaxTokenId;
+            SyntaxTokenId = record.SyntaxTokenId;
         }
     }
 }

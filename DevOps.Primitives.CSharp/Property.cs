@@ -13,28 +13,28 @@ namespace DevOps.Primitives.CSharp
     {
         public Property() { }
         public Property(
-            Identifier identifier,
-            Identifier type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null)
+            in Identifier identifier,
+            in Identifier type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default)
         {
-            Identifier = identifier;
-            Type = type;
             AccessorList = accessorList;
-            ModifierList = modifierList;
-            DocumentationCommentList = documentationCommentList;
             AttributeListCollection = attributeListCollection;
+            DocumentationCommentList = documentationCommentList;
+            Identifier = identifier;
+            ModifierList = modifierList;
+            Type = type;
         }
         public Property(
-            string identifier,
-            string type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null)
-            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection)
+            in string identifier,
+            in string type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in accessorList, in modifierList, in documentationCommentList, in attributeListCollection)
         {
         }
 

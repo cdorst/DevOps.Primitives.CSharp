@@ -18,21 +18,21 @@ namespace DevOps.Primitives.CSharp
     public class TypeParameterList : IUniqueList<TypeParameter, TypeParameterListAssociation>
     {
         public TypeParameterList() { }
-        public TypeParameterList(List<TypeParameterListAssociation> typeParameterListAssociations, AsciiStringReference listIdentifier = null)
+        public TypeParameterList(in List<TypeParameterListAssociation> typeParameterListAssociations, in AsciiStringReference listIdentifier = default)
         {
             TypeParameterListAssociations = typeParameterListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public TypeParameterList(TypeParameterListAssociation typeParameterListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<TypeParameterListAssociation> { typeParameterListAssociation }, listIdentifier)
+        public TypeParameterList(in TypeParameterListAssociation typeParameterListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<TypeParameterListAssociation> { typeParameterListAssociation }, in listIdentifier)
         {
         }
-        public TypeParameterList(Identifier typeParameter, AsciiStringReference listIdentifier = null)
+        public TypeParameterList(in Identifier typeParameter, in AsciiStringReference listIdentifier = default)
             : this(new TypeParameterListAssociation(typeParameter), listIdentifier)
         {
         }
-        public TypeParameterList(string typeParameter, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(typeParameter), listIdentifier)
+        public TypeParameterList(in string typeParameter, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in typeParameter), in listIdentifier)
         {
         }
 
@@ -76,11 +76,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<TypeParameterListAssociation> GetAssociations() => TypeParameterListAssociations;
 
-        public void SetRecords(List<TypeParameter> records)
+        public void SetRecords(in List<TypeParameter> records)
         {
-            TypeParameterListAssociations = UniqueListAssociationsFactory<TypeParameter, TypeParameterListAssociation>.Create(records);
+            TypeParameterListAssociations = UniqueListAssociationsFactory<TypeParameter, TypeParameterListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<TypeParameter>.Create(records, r => r.TypeParameterId));
+                UniqueListIdentifierFactory<TypeParameter>.Create(in records, r => r.TypeParameterId));
         }
     }
 }

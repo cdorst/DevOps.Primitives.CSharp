@@ -10,17 +10,17 @@ namespace DevOps.Primitives.CSharp
     public class UsingDirectiveListAssociation : IUniqueListAssociation<UsingDirective>
     {
         public UsingDirectiveListAssociation() { }
-        public UsingDirectiveListAssociation(UsingDirective usingDirective, UsingDirectiveList usingDirectiveList = null)
+        public UsingDirectiveListAssociation(in UsingDirective usingDirective, in UsingDirectiveList usingDirectiveList = default)
         {
             UsingDirective = usingDirective;
             UsingDirectiveList = usingDirectiveList;
         }
-        public UsingDirectiveListAssociation(Identifier usingDirective, UsingDirectiveList usingDirectiveList = null)
-            : this(new UsingDirective(usingDirective), usingDirectiveList)
+        public UsingDirectiveListAssociation(in Identifier usingDirective, in UsingDirectiveList usingDirectiveList = default)
+            : this(new UsingDirective(in usingDirective), in usingDirectiveList)
         {
         }
-        public UsingDirectiveListAssociation(string usingDirective, UsingDirectiveList usingDirectiveList = null)
-            : this(new Identifier(usingDirective), usingDirectiveList)
+        public UsingDirectiveListAssociation(in string usingDirective, in UsingDirectiveList usingDirectiveList = default)
+            : this(new Identifier(in usingDirective), in usingDirectiveList)
         {
         }
 
@@ -40,10 +40,10 @@ namespace DevOps.Primitives.CSharp
 
         public UsingDirective GetRecord() => UsingDirective;
 
-        public void SetRecord(UsingDirective record)
+        public void SetRecord(in UsingDirective record)
         {
             UsingDirective = record;
-            UsingDirectiveId = UsingDirective.UsingDirectiveId;
+            UsingDirectiveId = record.UsingDirectiveId;
         }
     }
 }

@@ -17,21 +17,21 @@ namespace DevOps.Primitives.CSharp
     public class ModifierList : IUniqueList<SyntaxToken, ModifierListAssociation>
     {
         public ModifierList() { }
-        public ModifierList(List<ModifierListAssociation> modifierListAssociations, AsciiStringReference listIdentifier = null)
+        public ModifierList(in List<ModifierListAssociation> modifierListAssociations, in AsciiStringReference listIdentifier = default)
         {
             ModifierListAssociations = modifierListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public ModifierList(ModifierListAssociation modifierListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<ModifierListAssociation> { modifierListAssociation }, listIdentifier)
+        public ModifierList(in ModifierListAssociation modifierListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<ModifierListAssociation> { modifierListAssociation }, in listIdentifier)
         {
         }
-        public ModifierList(SyntaxToken syntaxToken, AsciiStringReference listIdentifier = null)
-            : this(new ModifierListAssociation(syntaxToken), listIdentifier)
+        public ModifierList(in SyntaxToken syntaxToken, in AsciiStringReference listIdentifier = default)
+            : this(new ModifierListAssociation(in syntaxToken), in listIdentifier)
         {
         }
-        public ModifierList(SyntaxKind syntaxKind, AsciiStringReference listIdentifier = null)
-            : this(new SyntaxToken(syntaxKind), listIdentifier)
+        public ModifierList(in SyntaxKind syntaxKind, in AsciiStringReference listIdentifier = default)
+            : this(new SyntaxToken(in syntaxKind), in listIdentifier)
         {
         }
 
@@ -47,7 +47,7 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public List<ModifierListAssociation> ModifierListAssociations { get; set; }
 
-        public SyntaxTokenList GetSyntaxTokenList(DocumentationCommentList documentationCommentList = null)
+        public SyntaxTokenList GetSyntaxTokenList(in DocumentationCommentList documentationCommentList = default)
         {
             if (documentationCommentList == null)
             {
@@ -77,14 +77,14 @@ namespace DevOps.Primitives.CSharp
 
         public List<ModifierListAssociation> GetAssociations() => ModifierListAssociations;
 
-        public void SetRecords(List<SyntaxToken> records)
+        public void SetRecords(in List<SyntaxToken> records)
         {
-            ModifierListAssociations = UniqueListAssociationsFactory<SyntaxToken, ModifierListAssociation>.Create(records);
+            ModifierListAssociations = UniqueListAssociationsFactory<SyntaxToken, ModifierListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<SyntaxToken>.Create(records, r => r.SyntaxTokenId));
+                UniqueListIdentifierFactory<SyntaxToken>.Create(in records, r => r.SyntaxTokenId));
         }
 
-        private static int Rank(SyntaxKind modifier)
+        private static int Rank(in SyntaxKind modifier)
             => modifier == SyntaxKind.PublicKeyword ? 0
             : modifier == SyntaxKind.ProtectedKeyword ? 1
             : modifier == SyntaxKind.InternalKeyword ? 2

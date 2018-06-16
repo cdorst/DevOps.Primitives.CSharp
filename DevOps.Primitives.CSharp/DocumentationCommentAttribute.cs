@@ -1,5 +1,4 @@
 ﻿using Common.EntityFrameworkServices;
-using DevOps.Primitives.Strings;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
@@ -15,13 +14,13 @@ namespace DevOps.Primitives.CSharp
     public class DocumentationCommentAttribute : IUniqueListRecord
     {
         public DocumentationCommentAttribute() { }
-        public DocumentationCommentAttribute(Identifier identifier, Identifier value)
+        public DocumentationCommentAttribute(in Identifier identifier, in Identifier value)
         {
             Identifier = identifier;
             Value = value;
         }
-        public DocumentationCommentAttribute(string identifier, string value)
-            : this(new Identifier(identifier), new Identifier(value))
+        public DocumentationCommentAttribute(in string identifier, in string value)
+            : this(new Identifier(in identifier), new Identifier(in value))
         {
         }
 
@@ -39,33 +38,21 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(5)]
         public int ValueId { get; set; }
 
-        public static DocumentationCommentAttribute FromXmlAttributeSyntax(XmlAttributeSyntax syntax)
+        public static DocumentationCommentAttribute FromXmlAttributeSyntax(in XmlAttributeSyntax syntax)
         {
-            if (syntax is XmlCrefAttributeSyntax) return FromXmlCref(syntax);
-            if (syntax is XmlNameAttributeSyntax) return FromXmlName(syntax);
+            if (syntax is XmlCrefAttributeSyntax) return FromXmlCref(in syntax);
+            if (syntax is XmlNameAttributeSyntax) return FromXmlName(in syntax);
             return FromXmlText(syntax as XmlTextAttributeSyntax);
         }
 
-        private static DocumentationCommentAttribute FromXmlCref(XmlAttributeSyntax syntax)
-            => new DocumentationCommentAttribute
-            {
-                Identifier = new Identifier { Name = new AsciiStringReference { Value = "cref" } },
-                Value = new Identifier { Name = new AsciiStringReference { Value = (syntax as XmlCrefAttributeSyntax).Cref.ToString() } }
-            };
+        private static DocumentationCommentAttribute FromXmlCref(in XmlAttributeSyntax syntax)
+            => new DocumentationCommentAttribute("cref", (syntax as XmlCrefAttributeSyntax).Cref.ToString());
 
-        private static DocumentationCommentAttribute FromXmlName(XmlAttributeSyntax syntax)
-            => new DocumentationCommentAttribute
-            {
-                Identifier = new Identifier { Name = new AsciiStringReference { Value = "name" } },
-                Value = new Identifier { Name = new AsciiStringReference { Value = (syntax as XmlNameAttributeSyntax).Identifier.ToString() } }
-            };
+        private static DocumentationCommentAttribute FromXmlName(in XmlAttributeSyntax syntax)
+            => new DocumentationCommentAttribute("name", (syntax as XmlNameAttributeSyntax).Identifier.ToString());
 
-        private static DocumentationCommentAttribute FromXmlText(XmlTextAttributeSyntax syntax)
-            => new DocumentationCommentAttribute
-            {
-                Identifier = new Identifier { Name = new AsciiStringReference { Value = syntax.Name.ToString() } },
-                Value = new Identifier { Name = new AsciiStringReference { Value = syntax.TextTokens.ToString() } }
-            };
+        private static DocumentationCommentAttribute FromXmlText(in XmlTextAttributeSyntax syntax)
+            => new DocumentationCommentAttribute(syntax.Name.ToString(), syntax.TextTokens.ToString());
 
         public XmlAttributeSyntax GetXmlAttributeSyntax()
             => string.Equals(Identifier.Name.Value, "cref", StringComparison.OrdinalIgnoreCase)

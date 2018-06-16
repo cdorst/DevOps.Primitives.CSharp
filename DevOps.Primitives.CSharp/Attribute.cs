@@ -12,13 +12,13 @@ namespace DevOps.Primitives.CSharp
     public class Attribute : IUniqueListRecord
     {
         public Attribute() { }
-        public Attribute(Identifier identifier, AttributeArgumentListExpression argumentListExpression = null)
+        public Attribute(in Identifier identifier, in AttributeArgumentListExpression argumentListExpression = default)
         {
-            Identifier = identifier;
             AttributeArgumentListExpression = argumentListExpression;
+            Identifier = identifier;
         }
-        public Attribute(string identifier, string argumentListExpression = null)
-            : this(new Identifier(identifier), string.IsNullOrEmpty(argumentListExpression) ? null : new AttributeArgumentListExpression(argumentListExpression))
+        public Attribute(in string identifier, in string argumentListExpression = default)
+            : this(new Identifier(in identifier), string.IsNullOrEmpty(argumentListExpression) ? null : new AttributeArgumentListExpression(in argumentListExpression))
         {
         }
 

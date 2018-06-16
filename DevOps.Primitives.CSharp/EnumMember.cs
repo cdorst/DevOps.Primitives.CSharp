@@ -13,15 +13,15 @@ namespace DevOps.Primitives.CSharp
     public class EnumMember : IUniqueListRecord
     {
         public EnumMember() { }
-        public EnumMember(Identifier identifier, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributeListCollection = null, int? equalsValue = null)
+        public EnumMember(in Identifier identifier, in DocumentationCommentList documentationCommentList = default, in AttributeListCollection attributeListCollection = default, in int? equalsValue = default)
         {
-            Identifier = identifier;
-            DocumentationCommentList = documentationCommentList;
             AttributeListCollection = attributeListCollection;
+            DocumentationCommentList = documentationCommentList;
             EqualsValue = equalsValue;
+            Identifier = identifier;
         }
-        public EnumMember(string identifier, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributeListCollection = null, int? equalsValue = null)
-            : this(new Identifier(identifier), documentationCommentList, attributeListCollection, equalsValue)
+        public EnumMember(in string identifier, in DocumentationCommentList documentationCommentList = default, in AttributeListCollection attributeListCollection = default, in int? equalsValue = default)
+            : this(new Identifier(in identifier), in documentationCommentList, in attributeListCollection, in equalsValue)
         {
         }
 

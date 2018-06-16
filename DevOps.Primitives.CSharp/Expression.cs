@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class Expression
     {
         public Expression() { }
-        public Expression(AsciiMaxStringReference text) { Text = text; }
-        public Expression(string text) :this(new AsciiMaxStringReference(text)) { }
+        public Expression(in AsciiMaxStringReference text) { Text = text; }
+        public Expression(in string text) : this(new AsciiMaxStringReference(in text)) { }
 
         [Key]
         [ProtoMember(1)]
@@ -28,7 +28,6 @@ namespace DevOps.Primitives.CSharp
             => ArrowExpressionClause(GetExpressionSyntax());
 
         public ExpressionSyntax GetExpressionSyntax()
-            => ParseExpression(
-                Text.Value);
+            => ParseExpression(Text.Value);
     }
 }

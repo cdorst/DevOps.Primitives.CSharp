@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using static System.Environment;
 
 namespace DevOps.Primitives.CSharp
 {
@@ -18,15 +19,15 @@ namespace DevOps.Primitives.CSharp
         public const string SummaryElement = "summary";
 
         public DocumentationComment() { }
-        public DocumentationComment(Identifier identifier, AsciiMaxStringReference text, bool includeNewLine = false, byte indentLevel = byte.MinValue)
+        public DocumentationComment(in Identifier identifier, in AsciiMaxStringReference text, in bool includeNewLine = false, in byte indentLevel = byte.MinValue)
         {
             Identifier = identifier;
             Text = text;
             IncludeNewLine = includeNewLine;
             IndentLevel = indentLevel;
         }
-        public DocumentationComment(string text, string identifier = SummaryElement, bool includeNewLine = false, byte indentLevel = byte.MinValue)
-            : this(new Identifier(identifier), new AsciiMaxStringReference(text), includeNewLine, indentLevel)
+        public DocumentationComment(in string text, in string identifier = SummaryElement, in bool includeNewLine = false, in byte indentLevel = byte.MinValue)
+            : this(new Identifier(in identifier), new AsciiMaxStringReference(in text), in includeNewLine, in indentLevel)
         {
         }
 
@@ -88,8 +89,8 @@ namespace DevOps.Primitives.CSharp
         private Microsoft.CodeAnalysis.SyntaxToken GetNewLine()
             => XmlTextNewLine(
                 TriviaList(),
-                Environment.NewLine,
-                Environment.NewLine,
+                NewLine,
+                NewLine,
                 TriviaList());
 
         private Microsoft.CodeAnalysis.SyntaxToken GetDocumentationCommentExterior()
@@ -101,14 +102,6 @@ namespace DevOps.Primitives.CSharp
                 TriviaList());
 
         private string Indent()
-            => string.Join(string.Empty, indent());
-
-        private IEnumerable<string> indent()
-        {
-            for (int i = 0; i < IndentLevel; i++)
-            {
-                yield return "    ";
-            }
-        }
+            => new String(' ', 4 * IndentLevel);
     }
 }

@@ -18,21 +18,21 @@ namespace DevOps.Primitives.CSharp
     public class ParameterList : IUniqueList<Parameter, ParameterListAssociation>
     {
         public ParameterList() { }
-        public ParameterList(List<ParameterListAssociation> parameterListAssociations, AsciiStringReference listIdentifier = null)
+        public ParameterList(in List<ParameterListAssociation> parameterListAssociations, in AsciiStringReference listIdentifier = default)
         {
             ParameterListAssociations = parameterListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public ParameterList(ParameterListAssociation parameterListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<ParameterListAssociation> { parameterListAssociation }, listIdentifier)
+        public ParameterList(in ParameterListAssociation parameterListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<ParameterListAssociation> { parameterListAssociation }, in listIdentifier)
         {
         }
-        public ParameterList(Identifier identifier, Identifier type, Expression defaultValue = null, AsciiStringReference listIdentifier = null)
-            : this(new ParameterListAssociation(identifier, type, defaultValue), listIdentifier)
+        public ParameterList(in Identifier identifier, in Identifier type, in Expression defaultValue = default, in AsciiStringReference listIdentifier = default)
+            : this(new ParameterListAssociation(in identifier, in type, in defaultValue), in listIdentifier)
         {
         }
-        public ParameterList(string identifier, string type, Expression defaultValue = null, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(identifier), new Identifier(type), defaultValue, listIdentifier)
+        public ParameterList(in string identifier, in string type, in Expression defaultValue = default, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in defaultValue, in listIdentifier)
         {
         }
 
@@ -76,11 +76,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<ParameterListAssociation> GetAssociations() => ParameterListAssociations;
 
-        public void SetRecords(List<Parameter> records)
+        public void SetRecords(in List<Parameter> records)
         {
-            ParameterListAssociations = UniqueListAssociationsFactory<Parameter, ParameterListAssociation>.Create(records);
+            ParameterListAssociations = UniqueListAssociationsFactory<Parameter, ParameterListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Parameter>.Create(records, r => r.ParameterId));
+                UniqueListIdentifierFactory<Parameter>.Create(in records, r => r.ParameterId));
         }
     }
 }

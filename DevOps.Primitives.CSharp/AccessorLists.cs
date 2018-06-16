@@ -1,30 +1,32 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
-using System.Collections.Generic;
+using static DevOps.Primitives.CSharp.ModifierLists;
 
 namespace DevOps.Primitives.CSharp
 {
     public static class AccessorLists
     {
-        public static AccessorList AutoGet => new AccessorList(SyntaxKind.GetAccessorDeclaration);
-        public static AccessorList AutoGetSet => new AccessorList(new List<AccessorListAssociation>
-        {
-            new AccessorListAssociation(SyntaxKind.GetAccessorDeclaration),
-            new AccessorListAssociation(SyntaxKind.SetAccessorDeclaration)
-        });
-        public static AccessorList GetPrivateSet(Block getBlock, Block setBlock) => new AccessorList(new List<AccessorListAssociation>
-        {
-            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getBlock)),
-            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setBlock, ModifierLists.Private))
-        });
-        public static AccessorList GetPrivateSet(Block getBlock, Expression setExpression) => new AccessorList(new List<AccessorListAssociation>
-        {
-            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getBlock)),
-            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setExpression, ModifierLists.Private))
-        });
-        public static AccessorList GetPrivateSet(Expression getExpression, Expression setExpression) => new AccessorList(new List<AccessorListAssociation>
-        {
-            new AccessorListAssociation(new Accessor(SyntaxKind.GetAccessorDeclaration, getExpression)),
-            new AccessorListAssociation(new Accessor(SyntaxKind.SetAccessorDeclaration, setExpression, ModifierLists.Private))
-        });
+        private static readonly SyntaxKind _get = SyntaxKind.GetAccessorDeclaration;
+        private static readonly SyntaxKind _set = SyntaxKind.SetAccessorDeclaration;
+
+        public static readonly AccessorList AutoGet = new AccessorList(in _get);
+
+        public static readonly AccessorList AutoGetSet = new AccessorList(
+            new AccessorListAssociation(in _get),
+            new AccessorListAssociation(in _set));
+
+        public static AccessorList GetPrivateSet(in Block getBlock, in Block setBlock)
+            => new AccessorList(
+                new AccessorListAssociation(new Accessor(in _get, in getBlock)),
+                new AccessorListAssociation(new Accessor(in _set, in setBlock, Private)));
+
+        public static AccessorList GetPrivateSet(in Block getBlock, in Expression setExpression)
+            => new AccessorList(
+                new AccessorListAssociation(new Accessor(in _get, in getBlock)),
+                new AccessorListAssociation(new Accessor(in _set, in setExpression, Private)));
+
+        public static AccessorList GetPrivateSet(in Expression getExpression, in Expression setExpression)
+            => new AccessorList(
+                new AccessorListAssociation(new Accessor(in _get, in getExpression)),
+                new AccessorListAssociation(new Accessor(in _set, in setExpression, Private)));
     }
 }

@@ -10,7 +10,7 @@ namespace DevOps.Primitives.CSharp
     public class ConstraintClauseListAssociation : IUniqueListAssociation<ConstraintClause>
     {
         public ConstraintClauseListAssociation() { }
-        public ConstraintClauseListAssociation(ConstraintClause constraintClause, ConstraintClauseList constraintClauseList = null)
+        public ConstraintClauseListAssociation(in ConstraintClause constraintClause, in ConstraintClauseList constraintClauseList = default)
         {
             ConstraintClause = constraintClause;
             ConstraintClauseList = constraintClauseList;
@@ -32,7 +32,7 @@ namespace DevOps.Primitives.CSharp
 
         public ConstraintClause GetRecord() => ConstraintClause;
 
-        public void SetRecord(ConstraintClause record)
+        public void SetRecord(in ConstraintClause record)
         {
             ConstraintClause = record;
             ConstraintClauseId = ConstraintClause.ConstraintClauseId;

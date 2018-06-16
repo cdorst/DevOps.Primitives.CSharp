@@ -10,31 +10,31 @@ namespace DevOps.Primitives.CSharp
     public class PropertyListAssociation : IUniqueListAssociation<Property>
     {
         public PropertyListAssociation() { }
-        public PropertyListAssociation(Property property, PropertyList propertyList = null)
+        public PropertyListAssociation(in Property property, in PropertyList propertyList = default)
         {
             Property = property;
             PropertyList = propertyList;
         }
         public PropertyListAssociation(
-            Identifier identifier,
-            Identifier type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            PropertyList propertyList = null)
-            : this(new Property(identifier, type, accessorList, modifierList, documentationCommentList, attributeListCollection), propertyList)
+            in Identifier identifier,
+            in Identifier type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in PropertyList propertyList = default)
+            : this(new Property(in identifier, in type, in accessorList, in modifierList, in documentationCommentList, in attributeListCollection), in propertyList)
         {
         }
         public PropertyListAssociation(
-            string identifier,
-            string type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            PropertyList propertyList = null)
-            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection, propertyList)
+            in string identifier,
+            in string type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            PropertyList propertyList = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in accessorList, in modifierList, in documentationCommentList, in attributeListCollection, in propertyList)
         {
         }
 
@@ -54,10 +54,10 @@ namespace DevOps.Primitives.CSharp
 
         public Property GetRecord() => Property;
 
-        public void SetRecord(Property record)
+        public void SetRecord(in Property record)
         {
             Property = record;
-            PropertyId = Property.PropertyId;
+            PropertyId = record.PropertyId;
         }
     }
 }

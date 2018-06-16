@@ -1,13 +1,15 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
+using static System.IO.Path;
 
 namespace DevOps.Primitives.CSharp
 {
     public static class NamespacePathResolver
     {
-        public static string GetPath(string projectNamespace, string typeDeclarationNamespace)
-            => Path.Combine(typeDeclarationNamespace.Split('.')
-                .Skip(projectNamespace.Split('.').Count())
+        private const char Dot = '.';
+
+        public static string GetPath(in string projectNamespace, in string typeDeclarationNamespace)
+            => Combine(typeDeclarationNamespace.Split(Dot)
+                .Skip(projectNamespace.Split(Dot).Count())
                 .ToArray());
     }
 }

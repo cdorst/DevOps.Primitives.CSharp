@@ -12,8 +12,8 @@ namespace DevOps.Primitives.CSharp
     public class Identifier
     {
         public Identifier() { }
-        public Identifier(AsciiStringReference name) { Name = name; }
-        public Identifier(string name) : this(new AsciiStringReference(name)) { }
+        public Identifier(in AsciiStringReference name) { Name = name; }
+        public Identifier(in string name) : this(new AsciiStringReference(name)) { }
 
         [Key]
         [ProtoMember(1)]
@@ -30,7 +30,7 @@ namespace DevOps.Primitives.CSharp
         public NameSyntax GetNameSyntax()
             => ParseName(Name.Value);
 
-        public Microsoft.CodeAnalysis.SyntaxToken GetSyntaxToken(DocumentationCommentList documentationCommentList = null)
+        public Microsoft.CodeAnalysis.SyntaxToken GetSyntaxToken(in DocumentationCommentList documentationCommentList = default)
             => documentationCommentList == null
             ? Identifier(Name.Value)
             : Identifier(

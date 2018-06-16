@@ -15,35 +15,35 @@ namespace DevOps.Primitives.CSharp
     public class PropertyList : IUniqueList<Property, PropertyListAssociation>
     {
         public PropertyList() { }
-        public PropertyList(List<PropertyListAssociation> propertyListAssociations, AsciiStringReference listIdentifier = null)
+        public PropertyList(in List<PropertyListAssociation> propertyListAssociations, in AsciiStringReference listIdentifier = default)
         {
             PropertyListAssociations = propertyListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public PropertyList(PropertyListAssociation propertyListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<PropertyListAssociation> { propertyListAssociation }, listIdentifier)
+        public PropertyList(in PropertyListAssociation propertyListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<PropertyListAssociation> { propertyListAssociation }, in listIdentifier)
         {
         }
         public PropertyList(
-            Identifier identifier,
-            Identifier type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            AsciiStringReference listIdentifier = null)
-            : this(new PropertyListAssociation(identifier, type, accessorList, modifierList, documentationCommentList, attributeListCollection), listIdentifier)
+            in Identifier identifier,
+            in Identifier type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in AsciiStringReference listIdentifier = default)
+            : this(new PropertyListAssociation(in identifier, in type, in accessorList, in modifierList, in documentationCommentList, in attributeListCollection), in listIdentifier)
         {
         }
         public PropertyList(
-            string identifier,
-            string type,
-            AccessorList accessorList,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            AsciiStringReference listIdentifier = null)
-            : this(new Identifier(identifier), new Identifier(type), accessorList, modifierList, documentationCommentList, attributeListCollection, listIdentifier)
+            in string identifier,
+            in string type,
+            in AccessorList accessorList,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in accessorList, in modifierList, in documentationCommentList, in attributeListCollection, in listIdentifier)
         {
         }
 
@@ -64,11 +64,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<PropertyListAssociation> GetAssociations() => PropertyListAssociations;
 
-        public void SetRecords(List<Property> records)
+        public void SetRecords(in List<Property> records)
         {
-            PropertyListAssociations = UniqueListAssociationsFactory<Property, PropertyListAssociation>.Create(records);
+            PropertyListAssociations = UniqueListAssociationsFactory<Property, PropertyListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Property>.Create(records, r => r.PropertyId));
+                UniqueListIdentifierFactory<Property>.Create(in records, r => r.PropertyId));
         }
     }
 }

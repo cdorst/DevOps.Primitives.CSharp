@@ -10,17 +10,17 @@ namespace DevOps.Primitives.CSharp
     public class ConstraintListAssociation : IUniqueListAssociation<Constraint>
     {
         public ConstraintListAssociation() { }
-        public ConstraintListAssociation(Constraint constraint, ConstraintList constraintList = null)
+        public ConstraintListAssociation(in Constraint constraint, in ConstraintList constraintList = default)
         {
             Constraint = constraint;
             ConstraintList = constraintList;
         }
-        public ConstraintListAssociation(Identifier constraint, ConstraintList constraintList = null)
-            : this(new Constraint(constraint), constraintList)
+        public ConstraintListAssociation(in Identifier constraint, in ConstraintList constraintList = default)
+            : this(new Constraint(in constraint), in constraintList)
         {
         }
-        public ConstraintListAssociation(string constraint, ConstraintList constraintList = null)
-            : this(new Identifier(constraint), constraintList)
+        public ConstraintListAssociation(in string constraint, in ConstraintList constraintList = default)
+            : this(new Identifier(in constraint), in constraintList)
         {
         }
 
@@ -40,10 +40,10 @@ namespace DevOps.Primitives.CSharp
 
         public Constraint GetRecord() => Constraint;
 
-        public void SetRecord(Constraint record)
+        public void SetRecord(in Constraint record)
         {
             Constraint = record;
-            ConstraintId = Constraint.ConstraintId;
+            ConstraintId = record.ConstraintId;
         }
     }
 }

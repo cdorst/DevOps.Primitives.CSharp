@@ -12,13 +12,13 @@ namespace DevOps.Primitives.CSharp
     public class BaseType : IUniqueListRecord
     {
         public BaseType() { }
-        public BaseType(Identifier identifier, TypeArgumentList typeArgumentList = null)
+        public BaseType(in Identifier identifier, in TypeArgumentList typeArgumentList = default)
         {
             Identifier = identifier;
             TypeArgumentList = typeArgumentList;
         }
-        public BaseType(string identifier, TypeArgumentList typeArgumentList = null)
-            : this(new Identifier(identifier), typeArgumentList)
+        public BaseType(in string identifier, in TypeArgumentList typeArgumentList = default)
+            : this(new Identifier(in identifier), in typeArgumentList)
         {
         }
 

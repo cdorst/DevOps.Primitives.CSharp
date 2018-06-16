@@ -13,8 +13,8 @@ namespace DevOps.Primitives.CSharp
     public class UsingDirective : IUniqueListRecord
     {
         public UsingDirective() { }
-        public UsingDirective(Identifier identifier) { Identifier = identifier; }
-        public UsingDirective(string identifier) : this(new Identifier(identifier)) { }
+        public UsingDirective(in Identifier identifier) { Identifier = identifier; }
+        public UsingDirective(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]

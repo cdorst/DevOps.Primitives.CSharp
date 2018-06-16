@@ -18,13 +18,13 @@ namespace DevOps.Primitives.CSharp
     public class EnumMemberList : IUniqueList<EnumMember, EnumMemberListAssociation>
     {
         public EnumMemberList() { }
-        public EnumMemberList(List<EnumMemberListAssociation> enumMemberListAssociations, AsciiStringReference listIdentifier = null)
+        public EnumMemberList(in List<EnumMemberListAssociation> enumMemberListAssociations, in AsciiStringReference listIdentifier = default)
         {
             EnumMemberListAssociations = enumMemberListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public EnumMemberList(EnumMemberListAssociation enumMemberListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<EnumMemberListAssociation> { enumMemberListAssociation }, listIdentifier)
+        public EnumMemberList(in EnumMemberListAssociation enumMemberListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<EnumMemberListAssociation> { enumMemberListAssociation }, in listIdentifier)
         {
         }
 
@@ -65,11 +65,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<EnumMemberListAssociation> GetAssociations() => EnumMemberListAssociations;
 
-        public void SetRecords(List<EnumMember> records)
+        public void SetRecords(in List<EnumMember> records)
         {
-            EnumMemberListAssociations = UniqueListAssociationsFactory<EnumMember, EnumMemberListAssociation>.Create(records);
+            EnumMemberListAssociations = UniqueListAssociationsFactory<EnumMember, EnumMemberListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<EnumMember>.Create(records, r => r.EnumMemberId));
+                UniqueListIdentifierFactory<EnumMember>.Create(in records, r => r.EnumMemberId));
         }
     }
 }

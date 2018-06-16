@@ -13,7 +13,15 @@ namespace DevOps.Primitives.CSharp
     public class Method : ISortableMemberDeclaration, IUniqueListRecord
     {
         public Method() { }
-        public Method(Identifier identifier, Identifier type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null)
+        public Method(
+            in Identifier identifier,
+            in Identifier type,
+            in ParameterList parameterList = default,
+            in Expression arrowClauseExpression = default,
+            in Block block = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default)
         {
             ArrowClauseExpressionValue = arrowClauseExpression;
             AttributeListCollection = attributes;
@@ -24,16 +32,62 @@ namespace DevOps.Primitives.CSharp
             ParameterList = parameterList;
             Type = type;
         }
-        public Method(string identifier, string type, ParameterList parameterList = null, Expression arrowClauseExpression = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null)
-            : this(new Identifier(identifier), new Identifier(type), parameterList, arrowClauseExpression, block, modifierList, documentationCommentList, attributes)
+        public Method(
+            in string identifier,
+            in string type,
+            in ParameterList parameterList = default,
+            in Expression arrowClauseExpression = default,
+            in Block block = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in parameterList,
+                  in arrowClauseExpression,
+                  in block,
+                  in modifierList,
+                  in documentationCommentList,
+                  in attributes)
         {
         }
-        public Method(string identifier, string type, ParameterList parameterList = null, Block block = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null)
-            : this(new Identifier(identifier), new Identifier(type), parameterList, null, block, modifierList, documentationCommentList, attributes)
+        public Method(
+            in string identifier,
+            in string type,
+            in ParameterList parameterList = default,
+            in Block block = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in parameterList,
+                  arrowClauseExpression: null,
+                  in block,
+                  in modifierList,
+                  in documentationCommentList,
+                  in attributes)
         {
         }
-        public Method(string identifier, string type, string arrowClauseExpression, ParameterList parameterList = null, ModifierList modifierList = null, DocumentationCommentList documentationCommentList = null, AttributeListCollection attributes = null)
-            : this(new Identifier(identifier), new Identifier(type), parameterList, new Expression(arrowClauseExpression), null, modifierList, documentationCommentList, attributes)
+        public Method(
+            in string identifier,
+            in string type,
+            in string arrowClauseExpression,
+            in ParameterList parameterList = default,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributes = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in parameterList,
+                  new Expression(in arrowClauseExpression),
+                  block: null,
+                  in modifierList,
+                  in documentationCommentList,
+                  in attributes)
         {
         }
 

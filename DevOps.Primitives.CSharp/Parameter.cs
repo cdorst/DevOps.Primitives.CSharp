@@ -13,16 +13,16 @@ namespace DevOps.Primitives.CSharp
     public class Parameter : IUniqueListRecord
     {
         public Parameter() { }
-        public Parameter(Identifier identifier, Identifier type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null, bool useThisModifier = false)
+        public Parameter(in Identifier identifier, in Identifier type, in Expression defaultValue = default, in AttributeListCollection attributeListCollection = default, in bool useThisModifier = false)
         {
+            AttributeListCollection = attributeListCollection;
+            DefaultValue = defaultValue;
             Identifier = identifier;
             Type = type;
-            DefaultValue = defaultValue;
-            AttributeListCollection = attributeListCollection;
             UseThisModifier = useThisModifier;
         }
-        public Parameter(string identifier, string type, Expression defaultValue = null, AttributeListCollection attributeListCollection = null, bool useThisModifier = false)
-            : this(new Identifier(identifier), new Identifier(type), defaultValue, attributeListCollection, useThisModifier)
+        public Parameter(in string identifier, in string type, in Expression defaultValue = default, in AttributeListCollection attributeListCollection = default, in bool useThisModifier = false)
+            : this(new Identifier(in identifier), new Identifier(in type), in defaultValue, in attributeListCollection, in useThisModifier)
         {
         }
 

@@ -11,17 +11,17 @@ namespace DevOps.Primitives.CSharp
     public class AccessorListAssociation : IUniqueListAssociation<Accessor>
     {
         public AccessorListAssociation() { }
-        public AccessorListAssociation(Accessor accessor, AccessorList accessorList = null)
+        public AccessorListAssociation(in Accessor accessor, in AccessorList accessorList = default)
         {
             Accessor = accessor;
             AccessorList = accessorList;
         }
-        public AccessorListAssociation(SyntaxToken syntaxToken, AccessorList accessorList = null)
-            : this(new Accessor(syntaxToken), accessorList)
+        public AccessorListAssociation(in SyntaxToken syntaxToken, in AccessorList accessorList = default)
+            : this(new Accessor(in syntaxToken), in accessorList)
         {
         }
-        public AccessorListAssociation(SyntaxKind syntaxKind, AccessorList accessorList = null)
-            : this(new SyntaxToken(syntaxKind), accessorList)
+        public AccessorListAssociation(in SyntaxKind syntaxKind, in AccessorList accessorList = default)
+            : this(new SyntaxToken(in syntaxKind), in accessorList)
         {
         }
 
@@ -41,10 +41,10 @@ namespace DevOps.Primitives.CSharp
 
         public Accessor GetRecord() => Accessor;
 
-        public void SetRecord(Accessor record)
+        public void SetRecord(in Accessor record)
         {
             Accessor = record;
-            AccessorId = Accessor.AccessorId;
+            AccessorId = record.AccessorId;
         }
     }
 }

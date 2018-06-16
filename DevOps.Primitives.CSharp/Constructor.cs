@@ -13,31 +13,31 @@ namespace DevOps.Primitives.CSharp
     {
         public Constructor() { }
         public Constructor(
-            Identifier identifier,
-            Block block,
-            ModifierList modifierList = null,
-            ParameterList parameterList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            ConstructorBaseInitializer constructorBaseInitializer = null)
+            in Identifier identifier,
+            in Block block,
+            in ModifierList modifierList = default,
+            in ParameterList parameterList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in ConstructorBaseInitializer constructorBaseInitializer = default)
         {
-            Identifier = identifier;
+            AttributeListCollection = attributeListCollection;
             Block = block;
+            ConstructorBaseInitializer = constructorBaseInitializer;
+            DocumentationCommentList = documentationCommentList;
+            Identifier = identifier;
             ModifierList = modifierList;
             ParameterList = parameterList;
-            DocumentationCommentList = documentationCommentList;
-            AttributeListCollection = attributeListCollection;
-            ConstructorBaseInitializer = constructorBaseInitializer;
         }
         public Constructor(
-            string identifier,
-            Block block,
-            ModifierList modifierList = null,
-            ParameterList parameterList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            ConstructorBaseInitializer constructorBaseInitializer = null)
-            : this(new Identifier(identifier), block, modifierList, parameterList, documentationCommentList, attributeListCollection, constructorBaseInitializer)
+            in string identifier,
+            in Block block,
+            in ModifierList modifierList = default,
+            in ParameterList parameterList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in ConstructorBaseInitializer constructorBaseInitializer = default)
+            : this(new Identifier(in identifier), in block, in modifierList, in parameterList, in documentationCommentList, in attributeListCollection, in constructorBaseInitializer)
         {
         }
 

@@ -10,7 +10,7 @@ namespace DevOps.Primitives.CSharp
     public class FieldListAssociation : IUniqueListAssociation<Field>
     {
         public FieldListAssociation() { }
-        public FieldListAssociation(Field field, FieldList fieldList = null)
+        public FieldListAssociation(in Field field, in FieldList fieldList = default)
         {
             Field = field;
             FieldList = fieldList;
@@ -32,10 +32,10 @@ namespace DevOps.Primitives.CSharp
 
         public Field GetRecord() => Field;
 
-        public void SetRecord(Field record)
+        public void SetRecord(in Field record)
         {
             Field = record;
-            FieldId = Field.FieldId;
+            FieldId = record.FieldId;
         }
     }
 }

@@ -10,8 +10,8 @@ namespace DevOps.Primitives.CSharp
     public class TypeArgument : IUniqueListRecord
     {
         public TypeArgument() { }
-        public TypeArgument(Identifier identifier) { Identifier = identifier; }
-        public TypeArgument(string identifier) : this(new Identifier(identifier)) { }
+        public TypeArgument(in Identifier identifier) { Identifier = identifier; }
+        public TypeArgument(in string identifier) : this(new Identifier(in identifier)) { }
 
         [Key]
         [ProtoMember(1)]

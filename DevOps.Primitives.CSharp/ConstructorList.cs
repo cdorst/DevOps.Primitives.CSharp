@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using static DevOps.Primitives.CSharp.MemberDeclarationSorter;
 
 namespace DevOps.Primitives.CSharp
 {
@@ -15,17 +16,17 @@ namespace DevOps.Primitives.CSharp
     public class ConstructorList : IUniqueList<Constructor, ConstructorListAssociation>
     {
         public ConstructorList() { }
-        public ConstructorList(List<ConstructorListAssociation> constructorListAssociations, AsciiStringReference listIdentifier = null)
+        public ConstructorList(in List<ConstructorListAssociation> constructorListAssociations, in AsciiStringReference listIdentifier = default)
         {
             ConstructorListAssociations = constructorListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public ConstructorList(ConstructorListAssociation constructorListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<ConstructorListAssociation> { constructorListAssociation }, listIdentifier)
+        public ConstructorList(in ConstructorListAssociation constructorListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<ConstructorListAssociation> { constructorListAssociation }, in listIdentifier)
         {
         }
-        public ConstructorList(Constructor constructor, AsciiStringReference listIdentifier = null)
-            : this(new ConstructorListAssociation(constructor), listIdentifier)
+        public ConstructorList(in Constructor constructor, in AsciiStringReference listIdentifier = default)
+            : this(new ConstructorListAssociation(constructor), in listIdentifier)
         {
         }
 
@@ -42,15 +43,15 @@ namespace DevOps.Primitives.CSharp
         public List<ConstructorListAssociation> ConstructorListAssociations { get; set; }
 
         public IEnumerable<MemberDeclarationSyntax> GetMemberDeclarationSyntax()
-            => MemberDeclarationSorter.Sort(ConstructorListAssociations.Select(c => c.Constructor));
+            => Sort(ConstructorListAssociations.Select(c => c.Constructor));
 
         public List<ConstructorListAssociation> GetAssociations() => ConstructorListAssociations;
 
-        public void SetRecords(List<Constructor> records)
+        public void SetRecords(in List<Constructor> records)
         {
-            ConstructorListAssociations = UniqueListAssociationsFactory<Constructor, ConstructorListAssociation>.Create(records);
+            ConstructorListAssociations = UniqueListAssociationsFactory<Constructor, ConstructorListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Constructor>.Create(records, r => r.ConstructorId));
+                UniqueListIdentifierFactory<Constructor>.Create(in records, r => r.ConstructorId));
         }
     }
 }

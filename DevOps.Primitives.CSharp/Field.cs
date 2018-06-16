@@ -13,12 +13,12 @@ namespace DevOps.Primitives.CSharp
     {
         public Field() { }
         public Field(
-            Identifier identifier,
-            Identifier type,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            Expression initializer = null,
-            AttributeListCollection attributeListCollection = null)
+            in Identifier identifier,
+            in Identifier type,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in Expression initializer = default,
+            in AttributeListCollection attributeListCollection = default)
         {
             Identifier = identifier;
             Type = type;
@@ -28,13 +28,13 @@ namespace DevOps.Primitives.CSharp
             AttributeListCollection = attributeListCollection;
         }
         public Field(
-            string identifier,
-            string type,
-            ModifierList modifierList = null,
-            DocumentationCommentList documentationCommentList = null,
-            Expression initializer = null,
-            AttributeListCollection attributeListCollection = null)
-            : this(new Identifier(identifier), new Identifier(type), modifierList, documentationCommentList, initializer, attributeListCollection)
+            in string identifier,
+            in string type,
+            in ModifierList modifierList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in Expression initializer = default,
+            in AttributeListCollection attributeListCollection = default)
+            : this(new Identifier(in identifier), new Identifier(in type), in modifierList, in documentationCommentList, in initializer, in attributeListCollection)
         {
         }
 

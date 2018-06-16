@@ -10,17 +10,17 @@ namespace DevOps.Primitives.CSharp
     public class DocumentationCommentAttributeListAssociation : IUniqueListAssociation<DocumentationCommentAttribute>
     {
         public DocumentationCommentAttributeListAssociation() { }
-        public DocumentationCommentAttributeListAssociation(DocumentationCommentAttribute documentationCommentAttribute, DocumentationCommentAttributeList documentationCommentAttributeList = null)
+        public DocumentationCommentAttributeListAssociation(in DocumentationCommentAttribute documentationCommentAttribute, in DocumentationCommentAttributeList documentationCommentAttributeList = default)
         {
             DocumentationCommentAttribute = documentationCommentAttribute;
             DocumentationCommentAttributeList = documentationCommentAttributeList;
         }
-        public DocumentationCommentAttributeListAssociation(Identifier attribute, Identifier value, DocumentationCommentAttributeList documentationCommentAttributeList = null)
-            : this(new DocumentationCommentAttribute(attribute, value), documentationCommentAttributeList)
+        public DocumentationCommentAttributeListAssociation(in Identifier attribute, in Identifier value, in DocumentationCommentAttributeList documentationCommentAttributeList = default)
+            : this(new DocumentationCommentAttribute(in attribute, in value), in documentationCommentAttributeList)
         {
         }
-        public DocumentationCommentAttributeListAssociation(string attribute, string value, DocumentationCommentAttributeList documentationCommentAttributeList = null)
-            : this(new Identifier(attribute), new Identifier(value), documentationCommentAttributeList)
+        public DocumentationCommentAttributeListAssociation(in string attribute, in string value, in DocumentationCommentAttributeList documentationCommentAttributeList = default)
+            : this(new Identifier(in attribute), new Identifier(in value), in documentationCommentAttributeList)
         {
         }
 
@@ -40,7 +40,7 @@ namespace DevOps.Primitives.CSharp
 
         public DocumentationCommentAttribute GetRecord() => DocumentationCommentAttribute;
 
-        public void SetRecord(DocumentationCommentAttribute record)
+        public void SetRecord(in DocumentationCommentAttribute record)
         {
             DocumentationCommentAttribute = record;
             DocumentationCommentAttributeId = DocumentationCommentAttribute.DocumentationCommentAttributeId;

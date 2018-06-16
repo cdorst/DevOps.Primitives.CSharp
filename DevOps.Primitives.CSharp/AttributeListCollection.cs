@@ -19,21 +19,21 @@ namespace DevOps.Primitives.CSharp
     public class AttributeListCollection : IUniqueList<Attribute, AttributeListCollectionAssociation>
     {
         public AttributeListCollection() { }
-        public AttributeListCollection(List<AttributeListCollectionAssociation> attributeLists, AsciiStringReference listIdentifier = null)
+        public AttributeListCollection(in List<AttributeListCollectionAssociation> attributeLists, in AsciiStringReference listIdentifier = default)
         {
             AttributeLists = attributeLists;
             ListIdentifier = listIdentifier;
         }
-        public AttributeListCollection(AttributeListCollectionAssociation attributeList, AsciiStringReference listIdentifier = null)
-            : this(new List<AttributeListCollectionAssociation> { attributeList }, listIdentifier)
+        public AttributeListCollection(in AttributeListCollectionAssociation attributeList, in AsciiStringReference listIdentifier = default)
+            : this(new List<AttributeListCollectionAssociation> { attributeList }, in listIdentifier)
         {
         }
-        public AttributeListCollection(Identifier attribute, AsciiStringReference listIdentifier = null)
-            : this(new AttributeListCollectionAssociation(attribute), listIdentifier)
+        public AttributeListCollection(in Identifier attribute, in AsciiStringReference listIdentifier = default)
+            : this(new AttributeListCollectionAssociation(in attribute), in listIdentifier)
         {
         }
-        public AttributeListCollection(string attribute, AsciiStringReference listIdentifier = null)
-            : this(new Identifier(attribute), listIdentifier)
+        public AttributeListCollection(in string attribute, in AsciiStringReference listIdentifier = default)
+            : this(new Identifier(in attribute), in listIdentifier)
         {
         }
 
@@ -49,25 +49,25 @@ namespace DevOps.Primitives.CSharp
         [ProtoMember(4)]
         public List<AttributeListCollectionAssociation> AttributeLists { get; set; }
 
-        public SyntaxList<AttributeListSyntax> GetAttributeListSyntaxList(DocumentationCommentList documentation = null)
+        public SyntaxList<AttributeListSyntax> GetAttributeListSyntaxList(DocumentationCommentList documentation = default)
         {
             var attributes = AttributeLists
                 .Select(attr => AttributeList(SingletonSeparatedList(attr.Attribute.GetAttributeSyntax())))
                 .ToArray();
             return (documentation == null) ? List(attributes)
-                : GetListWithDocumentation(documentation, attributes);
+                : GetListWithDocumentation(in documentation, in attributes);
         }
 
         public List<AttributeListCollectionAssociation> GetAssociations() => AttributeLists;
 
-        public void SetRecords(List<Attribute> records)
+        public void SetRecords(in List<Attribute> records)
         {
-            AttributeLists = UniqueListAssociationsFactory<Attribute, AttributeListCollectionAssociation>.Create(records);
+            AttributeLists = UniqueListAssociationsFactory<Attribute, AttributeListCollectionAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Attribute>.Create(records, r => r.AttributeId));
+                UniqueListIdentifierFactory<Attribute>.Create(in records, r => r.AttributeId));
         }
 
-        private static SyntaxList<AttributeListSyntax> GetListWithDocumentation(DocumentationCommentList documentation, AttributeListSyntax[] attributes)
+        private static SyntaxList<AttributeListSyntax> GetListWithDocumentation(in DocumentationCommentList documentation, in AttributeListSyntax[] attributes)
         {
             var list = new List<AttributeListSyntax>();
             for (int i = 0; i < attributes.Length; i++)

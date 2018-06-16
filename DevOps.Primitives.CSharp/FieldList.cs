@@ -15,13 +15,13 @@ namespace DevOps.Primitives.CSharp
     public class FieldList : IUniqueList<Field, FieldListAssociation>
     {
         public FieldList() { }
-        public FieldList(List<FieldListAssociation> fieldListAssociations, AsciiStringReference listIdentifier = null)
+        public FieldList(in List<FieldListAssociation> fieldListAssociations, in AsciiStringReference listIdentifier = default)
         {
             FieldListAssociations = fieldListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public FieldList(FieldListAssociation fieldListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<FieldListAssociation> { fieldListAssociation }, listIdentifier)
+        public FieldList(in FieldListAssociation fieldListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<FieldListAssociation> { fieldListAssociation }, in listIdentifier)
         {
         }
 
@@ -42,11 +42,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<FieldListAssociation> GetAssociations() => FieldListAssociations;
 
-        public void SetRecords(List<Field> records)
+        public void SetRecords(in List<Field> records)
         {
-            FieldListAssociations = UniqueListAssociationsFactory<Field, FieldListAssociation>.Create(records);
+            FieldListAssociations = UniqueListAssociationsFactory<Field, FieldListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Field>.Create(records, r => r.FieldId));
+                UniqueListIdentifierFactory<Field>.Create(in records, r => r.FieldId));
         }
     }
 }

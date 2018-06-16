@@ -15,17 +15,17 @@ namespace DevOps.Primitives.CSharp
     public class MethodList : IUniqueList<Method, MethodListAssociation>
     {
         public MethodList() { }
-        public MethodList(List<MethodListAssociation> constraintListAssociations, AsciiStringReference listIdentifier = null)
+        public MethodList(in List<MethodListAssociation> methodListAssociations, in AsciiStringReference listIdentifier = default)
         {
-            MethodListAssociations = constraintListAssociations;
+            MethodListAssociations = methodListAssociations;
             ListIdentifier = listIdentifier;
         }
-        public MethodList(MethodListAssociation argumentListAssociation, AsciiStringReference listIdentifier = null)
-            : this(new List<MethodListAssociation> { argumentListAssociation }, listIdentifier)
+        public MethodList(in MethodListAssociation methodListAssociation, in AsciiStringReference listIdentifier = default)
+            : this(new List<MethodListAssociation> { methodListAssociation }, listIdentifier)
         {
         }
-        public MethodList(Method constraint, AsciiStringReference listIdentifier = null)
-            : this(new MethodListAssociation(constraint), listIdentifier)
+        public MethodList(in Method method, in AsciiStringReference listIdentifier = default)
+            : this(new MethodListAssociation(method), listIdentifier)
         {
         }
 
@@ -46,11 +46,11 @@ namespace DevOps.Primitives.CSharp
 
         public List<MethodListAssociation> GetAssociations() => MethodListAssociations;
 
-        public void SetRecords(List<Method> records)
+        public void SetRecords(in List<Method> records)
         {
-            MethodListAssociations = UniqueListAssociationsFactory<Method, MethodListAssociation>.Create(records);
+            MethodListAssociations = UniqueListAssociationsFactory<Method, MethodListAssociation>.Create(in records);
             ListIdentifier = new AsciiStringReference(
-                UniqueListIdentifierFactory<Method>.Create(records, r => r.MethodId));
+                UniqueListIdentifierFactory<Method>.Create(in records, r => r.MethodId));
         }
     }
 }

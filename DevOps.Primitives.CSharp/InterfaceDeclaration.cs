@@ -11,31 +11,31 @@ namespace DevOps.Primitives.CSharp
     {
         public InterfaceDeclaration() { }
         public InterfaceDeclaration(
-            string identifier,
-            string @namespace,
-            ModifierList modifierList = null,
-            UsingDirectiveList usingDirectiveList = null,
-            DocumentationCommentList documentationCommentList = null,
-            AttributeListCollection attributeListCollection = null,
-            TypeParameterList typeParameterList = null,
-            ConstraintClauseList constraintClauseList = null,
-            BaseList baseList = null,
-            MethodList methodList = null,
-            PropertyList propertyList = null)
+            in string identifier,
+            in string @namespace,
+            in ModifierList modifierList = default,
+            in UsingDirectiveList usingDirectiveList = default,
+            in DocumentationCommentList documentationCommentList = default,
+            in AttributeListCollection attributeListCollection = default,
+            in TypeParameterList typeParameterList = default,
+            in ConstraintClauseList constraintClauseList = default,
+            in BaseList baseList = default,
+            in MethodList methodList = default,
+            in PropertyList propertyList = default)
             : base(
-                  identifier,
-                  @namespace,
-                  modifierList,
-                  usingDirectiveList,
-                  documentationCommentList,
-                  attributeListCollection,
-                  typeParameterList,
-                  constraintClauseList,
-                  baseList,
+                  in identifier,
+                  in @namespace,
+                  in modifierList,
+                  in usingDirectiveList,
+                  in documentationCommentList,
+                  in attributeListCollection,
+                  in typeParameterList,
+                  in constraintClauseList,
+                  in baseList,
                   null,
                   null,
-                  methodList,
-                  propertyList)
+                  in methodList,
+                  in propertyList)
         {
         }
 
