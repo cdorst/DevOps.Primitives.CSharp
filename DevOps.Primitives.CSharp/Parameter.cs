@@ -1,5 +1,4 @@
 ﻿using Common.EntityFrameworkServices;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ProtoBuf;
 using System.ComponentModel.DataAnnotations;
@@ -13,16 +12,31 @@ namespace DevOps.Primitives.CSharp
     public class Parameter : IUniqueListRecord
     {
         public Parameter() { }
-        public Parameter(in Identifier identifier, in Identifier type, in Expression defaultValue = default, in AttributeListCollection attributeListCollection = default, in bool useThisModifier = false)
+        public Parameter(
+            in Identifier identifier,
+            in Identifier type,
+            in Expression defaultValue = default,
+            in AttributeListCollection attributeListCollection = default,
+            in SyntaxToken modifier = default)
         {
             AttributeListCollection = attributeListCollection;
             DefaultValue = defaultValue;
             Identifier = identifier;
             Type = type;
-            UseThisModifier = useThisModifier;
+            Modifier = modifier;
         }
-        public Parameter(in string identifier, in string type, in Expression defaultValue = default, in AttributeListCollection attributeListCollection = default, in bool useThisModifier = false)
-            : this(new Identifier(in identifier), new Identifier(in type), in defaultValue, in attributeListCollection, in useThisModifier)
+        public Parameter(
+            in string identifier,
+            in string type,
+            in Expression defaultValue = default,
+            in AttributeListCollection attributeListCollection = default,
+            in SyntaxToken modifier = default)
+            : this(
+                  new Identifier(in identifier),
+                  new Identifier(in type),
+                  in defaultValue,
+                  in attributeListCollection,
+                  in modifier)
         {
         }
 
@@ -51,7 +65,9 @@ namespace DevOps.Primitives.CSharp
         public int TypeId { get; set; }
 
         [ProtoMember(10)]
-        public bool? UseThisModifier { get; set; }
+        public SyntaxToken Modifier { get; set; }
+        [ProtoMember(11)]
+        public short? ModifierId { get; set; }
 
         public ParameterSyntax GetParameterSyntax()
         {
@@ -70,11 +86,11 @@ namespace DevOps.Primitives.CSharp
                     EqualsValueClause(
                         DefaultValue.GetExpressionSyntax()));
             }
-            if (UseThisModifier ?? false)
+            if (Modifier != null)
             {
                 parameter = parameter.WithModifiers(
                     TokenList(
-                        Token(SyntaxKind.ThisKeyword)));
+                        Token(Modifier.SyntaxKind)));
             }
             return parameter;
         }
